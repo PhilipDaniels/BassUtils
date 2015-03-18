@@ -7,6 +7,7 @@
       <Word>utils</Word>
       <Word>enumerand</Word>
       <Word>directorywatcher</Word>
+      <Word>ini</Word>
     </Recognized>
     <Deprecated>
       <Term PreferredAlternate=""></Term>

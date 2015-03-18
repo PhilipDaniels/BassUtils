@@ -13,16 +13,10 @@ namespace BassUtils
         {
             stream.ThrowIfNull("stream");
 
-            byte[] buffer = new byte[32768];
             using (var ms = new MemoryStream())
             {
-                while (true)
-                {
-                    int read = stream.Read(buffer, 0, buffer.Length);
-                    if (read <= 0)
-                        return ms.ToArray();
-                    ms.Write(buffer, 0, read);
-                }
+                stream.CopyTo(ms);
+                return ms.ToArray();
             }
         }
     }

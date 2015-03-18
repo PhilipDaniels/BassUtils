@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Permissions;
 using System.Threading;
 
 namespace BassUtils
@@ -11,8 +10,6 @@ namespace BassUtils
     /// Wrapper around <code>FileSystemWatcher</code> that tries to uniqueify events,
     /// because <code>FileSystemWatcher</code> raises lots of duplicates.
     /// </summary>
-    [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
-    [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
     public sealed class DirectoryWatcher : IDisposable
     {
         /// <summary>
