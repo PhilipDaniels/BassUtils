@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils", "BassUtils\Bass
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils.Tests", "BassUtils.Tests\BassUtils.Tests.csproj", "{7FB3917B-2480-46F0-AD73-D37A21FB5D03}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{EBF37525-3D3C-40C5-BCCB-0DB10628EE88}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuget\build.ps1 = ..\nuget\build.ps1
+		..\nuget\pushinternet.ps1 = ..\nuget\pushinternet.ps1
+		..\nuget\pushlocal.ps1 = ..\nuget\pushlocal.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
