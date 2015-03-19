@@ -8,13 +8,13 @@
     <owners>Philip Daniels</owners>
     <licenseUrl>https://github.com/PhilipDaniels/BassUtils/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/PhilipDaniels/BassUtils</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/PhilipDaniels/BassUtils/master/BassUtils/BassUtils/Icons/bass-clef-32.png</iconUrl>
+    <iconUrl>http://philipdaniels.com/nugeticons/bassutils/bass-clef-32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>BassUtils for .Net - argument validators, FileUtils, IData extensions etc.</description>
     <releaseNotes>Initial version.</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Argument Validation Comb Expando FileUtils IDataReader IDataRecord IniParser StringExtensions SqlBulkCopy
-      bulk copy SQL</tags>
+    <tags>Argument Validation Comb Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
+      StringExtensions SqlBulkCopy bulk copy SQL</tags>
   </metadata>
   <files>
     <!-- Files are relative to the nuspec file. -->
