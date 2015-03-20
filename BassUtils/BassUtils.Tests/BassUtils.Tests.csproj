@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="ArgumentValidatorTests.cs" />
     <Compile Include="BeforeAndAfterTests.cs" />
+    <Compile Include="ConvTests.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="PadAndAlignTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

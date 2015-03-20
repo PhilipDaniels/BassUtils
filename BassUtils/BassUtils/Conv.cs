@@ -368,6 +368,48 @@ namespace BassUtils
                 return false;
             }
         }
+
+        public static object StringToBest(string value, CultureInfo culture)
+        {
+            if (value == null)
+                return value;
+
+            if (value.Equals("true", StringComparison.Ordinal) || value.Equals("True"))
+                return true;
+
+            if (value.Equals("false", StringComparison.Ordinal) || value.Equals("False"))
+                return false;
+
+            DateTime dt;
+            if (DateTime.TryParse(value, culture, DateTimeStyles.AllowWhiteSpaces, out dt))
+                return dt;
+
+            double double_result;
+            bool double_ok = Double.TryParse(value, NumberStyles.Any, culture, out double_result);
+
+            decimal decimal_result;
+            bool decimal_ok = Decimal.TryParse(value, NumberStyles.Currency, culture, out decimal_result);
+
+            long long_result;
+            bool long_ok = Int64.TryParse(value, NumberStyles.Integer, culture, out long_result);
+
+            int int_result;
+            bool int_ok = Int32.TryParse(value, NumberStyles.Integer, culture, out int_result);
+
+            if (long_ok && !int_ok)
+                return long_result;
+
+            if (decimal_ok && !double_ok)
+                return decimal_result;
+
+            if (double_ok && !(int_ok || long_ok))
+                return double_result;
+
+            if (int_ok)
+                return int_result;
+
+            return value;
+        }
     }
 
 }
