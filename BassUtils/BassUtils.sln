@@ -14,6 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{EBF37525
 		..\nuget\pushlocal.ps1 = ..\nuget\pushlocal.ps1
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{AAB1E2F3-0F23-4F96-BDD4-3D28C7086BEB}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+		..\TODO.md = ..\TODO.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

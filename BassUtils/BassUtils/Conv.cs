@@ -8,7 +8,8 @@ namespace BassUtils
     /// <summary>
     /// A class for doing conversions, in the style of System.Convert.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Conv", Justification = "My version of System.Convert.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Conv", Justification = "My version of System.Convert.")]
     public static class Conv
     {
         /// <summary>
@@ -369,6 +370,22 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Converts a string to the "best match" fundamental type.
+        /// nulls are returned as null strings.
+        /// True/true/False/false are returned as the corresponding boolean.
+        /// Things that look like DateTimes are returned as such.
+        /// Things that look like TimeSpans according to the format [d].hh:mm:ss[.fff] are returned as TimeSpans
+        /// (days and fractions of a second are optional).
+        /// If it looks like a Guid according to one of the format specifiers D, B, P or X then a Guid is returned.
+        /// Hex literals (0x....) are returned as the corresponding int or long (always the signed type).
+        /// Finally, things that look like doubles, decimals, longs or ints are returned as such. You can use the
+        /// thousands separator too, e.g. "123,456.78".
+        /// If none of the above match, the original string is returned.
+        /// </summary>
+        /// <param name="value">The string to convert.</param>
+        /// <param name="culture">Culture to use for parsing.</param>
+        /// <returns>The appropriate converted value.</returns>
         public static object StringToBest(string value, CultureInfo culture)
         {
             if (value == null)
@@ -380,36 +397,90 @@ namespace BassUtils
             if (value.Equals("false", StringComparison.Ordinal) || value.Equals("False"))
                 return false;
 
+            // Check for timespans. Must do this before DateTimes.
+            string[] timeSpanFormats = new string[] { @"d\.hh\:mm\:ss", @"hh\:mm\:ss", @"hh\:mm\:ss\.fff", @"d\.hh\:mm\:ss\.fff" };
+            TimeSpan timeSpanResult;
+            if (TimeSpan.TryParseExact(value, timeSpanFormats, culture, out timeSpanResult))
+                return timeSpanResult;
+
             DateTime dt;
             if (DateTime.TryParse(value, culture, DateTimeStyles.AllowWhiteSpaces, out dt))
                 return dt;
 
-            double double_result;
-            bool double_ok = Double.TryParse(value, NumberStyles.Any, culture, out double_result);
+            // Check for Guids. Do not use the N format because it could easily clash with an int or a string.
+            Guid guidResult;
+            if (Guid.TryParseExact(value, "D", out guidResult))
+                return guidResult;
+            if (Guid.TryParseExact(value, "B", out guidResult))
+                return guidResult;
+            if (Guid.TryParseExact(value, "P", out guidResult))
+                return guidResult;
+            if (Guid.TryParseExact(value, "X", out guidResult))
+                return guidResult;
 
+            // Check for hex literals.
+            // TODO: There are other cases, see https://msdn.microsoft.com/en-us/library/aa664674%28v=vs.71%29.aspx
+            if (value.StartsWith("0x", StringComparison.Ordinal))
+            {
+                string v = value.Substring(2);
+                int intHexResult;
+                if (Int32.TryParse(v, NumberStyles.HexNumber, culture, out intHexResult))
+                    return intHexResult;
+                long longHexResult;
+                if (Int64.TryParse(v, NumberStyles.HexNumber, culture, out longHexResult))
+                    return longHexResult;
+
+                return value;
+            }
+
+            // Check for numbers with explicit type suffixes.
             decimal decimal_result;
-            bool decimal_ok = Decimal.TryParse(value, NumberStyles.Currency, culture, out decimal_result);
+            if (value.EndsWith("M", StringComparison.OrdinalIgnoreCase))
+            {
+                string v = value.Substring(0, value.Length - 1);
+                if (Decimal.TryParse(v, NumberStyles.Number, culture, out decimal_result))
+                    return decimal_result;
+            }
+
+            double double_result;
+            if (value.EndsWith("D", StringComparison.OrdinalIgnoreCase))
+            {
+                string v = value.Substring(0, value.Length - 1);
+                if (Double.TryParse(v, NumberStyles.Number | NumberStyles.AllowExponent, culture, out double_result))
+                    return double_result;
+            }
 
             long long_result;
-            bool long_ok = Int64.TryParse(value, NumberStyles.Integer, culture, out long_result);
+            if (value.EndsWith("L", StringComparison.OrdinalIgnoreCase))
+            {
+                string v = value.Substring(0, value.Length - 1);
+                if (Int64.TryParse(v, NumberStyles.Integer | NumberStyles.AllowThousands, culture, out long_result))
+                    return long_result;
+            }
 
             int int_result;
-            bool int_ok = Int32.TryParse(value, NumberStyles.Integer, culture, out int_result);
+            bool double_ok = Double.TryParse(value, NumberStyles.Number | NumberStyles.AllowExponent, culture, out double_result);
+            bool long_ok = Int64.TryParse(value, NumberStyles.Integer | NumberStyles.AllowThousands, culture, out long_result);
+            bool int_ok = Int32.TryParse(value, NumberStyles.Integer | NumberStyles.AllowThousands, culture, out int_result);
 
-            if (long_ok && !int_ok)
-                return long_result;
+            if (value.Contains(culture.NumberFormat.CurrencyDecimalSeparator, StringComparison.OrdinalIgnoreCase) ||
+                value.Contains("e", StringComparison.OrdinalIgnoreCase))
+            {
+                // Possibly a floating point number.
+                if (double_ok)
+                    return double_result;
+            }
+            else
+            {
+                // Possibly an int or long.
+                if (long_ok && !int_ok)
+                    return long_result;
+                if (int_ok)
+                    return int_result;
+            }
 
-            if (decimal_ok && !double_ok)
-                return decimal_result;
-
-            if (double_ok && !(int_ok || long_ok))
-                return double_result;
-
-            if (int_ok)
-                return int_result;
-
+            // Nothing else matches? Just return the string.
             return value;
         }
     }
-
 }

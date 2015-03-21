@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/PhilipDaniels/BassUtils</projectUrl>
     <iconUrl>http://philipdaniels.com/nugeticons/bassutils/bass-clef-32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>BassUtils for .Net - argument validators, FileUtils, IData extensions etc.</description>
+    <description>BassUtils for .Net - argument validators, FileUtils, IDataReader, IDataRecord extensions etc.</description>
     <releaseNotes>Initial version.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Argument Validation Comb Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
