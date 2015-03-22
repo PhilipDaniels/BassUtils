@@ -378,7 +378,7 @@ namespace BassUtils
         /// Things that look like TimeSpans according to the format [d].hh:mm:ss[.fff] are returned as TimeSpans
         /// (days and fractions of a second are optional).
         /// If it looks like a Guid according to one of the format specifiers D, B, P or X then a Guid is returned.
-        /// Hex literals (0x....) are returned as the corresponding int or long (always the signed type).
+        /// Hex literals (0x...) are returned as the corresponding int or long (always the signed type).
         /// Finally, things that look like doubles, decimals, longs or ints are returned as such. You can use the
         /// thousands separator too, e.g. "123,456.78".
         /// If none of the above match, the original string is returned.
@@ -391,10 +391,10 @@ namespace BassUtils
             if (value == null)
                 return value;
 
-            if (value.Equals("true", StringComparison.Ordinal) || value.Equals("True"))
+            if (value.Equals("true", StringComparison.Ordinal) || value.Equals("True", StringComparison.Ordinal))
                 return true;
 
-            if (value.Equals("false", StringComparison.Ordinal) || value.Equals("False"))
+            if (value.Equals("false", StringComparison.Ordinal) || value.Equals("False", StringComparison.Ordinal))
                 return false;
 
             // Check for timespans. Must do this before DateTimes.
