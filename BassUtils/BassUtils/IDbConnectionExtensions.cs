@@ -2,6 +2,9 @@
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Data.IDbConnection</code> interface.
+    /// </summary>
     public static class IDbConnectionExtensions
     {
         /// <summary>

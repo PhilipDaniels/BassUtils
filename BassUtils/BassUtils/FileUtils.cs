@@ -2,6 +2,9 @@
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Various file-system oriented utility functions.
+    /// </summary>
     public static class FileUtils
     {
         /// <summary>

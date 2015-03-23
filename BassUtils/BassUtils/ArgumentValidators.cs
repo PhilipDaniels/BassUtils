@@ -98,7 +98,7 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is less than <paramref name="value."/>
+        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is less than <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -112,7 +112,7 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is less than <paramref name="value."/>
+        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is less than <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -145,7 +145,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is less than 
-        /// or equal to <paramref name="value."/>
+        /// or equal to <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -160,7 +160,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is less than
-        /// or equal to <paramref name="value."/>
+        /// or equal to <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -193,7 +193,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is more than
-        /// <paramref name="value."/>
+        /// <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -208,7 +208,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is more than
-        /// <paramref name="value."/>
+        /// <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -241,7 +241,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is more than
-        /// or equal to <paramref name="value."/>
+        /// or equal to <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -256,7 +256,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="parameter"/> is more than
-        /// or equal to <paramref name="value."/>
+        /// or equal to <paramref name="comparisonValue"/>.
         /// </summary>
         /// <typeparam name="T">The generic type.</typeparam>
         /// <param name="parameter">The parameter itself.</param>
@@ -288,8 +288,8 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Throws a <code>ArgumentNullException</code> if <paramref name="path"/> is null.
-        /// Throws a <code>ArgumentOutOfRangeException</code> if <paramref name="path"/> is whitespace.
+        /// Throws an <code>ArgumentNullException</code> if <paramref name="path"/> is null.
+        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="path"/> is whitespace.
         /// Throws a <code>FileNotFoundException</code> if the file <paramref name="path"/> does not exist.
         /// </summary>
         /// <param name="path">Path of the directory.</param>
@@ -315,8 +315,8 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Throws a <code>ArgumentNullException</code> if <paramref name="path"/> is null.
-        /// Throws a <code>ArgumentOutOfRangeException</code> if <paramref name="path"/> is whitespace.
+        /// Throws an <code>ArgumentNullException</code> if <paramref name="path"/> is null.
+        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="path"/> is whitespace.
         /// Throws a <code>DirectoryNotFoundException</code> if the directory <paramref name="path"/> does not exist.
         /// </summary>
         /// <param name="path">Path of the directory.</param>
@@ -342,8 +342,8 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Throws a <code>ArgumentException</code> if <typeparamref name="T"/> is not an enumerated type.
-        /// Throws a <code>ArgumentOutOfRangeException</code> if <paramref name="enumerand"/> is not a valid value within <typeparamref name="T"/>.
+        /// Throws an <code>ArgumentException</code> if <typeparamref name="T"/> is not an enumerated type.
+        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="enumerand"/> is not a valid value within <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the enumeration.</typeparam>
         /// <param name="enumerand">The value of the enumeration.</param>

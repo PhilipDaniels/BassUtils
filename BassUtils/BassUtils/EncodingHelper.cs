@@ -3,6 +3,9 @@ using System.Text;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Utility methods to help with file/byte encoding issues.
+    /// </summary>
     public static class EncodingHelper
     {
         /// <summary>
@@ -48,11 +51,11 @@ namespace BassUtils
         /// long then the default will be returned (you probably have an ASCII file that is less
         /// than 4 bytes long).
         /// </summary>
-        /// <param name="byteOrderMark">Byte array containing the byte order mark.</param>
+        /// <param name="data">Byte array containing the byte order mark.</param>
         /// <returns>The encoding of the data, or the default if it could not be determined.</returns>
-        public static Encoding GuessEncodingFromByteOrderMark(byte[] byteOrderMark)
+        public static Encoding GuessEncodingFromByteOrderMark(byte[] data)
         {
-            return GuessEncodingFromByteOrderMark(byteOrderMark, Encoding.Default);
+            return GuessEncodingFromByteOrderMark(data, Encoding.Default);
         }
 
         /// <summary>
@@ -60,7 +63,7 @@ namespace BassUtils
         /// long then the default will be returned (you probably have an ASCII file that is less
         /// than 4 bytes long).
         /// </summary>
-        /// <param name="Bom">Byte array containing the Bom.</param>
+        /// <param name="data">Byte array containing the Bom.</param>
         /// <param name="defaultIfUndetermined">If the encoding cannot be determined,
         /// what to return instead.</param>
         /// <returns>The encoding of the data, or the default if it could not be determined.</returns>

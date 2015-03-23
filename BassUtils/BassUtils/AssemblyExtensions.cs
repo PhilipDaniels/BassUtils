@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Reflection.Assembly</code> class.
+    /// </summary>
     public static class AssemblyExtensions
     {
         /// <summary>
@@ -48,7 +51,7 @@ namespace BassUtils
         /// and is case sensitive.
         /// </summary>
         /// <param name="assembly">The assembly from which to retrieve the file.</param>
-        /// <param name="filename">Filename whose contents you want.</param>
+        /// <param name="fileName">Filename whose contents you want.</param>
         /// <returns>String object.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times",
             Justification="Known to be safe")]
@@ -71,7 +74,7 @@ namespace BassUtils
         /// and is case sensitive.
         /// </summary>
         /// <param name="assembly">The assembly from which to retrieve the image.</param>
-        /// <param name="filename">Filename whose contents you want.</param>
+        /// <param name="fileName">Filename whose contents you want.</param>
         /// <returns>Image object.</returns>
         public static Image GetResourceAsImage(this Assembly assembly, string fileName)
         {
@@ -91,7 +94,7 @@ namespace BassUtils
         /// and is case sensitive.
         /// </summary>
         /// <param name="assembly">The assembly from which to retrieve the image.</param>
-        /// <param name="filename">Filename whose contents you want.</param>
+        /// <param name="fileName">Filename whose contents you want.</param>
         /// <returns>The manifest resource as an array of bytes.</returns>
         public static byte[] GetResourceAsBytes(this Assembly assembly, string fileName)
         {

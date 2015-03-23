@@ -2,6 +2,9 @@
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Data.DataRow</code> class.
+    /// </summary>
     public static class DataRowExtensions
     {
         /// <summary>

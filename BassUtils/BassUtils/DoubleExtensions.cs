@@ -5,8 +5,14 @@ using System.Text;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>Double</code> class, mainly for comparing doubles.
+    /// </summary>
     public static class DoubleExtensions
     {
+        /// <summary>
+        /// Max error to be used when comparing doubles.
+        /// </summary>
         public static readonly double DefaultMaxRelativeError = 0.000000001;
 
         /// <summary>

@@ -15,6 +15,11 @@ namespace BassUtils
 	 * public static Boolean? GetNullableBoolean(int i);                        // extension
 	 * public static Boolean? GetNullableBoolean(string name);                  // extension
 	 */
+
+
+    /// <summary>
+    /// Extensions to the <code>System.Data.IDataRecord</code> class.
+    /// </summary>
     public static class IDataRecordExtensions
     {
         /// <summary>
@@ -84,7 +89,7 @@ namespace BassUtils
         /// Return whether the specified field is set to null.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>True if the field is DbNull, false otherwise.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Boolean IsDbNull(this IDataRecord record, string name)
@@ -96,7 +101,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Boolean"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Boolean GetBoolean(this IDataRecord record, string name)
@@ -122,7 +127,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Boolean"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -148,7 +153,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Boolean&gt;"/> of <see cref="Boolean"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Boolean? GetNullableBoolean(this IDataRecord record, string name)
@@ -160,7 +165,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Byte"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Byte GetByte(this IDataRecord record, string name)
@@ -186,7 +191,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Byte"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -199,7 +204,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Byte&gt;"/> of <see cref="Byte"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Byte? GetNullableByte(this IDataRecord record, string name)
@@ -224,7 +229,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Char"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Char GetChar(this IDataRecord record, string name)
@@ -250,7 +255,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Char"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -263,7 +268,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Char&gt;"/> of <see cref="Char"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Char? GetNullableChar(this IDataRecord record, string name)
@@ -288,7 +293,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="DateTime"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static DateTime GetDateTime(this IDataRecord record, string name)
@@ -314,7 +319,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="DateTime"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -327,7 +332,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;DateTime&gt;"/> of <see cref="DateTime"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static DateTime? GetNullableDateTime(this IDataRecord record, string name)
@@ -352,7 +357,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Decimal"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Decimal GetDecimal(this IDataRecord record, string name)
@@ -378,7 +383,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Decimal"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -391,7 +396,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Decimal&gt;"/> of <see cref="Decimal"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Decimal? GetNullableDecimal(this IDataRecord record, string name)
@@ -416,7 +421,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Double"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Double GetDouble(this IDataRecord record, string name)
@@ -442,7 +447,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Double"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -455,7 +460,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Double&gt;"/> of <see cref="Double"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Double? GetNullableDouble(this IDataRecord record, string name)
@@ -480,7 +485,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Single"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Single GetSingle(this IDataRecord record, string name)
@@ -506,7 +511,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Single"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -519,7 +524,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Single&gt;"/> of <see cref="Single"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Single? GetNullableFloat(this IDataRecord record, string name)
@@ -544,7 +549,7 @@ namespace BassUtils
         /// Gets the value of the specified column as an <see cref="Int16"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Int16 GetInt16(this IDataRecord record, string name)
@@ -570,7 +575,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Int16"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -583,7 +588,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Int16&gt;"/> of <see cref="Int16"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Int16? GetNullableInt16(this IDataRecord record, string name)
@@ -608,7 +613,7 @@ namespace BassUtils
         /// Gets the value of the specified column as an <see cref="Int32"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Int32 GetInt32(this IDataRecord record, string name)
@@ -634,7 +639,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Int32"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -647,7 +652,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Int32&gt;"/> of <see cref="Int32"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Int32? GetNullableInt32(this IDataRecord record, string name)
@@ -672,7 +677,7 @@ namespace BassUtils
         /// Gets the value of the specified column as an <see cref="Int64"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Int64 GetInt64(this IDataRecord record, string name)
@@ -698,7 +703,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Int64"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -711,7 +716,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Int64&gt;"/> of <see cref="Int64"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Int64? GetNullableInt64(this IDataRecord record, string name)
@@ -736,7 +741,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="String"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static String GetString(this IDataRecord record, string name)
@@ -762,7 +767,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="String"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -775,7 +780,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="String"/>, or null (Nothing in Visual Basic).
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static String GetStringOrNull(this IDataRecord record, string name)
@@ -800,7 +805,7 @@ namespace BassUtils
         /// Gets the value of the specified column.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Object GetValue(this IDataRecord record, string name)
@@ -826,7 +831,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Int64"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -839,7 +844,7 @@ namespace BassUtils
         /// Gets the value of the specified column as an <see cref="Object"/>, or null (Nothing in Visual Basic).
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Object GetValueOrNull(this IDataRecord record, string name)
@@ -864,7 +869,7 @@ namespace BassUtils
         /// Gets the value of the specified column as an <see cref="Guid"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Guid GetGuid(this IDataRecord record, string name)
@@ -890,7 +895,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Guid"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -903,7 +908,7 @@ namespace BassUtils
         /// Gets the value of the specified column as a <see cref="Nullable&lt;Guid&gt;"/> of <see cref="Guid"/>.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Guid? GetNullableGuid(this IDataRecord record, string name)
@@ -924,6 +929,13 @@ namespace BassUtils
             return record.IsDBNull(i) ? default(Guid?) : record.GetGuid(i);
         }
 
+        /// <summary>
+        /// Gets the value of the specified column as a <see cref="Boolean"/>.
+        /// Accepts Y, N, T, F, Yes, No, True, False, 0, 1.
+        /// </summary>
+        /// <param name="record">The data record.</param>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .Net Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Boolean GetBooleanExtended(this IDataRecord record, int i)
@@ -936,7 +948,7 @@ namespace BassUtils
         /// Accepts Y, N, T, F, Yes, No, True, False, 0, 1.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Boolean GetBooleanExtended(this IDataRecord record, string name)
@@ -964,7 +976,7 @@ namespace BassUtils
         /// Accepts Y, N, T, F, Yes, No, True, False, 0, 1.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
@@ -992,7 +1004,7 @@ namespace BassUtils
         /// Accepts Y, N, T, F, Yes, No, True, False, 0, 1.
         /// </summary>
         /// <param name="record">The data record.</param>
-        /// <param name="name">The name of the column to find.</param>
+        /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Boolean? GetNullableBooleanExtended(this IDataRecord record, string name)
@@ -1000,6 +1012,13 @@ namespace BassUtils
             return record.GetNullableBooleanExtended(record.GetOrdinal(name));
         }
 
+        /// <summary>
+        /// Gets the value of the specified column an an enum.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="record">The data record.</param>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>The value of the column converted to the corresponding enum value.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static T GetEnum<T>(this IDataRecord record, int i)
@@ -1008,6 +1027,13 @@ namespace BassUtils
             return Conv.ToEnum<T>(record.GetValue(i));
         }
 
+        /// <summary>
+        /// Gets the value of the specified column an an enum.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="record">The data record.</param>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The value of the column converted to the corresponding enum value.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static T GetEnum<T>(this IDataRecord record, string name)
              where T : struct
@@ -1015,6 +1041,14 @@ namespace BassUtils
             return record.GetEnum<T>(record.GetOrdinal(name));
         }
 
+        /// <summary>
+        /// Gets the value of the specified column an an enum, returning a default value if the column is null.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="record">The data record.</param>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <param name="defaultIfNull">Default value to return if the column is null.</param>
+        /// <returns>The value of the column converted to the corresponding enum value, or the default value if the column is null.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static T GetEnum<T>(this IDataRecord record, int i, T defaultIfNull)
@@ -1023,6 +1057,14 @@ namespace BassUtils
             return record.IsDBNull(i) ? defaultIfNull : record.GetEnum<T>(i);
         }
 
+        /// <summary>
+        /// Gets the value of the specified column an an enum, returning a default value if the column is null.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="record">The data record.</param>
+        /// <param name="name">The name of the column.</param>
+        /// <param name="defaultIfNull">Default value to return if the column is null.</param>
+        /// <returns>The value of the column converted to the corresponding enum value, or the default value if the column is null.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static T GetEnum<T>(this IDataRecord record, string name, T defaultIfNull)
              where T : struct
@@ -1030,6 +1072,13 @@ namespace BassUtils
             return record.GetEnum<T>(record.GetOrdinal(name), defaultIfNull);
         }
 
+        /// <summary>
+        /// Gets the value of the specified column an an enum, returning null if the column is DbNull.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="record">The data record.</param>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>The value of the column converted to the corresponding enum value, or null.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static T? GetNullableEnum<T>(this IDataRecord record, int i)
@@ -1038,6 +1087,13 @@ namespace BassUtils
             return record.IsDBNull(i) ? default(T?) : record.GetEnum<T>(i);
         }
 
+        /// <summary>
+        /// Gets the value of the specified column an an enum, returning null if the column is DbNull.
+        /// </summary>
+        /// <typeparam name="T">The type of the enum.</typeparam>
+        /// <param name="record">The data record.</param>
+        /// <param name="name">The name of the column.</param>
+        /// <returns>The value of the column converted to the corresponding enum value, or null.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static T? GetNullableEnum<T>(this IDataRecord record, string name)
              where T : struct

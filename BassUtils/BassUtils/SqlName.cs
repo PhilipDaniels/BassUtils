@@ -12,7 +12,14 @@ namespace BassUtils
     [DebuggerDisplay("{ToString()}")]
     public class SqlName
     {
+        /// <summary>
+        /// The left-hand character used by MS SQL to quote identifiers.
+        /// </summary>
         public const string MSSqlLeftQuote = "[";
+
+        /// <summary>
+        /// The right-hand character used by MS SQL to quote identifiers.
+        /// </summary>
         public const string MSSqlRightQuote = "]";
 
         /// <summary>
@@ -185,6 +192,8 @@ namespace BassUtils
         /// Removes the left and right SQL quote characters if they exist.
         /// </summary>
         /// <param name="name">SQL name. Can be 1, 2 or N part.</param>
+        /// <param name="leftQuote">Left quote character.</param>
+        /// <param name="rightQuote">Right quote character.</param>
         /// <returns>Name with the quotes removed.</returns>
         public static string TrimSqlQuotes(string name, string leftQuote, string rightQuote)
         {

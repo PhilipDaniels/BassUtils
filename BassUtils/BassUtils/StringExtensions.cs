@@ -53,7 +53,7 @@ namespace BassUtils
 
         /// <summary>
         /// Applies the specified <paramref name="alignment"/> to <paramref name="value"/> and pads 
-        /// with <paramref name="paddingChar"/> to the specified <paramref name="minWidth"/>, but trims the output if it 
+        /// with <paramref name="paddingCharacter"/> to the specified <paramref name="minWidth"/>, but trims the output if it 
         /// exceeds <paramref name="maxWidth"/>.
         /// </summary>
         /// <param name="value">The input text.</param>
@@ -331,6 +331,7 @@ namespace BassUtils
         /// <remarks>
         /// </remarks>
         /// <param name="value">The string to convert.</param>
+        /// <param name="culture">The culture to use for upper/lower-case conversion.</param>
         /// <returns>Proper cased string.</returns>
         public static string ToProperCase(this string value, CultureInfo culture)
         {
@@ -482,6 +483,13 @@ namespace BassUtils
         // Should match decimal numbers.
         const string NUMBER_PATTERN = @"[0-9]([.,][0-9]{1,3})?";
 
+        /// <summary>
+        /// Returns a leading number from a string such as "123Hello", using the InvariantCulture
+        /// for conversion.
+        /// </summary>
+        /// <typeparam name="T">The type of number to return.</typeparam>
+        /// <param name="value">The value to extract the number from.</param>
+        /// <returns>Leading number.</returns>
         public static T GetLeadingNumber<T>(this string value)
         {
             value.ThrowIfNull("value");
@@ -489,6 +497,13 @@ namespace BassUtils
             return GetLeadingNumber<T>(value, CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Returns a leading number from a string such as "123Hello".
+        /// </summary>
+        /// <typeparam name="T">The type of number to return.</typeparam>
+        /// <param name="value">The value to extract the number from.</param>
+        /// <param name="provider">Format provider to use for conversion.</param>
+        /// <returns>Leading number.</returns>
         public static T GetLeadingNumber<T>(this string value, IFormatProvider provider)
         {
             value.ThrowIfNull("value");
@@ -498,11 +513,25 @@ namespace BassUtils
             return result;
         }
 
+        /// <summary>
+        /// Returns a trailing number from a string such as "Hello123", using the InvariantCulture
+        /// for conversion.
+        /// </summary>
+        /// <typeparam name="T">The type of number to return.</typeparam>
+        /// <param name="value">The value to extract the number from.</param>
+        /// <returns>Leading number.</returns>
         public static T GetTrailingNumber<T>(this string value)
         {
             return GetTrailingNumber<T>(value, CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Returns a trailing number from a string such as "Hello123".
+        /// </summary>
+        /// <typeparam name="T">The type of number to return.</typeparam>
+        /// <param name="value">The value to extract the number from.</param>
+        /// <param name="provider">Format provider to use for conversion.</param>
+        /// <returns>Leading number.</returns>
         public static T GetTrailingNumber<T>(this string value, IFormatProvider provider)
         {
             value.ThrowIfNull("value");
@@ -514,6 +543,11 @@ namespace BassUtils
 
         static readonly Regex BadFileNameCharacters = new Regex(@"[\\\/:\*\?""<>|]");
 
+        /// <summary>
+        /// Removes characters that are invalid in Windows filenames from a string.
+        /// </summary>
+        /// <param name="value">The string to remove characters from.</param>
+        /// <returns>New string with invalid filename characters removed.</returns>
         public static string RemoveInvalidFileNameCharacters(this string value)
         {
             return BadFileNameCharacters.Replace(value, String.Empty);

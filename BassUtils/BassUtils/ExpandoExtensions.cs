@@ -2,6 +2,9 @@
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the Expando (really, IDictionary&lt;string, object&gt;) class.
+    /// </summary>
     public static class ExpandoExtensions
     {
         /// <summary>

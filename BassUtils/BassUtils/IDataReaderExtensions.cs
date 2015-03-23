@@ -7,8 +7,16 @@ using System.Linq;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Data.IDataReader</code> interface.
+    /// </summary>
     public static class IDataReaderExtensions
     {
+        /// <summary>
+        /// Converts an IDataReader to a DataTable.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <returns>A DataTable object.</returns>
         public static DataTable ToDataTable(this IDataReader reader)
         {
             reader.ThrowIfNull("reader");
@@ -17,6 +25,12 @@ namespace BassUtils
             return dt;
         }
 
+        /// <summary>
+        /// Converts an IDataReader to a DataSet. Each set of records is returned as an
+        /// individual table in the DataSet.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <returns>A DataSet object with 1 or more tables.</returns>
         public static DataSet ToDataSet(this IDataReader reader)
         {
             reader.ThrowIfNull("reader");

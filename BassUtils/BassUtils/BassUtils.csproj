@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\BassUtils.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -87,7 +88,7 @@
     <Compile Include="TableAdapterBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TypeExtensions.cs" />
+    <Compile Include="MemberInfoExtensions.cs" />
     <Compile Include="ValidatedNotNullAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatingDataReader.cs" />

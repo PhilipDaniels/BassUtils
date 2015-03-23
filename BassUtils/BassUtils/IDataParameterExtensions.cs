@@ -9,7 +9,7 @@ namespace BassUtils
     public static class IDataParameterExtensions
     {
         /// <summary>
-        /// Sets the <code>.Value</code> property of <paramref name="prm"/>.
+        /// Sets the <code>.Value</code> property of <paramref name="parameter"/>.
         /// If the string is null, or Trim()s to empty string then the <code>.Value</code>
         /// is set to DBNull.Value, otherwise it is set to the value of the text
         /// field, with any *'s replaced with %'s.
@@ -27,7 +27,7 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Sets the <code>.Value</code> property of <paramref name="prm"/>.
+        /// Sets the <code>.Value</code> property of <paramref name="parameter"/>.
         /// If the value is null, then the <code>.Value</code>
         /// is set to DBNull.Value, otherwise it is set to <paramref name="value"/>.
         /// </summary>

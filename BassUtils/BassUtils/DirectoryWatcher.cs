@@ -47,8 +47,12 @@ namespace BassUtils
             get { return _DirectoriesToIgnore; }
         }
 
-
+        /// <summary>
+        /// Returns the default number of milliseconds between event raisings, if there are
+        /// notifications to be returned.
+        /// </summary>
         public static int DefaultTimerPeriodMilliseconds { get { return 100; } }
+
         HashSet<string> _FilesToIgnore;
         List<string> _DirectoriesToIgnore;
         readonly FileSystemWatcher Watcher;
@@ -115,7 +119,9 @@ namespace BassUtils
             }
         }
 
-
+        /// <summary>
+        /// Starts the watcher.
+        /// </summary>
         public void Start()
         {
             ThrowIfDisposed();
@@ -130,6 +136,9 @@ namespace BassUtils
             Watcher.EnableRaisingEvents = true;
         }
 
+        /// <summary>
+        /// Stops the watcher.
+        /// </summary>
         public void Stop()
         {
             ThrowIfDisposed();
@@ -138,6 +147,9 @@ namespace BassUtils
             Timer.Dispose();
         }
 
+        /// <summary>
+        /// Disposes the watcher.
+        /// </summary>
         public void Dispose()
         {
             if (!Disposed)

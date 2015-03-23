@@ -7,13 +7,25 @@ using System.Text;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Data.DataTable</code> class.
+    /// </summary>
     public static class DataTableExtensions
     {
+        /// <summary>
+        /// Sets the ReadOnly flag on the DataTable to true.
+        /// </summary>
+        /// <param name="dataTable">The DataTable.</param>
         public static void SetReadOnly(this DataTable dataTable)
         {
             dataTable.SetReadOnly(true);
         }
 
+        /// <summary>
+        /// Sets the ReadOnly flag on the DataTable to true or false.
+        /// </summary>
+        /// <param name="dataTable">The DataTable.</param>
+        /// <param name="readOnly">The new value for the read-only flag.</param>
         public static void SetReadOnly(this DataTable dataTable, bool readOnly)
         {
             dataTable.ThrowIfNull("dataTable");

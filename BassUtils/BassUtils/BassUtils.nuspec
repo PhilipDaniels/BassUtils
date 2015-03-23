@@ -11,7 +11,7 @@
     <iconUrl>http://philipdaniels.com/nugeticons/bassutils/bass-clef-32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>BassUtils for .Net - argument validators, FileUtils, IDataReader, IDataRecord extensions etc.</description>
-    <releaseNotes>Initial version.</releaseNotes>
+    <releaseNotes>Add XML documentation for most classes and methods.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Argument Validation Comb Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
       StringExtensions SqlBulkCopy bulk copy SQL</tags>
@@ -19,5 +19,6 @@
   <files>
     <!-- Files are relative to the nuspec file. -->
     <file src="bin\$configuration$\BassUtils.dll" target="lib\BassUtils.dll" />
+    <file src="bin\$configuration$\BassUtils.xml" target="lib\BassUtils.xml" />
   </files>
 </package>

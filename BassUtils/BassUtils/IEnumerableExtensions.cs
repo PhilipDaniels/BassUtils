@@ -3,6 +3,9 @@ using System.Data;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to <code>IEnumerable of T</code>.
+    /// </summary>
     public static class IEnumerableExtensions
     {
         /// <summary>
@@ -67,7 +70,7 @@ namespace BassUtils
         /// </summary>
         /// <typeparam name="T">The element type of the collectin.</typeparam>
         /// <param name="collection">A collection to wrap in a DataReader</param>
-        /// <param name="exposeNullableColumns"></param>
+        /// <param name="nullConversion">Whether to convert nulls.</param>
         /// <returns>An IDataReader wrapping the collection.</returns>
         public static IDataReader AsDataReader<T>(this IEnumerable<T> collection, NullConversion nullConversion)
         {

@@ -109,7 +109,7 @@ namespace BassUtils
 
         /// <summary>
         /// Convert a <paramref name="value"/> to a <c>Boolean</c>. If the <paramref name="value"/> is a
-        /// number, then return false< if it is 0, else true. If the <paramref name="value"/>
+        /// number, then return false if it is 0, else true. If the <paramref name="value"/>
         /// is not a number then it is converted to a string, and matched against an internal list
         /// of strings considered true and false.
         /// </summary>

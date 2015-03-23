@@ -7,6 +7,9 @@ using System.Text;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Data.DataView</code> class.
+    /// </summary>
     public static class DataViewExtensions
     {
         /// <summary>

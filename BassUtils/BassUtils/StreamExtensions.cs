@@ -2,6 +2,9 @@
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.IO.Stream</code> class.
+    /// </summary>
     public static class StreamExtensions
     {
         /// <summary>

@@ -4,6 +4,9 @@ using System.Data.SqlClient;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Data.SqlClient.SqlParameterCollection</code> class.
+    /// </summary>
     public static class SqlParameterCollectionExtensions
     {
         /// <summary>
@@ -26,6 +29,14 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Adds a parameter to the collection, inserting DbNull if the parameter is null.
+        /// </summary>
+        /// <typeparam name="T">The type of object to add.</typeparam>
+        /// <param name="parameters">The parameters collection to add the new parameter to.</param>
+        /// <param name="parameterName">The (SQL name) of the parameter.</param>
+        /// <param name="value">The value of the parameter.</param>
+        /// <returns>The new SqlParameter object that was just added to the collection.</returns>
         public static SqlParameter AddWithNullableValue<T>
             (
             this SqlParameterCollection parameters,
@@ -45,8 +56,13 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// A convenience method for adding a string with size and value.
+        /// Add a string of type 'varchar' to the collection.
         /// </summary>
+        /// <param name="parameters">The parameters collection to add the new parameter to.</param>
+        /// <param name="parameterName">The (SQL name) of the parameter.</param>
+        /// <param name="size">The size of the string parameter.</param>
+        /// <param name="value">The value of the parameter.</param>
+        /// <returns>The new SqlParameter object that was just added to the collection.</returns>
         public static SqlParameter AddString
             (
             this SqlParameterCollection parameters,
@@ -71,7 +87,7 @@ namespace BassUtils
         /// <param name="parameterName">Name of the parameter.</param>
         /// <param name="size">The length of the column, as you typed it in SSMS.</param>
         /// <param name="value">The string value.</param>
-        /// <returns>New SqlParameter.</returns>
+        /// <returns>The new SqlParameter object that was just added to the collection.</returns>
         public static SqlParameter AddNVString
             (
             this SqlParameterCollection parameters,
@@ -92,11 +108,28 @@ namespace BassUtils
             return p;
         }
 
+        /// <summary>
+        /// Adds an output parameter named 'Id' of type <code>SqlDbType.Int</code> to the parameter collection.
+        /// </summary>
+        /// <param name="parameters">The collection.</param>
+        /// <returns>The new SqlParameter object that was just added to the collection.</returns>
+        public static SqlParameter AddOutputId(this SqlParameterCollection parameters)
+        {
+            return AddOutputId(parameters, "Id", SqlDbType.Int);
+        }
+
+        /// <summary>
+        /// Adds an output parameter to the parameter collection.
+        /// </summary>
+        /// <param name="parameters">The collection.</param>
+        /// <param name="parameterName">Name of the parameter.</param>
+        /// <param name="parameterType">The type of the Id, typically SqlDbType.Int.</param>
+        /// <returns>The new SqlParameter object that was just added to the collection.</returns>
         public static SqlParameter AddOutputId
             (
             this SqlParameterCollection parameters,
-            string parameterName = "Id",
-            SqlDbType parameterType = SqlDbType.Int
+            string parameterName,
+            SqlDbType parameterType
             )
         {
             parameters.ThrowIfNull("parameters");

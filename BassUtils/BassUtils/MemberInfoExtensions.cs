@@ -4,7 +4,10 @@ using System.Reflection;
 
 namespace BassUtils
 {
-    public static class TypeExtensions
+    /// <summary>
+    /// Extensions to the <code>System.Reflection.MemberInfo</code> class.
+    /// </summary>
+    public static class MemberInfoExtensions
     {
         /// <summary>
         /// Returns all the attributes of a member or type.
