@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -67,7 +65,9 @@ namespace BassUtils
     /// A worker queue that will execute actions in the background.
     /// Use it within a using statement, the thread of execution
     /// will not proceed beyond the last } until all actions
-    /// have been processedd.
+    /// have been processed.
+    /// n.b. This class is quite old. Though still useful, TPL Dataflow might
+    /// be a better choice in many circumstances.
     /// </summary>
     public sealed class ThrottledBlockingQueue : IDisposable
     {

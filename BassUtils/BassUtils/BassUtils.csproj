@@ -79,6 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PropertyCopier.cs" />
     <Compile Include="SchemaException.cs" />
     <Compile Include="SqlBulkCopyExtensions.cs" />
     <Compile Include="SqlName.cs" />
@@ -89,9 +90,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MemberInfoExtensions.cs" />
+    <Compile Include="ThrottledBlockingQueue.cs" />
     <Compile Include="ValidatedNotNullAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidatingDataReader.cs" />
+    <Compile Include="SqlBulkCopyDataReader.cs" />
     <Compile Include="XmlSerializationHelper.cs" />
     <Compile Include="XmlWriterExtensions.cs" />
   </ItemGroup>

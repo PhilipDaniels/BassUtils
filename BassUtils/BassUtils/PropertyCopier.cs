@@ -4,14 +4,19 @@ using System.Reflection;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Copies properties from one object to another.
+    /// </summary>
     public static class PropertyCopier
     {
         /// <summary>
         /// Copies all possible property values from <paramref name="source"/> to <paramref name="destination"/>.
+        /// Properties are matched by name, and the property on the destination must have a setter and
+        /// a type that is compatible with the source.
         /// </summary>
         /// <param name="source">Object to copy properties from.</param>
         /// <param name="destination">Object to copy properties to.</param>
-        public static void CopyProperties(this object source, object destination)
+        public static void CopyProperties(object source, object destination)
         {
             source.ThrowIfNull("source");
             destination.ThrowIfNull("destination");
@@ -29,11 +34,9 @@ namespace BassUtils
                                    && targetProperty.PropertyType.IsAssignableFrom(srcProp.PropertyType)
                              select new { sourceProperty = srcProp, targetProperty = targetProperty };
 
-            // Map the properties.
+            // Se the properties in the destination.
             foreach (var property in properties)
-            {
                 property.targetProperty.SetValue(destination, property.sourceProperty.GetValue(source, null), null);
-            }
         }
     }
 }

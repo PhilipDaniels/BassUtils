@@ -14,7 +14,7 @@ using System.Reflection;
 // Differences/Improvements
 // ========================
 // * Renamed from EntityDataReader to ObjectDataReader as it will now work with
-//   any type of .Net object (POCOs.).
+//   any type of .Net object (POCOs).
 // * Does not use/need/reference the EntityFramework.
 // * Returns public fields and enumerations (EntityDataReader just did properties).
 // * Handles a few more types (unsigned integral types, DateTimeOffset etc.)
@@ -74,16 +74,16 @@ using System.Reflection;
 namespace BassUtils
 {
     /// <summary>
-	/// The ObjectDataReader wraps a collection of CLR objects in a DbDataReader.  
-    /// "Scalar" properties, fields and enumerations are projected. They be be
-    /// of System.Nullable, or value types.
+	/// The ObjectDataReader presents a collection of CLR objects via an IDataReader interface.
+    /// Scalar properties, fields and enumerations are projected. They can be of System.Nullable,
+    /// or value types.
     /// 
     /// This is useful for doing high-speed data loads with SqlBulkCopy, and copying collections
-    /// of entities ot a DataTable for use with SQL Server Table-Valued parameters, or for interop
-    /// with older ADO.NET applciations.
+    /// of entities to a DataTable for use with SQL Server Table-Valued parameters, or for interop
+    /// with older ADO.NET applications.
     /// 
-    /// For explicit control over the fields projected by the DataReader, just wrap your collection
-    /// of entities in an anonymous type projection before wrapping it in an EntityDataReader.
+    /// For explicit control over the fields projected by the IDataReader, just wrap your collection
+    /// of entities in an anonymous type projection before wrapping it in an ObjectDataReader.
     /// i.e. use a LINQ query. This is also the way to flatten object graphs.
     /// </summary>
     /// <typeparam name="T">The type of things we are creating a reader over</typeparam>
@@ -104,7 +104,7 @@ namespace BassUtils
             readonly Func<T, object> ValueAccessor;
 
             /// <summary>
-            /// Uses Lamda expressions to create a Func<T,object> that invokes the given property getter.
+            /// Uses Lamda expressions to create a Func&lt;T,object&gt; that invokes the given property getter.
             /// The property value will be extracted and cast to type TProperty
             /// </summary>
             /// <typeparam name="TObject">The type of the object declaring the property.</typeparam>
@@ -206,7 +206,7 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Initialise a new POCODataReader that treats nullable types as nulls.
+        /// Initialise a new ObjectDataReader that treats nullable types as nulls.
         /// </summary>
         /// <param name="collection">The collection of things to make a data reader over.</param>
         public ObjectDataReader(IEnumerable<T> collection)
@@ -285,7 +285,7 @@ namespace BassUtils
             return result;
         }
 
-        const string shemaTableSchema = @"<?xml version=""1.0"" standalone=""yes""?>
+        const string schemaTableSchema = @"<?xml version=""1.0"" standalone=""yes""?>
 <xs:schema id=""NewDataSet"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
   <xs:element name=""NewDataSet"" msdata:IsDataSet=""true"" msdata:MainDataTable=""SchemaTable"" msdata:Locale="""">
     <xs:complexType>
@@ -331,12 +331,17 @@ namespace BassUtils
   </xs:element>
 </xs:schema>";
 
+        /// <summary>
+        /// Returns a System.Data.DataTable that describes the column metadata of the
+        /// System.Data.IDataReader.
+        /// </summary>
+        /// <returns>A System.Data.DataTable that describes the column metadata.</returns>
         public DataTable GetSchemaTable()
         {
             using (DataSet ds = new DataSet())
             {
                 ds.Locale = System.Globalization.CultureInfo.CurrentCulture;
-                using (var sr = new StringReader(shemaTableSchema))
+                using (var sr = new StringReader(schemaTableSchema))
                 { 
                     ds.ReadXmlSchema(sr);
                     DataTable t = ds.Tables[0];
@@ -364,27 +369,43 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Closes the data reader.
+        /// </summary>
         public void Close()
         {
             closed = true;
         }
 
+        /// <summary>
+        /// Always returns 1.
+        /// </summary>
         public int Depth
         {
             get { return 1; }
         }
 
-
+        /// <summary>
+        /// Returns true if the reader is closed.
+        /// </summary>
         public bool IsClosed
         {
             get { return closed; }
         }
 
+        /// <summary>
+        /// Always returns false, the ObjectDataReader only supports one recordset at a time.
+        /// </summary>
+        /// <returns>False.</returns>
         public bool NextResult()
         {
             return false;
         }
 
+        /// <summary>
+        /// Advances the data reader to the next record.
+        /// </summary>
+        /// <returns>True if there are more rows; false otherwise.</returns>
         public bool Read()
         {
             if (IsClosed)
@@ -406,15 +427,25 @@ namespace BassUtils
             return rv;
         }
 
+        /// <summary>
+        /// Always returns -1.
+        /// </summary>
         public int RecordsAffected
         {
             get { return -1; }
         }
 
+        /// <summary>
+        /// Disposes the data reader.
+        /// </summary>
         public void Dispose()
         {
         }
 
+        /// <summary>
+        /// Gets the number of columns in the current row.
+        /// </summary>
+        /// <returns>Number of columns.</returns>
         public int FieldCount
         {
             get
@@ -436,16 +467,36 @@ namespace BassUtils
             return val;
         }
 
+        /// <summary>
+        /// Gets the boolean at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Boolean value.</returns>
         public bool GetBoolean(int i)
         {
             return GetValue<bool>(i);
         }
 
+        /// <summary>
+        /// Gets the Byte at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Byte value.</returns>
         public byte GetByte(int i)
         {
             return GetValue<byte>(i);
         }
 
+        /// <summary>
+        /// Reads a stream of bytes from the specified column offset into the buffer
+        /// as an array, starting at the given buffer offset.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <param name="fieldOffset">The index within the row from which to start the read operation.</param>
+        /// <param name="buffer">The buffer into which to read the stream of bytes.</param>
+        /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
+        /// <param name="length">The number of bytes to read.</param>
+        /// <returns>The actual number of bytes read.</returns>
         public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
         {
             var buf = GetValue<byte[]>(i);
@@ -454,11 +505,26 @@ namespace BassUtils
             return bytes;
         }
 
+        /// <summary>
+        /// Gets the char at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Char value.</returns>
         public char GetChar(int i)
         {
             return GetValue<char>(i);
         }
 
+        /// <summary>
+        /// Reads a stream of characters from the specified column offset into the buffer
+        /// as an array, starting at the given buffer offset.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <param name="fieldoffset">The index within the row from which to start the read operation.</param>
+        /// <param name="buffer">The buffer into which to read the stream of bytes.</param>
+        /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
+        /// <param name="length">The number of bytes to read.</param>
+        /// <returns>The actual number of characters read.</returns>
         public long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
         {
             string s = GetValue<string>(i);
@@ -468,31 +534,64 @@ namespace BassUtils
             return chars;
         }
 
+        /// <summary>
+        /// Throws NotImplementedException.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Never, always throws.</returns>
         public IDataReader GetData(int i)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the data type information for the specified column.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>The data type information for the specified field.</returns>
         public string GetDataTypeName(int i)
         {
             return Attributes[i].Type.Name;
         }
 
+        /// <summary>
+        /// Gets the DateTime at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>DateTime value.</returns>
         public DateTime GetDateTime(int i)
         {
             return GetValue<DateTime>(i);
         }
 
+        /// <summary>
+        /// Gets the Decimal at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Decimal value.</returns>
         public decimal GetDecimal(int i)
         {
             return GetValue<decimal>(i);
         }
 
+        /// <summary>
+        /// Gets the double at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Double value.</returns>
         public double GetDouble(int i)
         {
             return GetValue<double>(i);
         }
 
+        /// <summary>
+        /// Gets the System.Type information corresponding to the type of System.Object
+        /// that would be returned from System.Data.IDataRecord.GetValue(System.Int32).
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>The System.Type information corresponding to the type of System.Object that
+        /// would be returned from System.Data.IDataRecord.GetValue(System.Int32).
+        /// </returns>
         public Type GetFieldType(int i)
         {
             Type t = Attributes[i].Type;
@@ -505,37 +604,72 @@ namespace BassUtils
             return t;
         }
 
+        /// <summary>
+        /// Gets the float at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Float value.</returns>
         public float GetFloat(int i)
         {
             return GetValue<float>(i);
         }
 
+        /// <summary>
+        /// Gets the Guid at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Guid value.</returns>
         public Guid GetGuid(int i)
         {
             return GetValue<Guid>(i);
         }
 
+        /// <summary>
+        /// Gets the Int16 (short) at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Int16 (short) value.</returns>
         public short GetInt16(int i)
         {
             return GetValue<short>(i);
         }
 
+        /// <summary>
+        /// Gets the Int32 at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Int32 value.</returns>
         public int GetInt32(int i)
         {
             return GetValue<int>(i);
         }
 
+        /// <summary>
+        /// Gets the Int64 at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Int64 value.</returns>
         public long GetInt64(int i)
         {
             return GetValue<long>(i);
         }
 
+        /// <summary>
+        /// Gets the name of the column at ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Name of the field.</returns>
         public string GetName(int i)
         {
             Attribute a = Attributes[i];
             return a.Name;
         }
 
+        /// <summary>
+        /// Gets the column ordinal for the column with the specified name.
+        /// </summary>
+        /// <param name="name">Name of the column.</param>
+        /// <returns>Corresponding olumn ordinal.</returns>
         public int GetOrdinal(string name)
         {
             for (int i = 0; i < Attributes.Count; i++)
@@ -548,11 +682,21 @@ namespace BassUtils
             return -1;
         }
 
+        /// <summary>
+        /// Gets the string at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>String value.</returns>
         public string GetString(int i)
         {
             return GetValue<string>(i);
         }
 
+        /// <summary>
+        /// Populates an array of objects with the column values of the current record.
+        /// </summary>
+        /// <param name="values">An array of System.Object to copy the attribute fields into.</param>
+        /// <returns>The number of instances of System.Object in the array.</returns>
         public int GetValues(object[] values)
         {
             values.ThrowIfNull("values");
@@ -574,6 +718,11 @@ namespace BassUtils
             return Attributes.Count;
         }
 
+        /// <summary>
+        /// Return the value of the specified field.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Value from column i.</returns>
         public object GetValue(int i)
         {
             object o = GetValue<object>(i);
@@ -583,12 +732,22 @@ namespace BassUtils
             return o;
         }
 
+        /// <summary>
+        /// Return whether the specified field is null.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>True if the field is DbNull, false otherwise.</returns>
         public bool IsDBNull(int i)
         {
             object o = GetValue<object>(i);
             return (o == null);
         }
 
+        /// <summary>
+        /// Return the value of the specified field.
+        /// </summary>
+        /// <param name="name">Name of the field.</param>
+        /// <returns>Value from the column.</returns>
         public object this[string name]
         {
             get
@@ -598,6 +757,11 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Return the value of the specified field.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Value from column i.</returns>
         public object this[int i]
         {
             get { return GetValue(i); }
