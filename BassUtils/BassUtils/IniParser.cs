@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BassUtils
 {
@@ -182,46 +181,87 @@ namespace BassUtils
         Justification="By design")]
     public sealed class IniSection : IDictionary<string, string>
     {
-        public string Name { get; private set; }
-        IDictionary<string, string> InnerDict;
+        readonly IDictionary<string, string> InnerDict;
 
+        /// <summary>
+        /// Returns the name of the section.
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Creates a new IniSection.
+        /// </summary>
+        /// <param name="name">Name of the section.</param>
         public IniSection(string name)
         {
-            name.ThrowIfNull("name");
-            Name = name;
+            Name = name.ThrowIfNull("name");
             InnerDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         }
 
+        /// <summary>
+        /// Adds a new key-value to the section.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
         public void Add(string key, string value)
         {
             InnerDict.Add(key, value);
         }
 
+        /// <summary>
+        /// Returns whether the section has a particular key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>True if the section has the key, false otherwise.</returns>
         public bool ContainsKey(string key)
         {
             return InnerDict.ContainsKey(key);
         }
 
+        /// <summary>
+        /// Gets all the keys in the section.
+        /// </summary>
         public ICollection<string> Keys
         {
             get { return InnerDict.Keys; }
         }
 
+        /// <summary>
+        /// Removes a key from the section.
+        /// </summary>
+        /// <param name="key">The key to remove.</param>
+        /// <returns>True if the key was successfully removed from the section, false otherwise.
+        /// This method also returns false if item is not found in section.
+        /// </returns>
         public bool Remove(string key)
         {
             return InnerDict.Remove(key);
         }
 
+        /// <summary>
+        /// Trys to get the value associated with a particular key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value. Only valid if the method returns true.</param>
+        /// <returns>True if the key exists in the section, false otherwise.</returns>
         public bool TryGetValue(string key, out string value)
         {
             return InnerDict.TryGetValue(key, out value);
         }
 
+        /// <summary>
+        /// Gets all the values in the section.
+        /// </summary>
         public ICollection<string> Values
         {
             get { return InnerDict.Values; }
         }
 
+        /// <summary>
+        /// Gets or sets the value associated with the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>The value for that key.</returns>
         public string this[string key]
         {
             get
@@ -234,46 +274,85 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Adds a new key-value pair to the section.
+        /// </summary>
+        /// <param name="item">The key-value parir to add.</param>
         public void Add(KeyValuePair<string, string> item)
         {
             InnerDict.Add(item);
         }
 
+        /// <summary>
+        /// Clears the section (removes all keys and values).
+        /// </summary>
         public void Clear()
         {
             InnerDict.Clear();
         }
 
+        /// <summary>
+        /// Checks to see if the section contains the specified key-value pair.
+        /// </summary>
+        /// <param name="item">The key-value parir to check for.</param>
+        /// <returns>True if the section contains the key-value pair, false otherwise.</returns>
         public bool Contains(KeyValuePair<string, string> item)
         {
             return InnerDict.Contains(item);
         }
 
+        /// <summary>
+        /// Copies the keys and values in the section to an array starting at a specified index.
+        /// The array must be large enough to receieve all items.
+        /// </summary>
+        /// <param name="array">The destination array.</param>
+        /// <param name="arrayIndex">The index to start copying to.</param>
         public void CopyTo(KeyValuePair<string, string>[] array, int arrayIndex)
         {
             InnerDict.CopyTo(array, arrayIndex);
         }
 
+        /// <summary>
+        /// Returns the number of keys in the section.
+        /// </summary>
         public int Count
         {
             get { return InnerDict.Count; }
         }
 
+        /// <summary>
+        /// Returns true if the section is read-only.
+        /// </summary>
         public bool IsReadOnly
         {
             get { return InnerDict.IsReadOnly; }
         }
 
+        /// <summary>
+        /// Removes a key-value pair from the section.
+        /// </summary>
+        /// <param name="item">The key-value pair to remove.</param>
+        /// <returns>True if item was successfully removed from the section, false otherwise.
+        /// This method also returns false if the item is not found in section.
+        /// </returns>
         public bool Remove(KeyValuePair<string, string> item)
         {
             return InnerDict.Remove(item);
         }
 
+        /// <summary>
+        /// Gets an enumerator over the section.
+        /// </summary>
+        /// <returns>Enumerator object.</returns>
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
         {
             return InnerDict.GetEnumerator();
         }
 
+        /// <summary>
+        /// Gets an enumerator over the section.
+        /// </summary>
+        /// <returns>Enumerator object.</returns>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return InnerDict.GetEnumerator();
