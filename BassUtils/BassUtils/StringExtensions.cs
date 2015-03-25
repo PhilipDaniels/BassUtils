@@ -580,6 +580,7 @@ namespace BassUtils
         /// <returns>List of things.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists",
             Justification = "It's a static method, will not be inherited.")]
+        [CLSCompliant(false)]   // Due to use of IConvertible.
         public static List<T> ToList<T>(this string value, string delimiter, bool allowDuplicates)
             where T : IConvertible
         {
@@ -599,6 +600,7 @@ namespace BassUtils
         /// <returns>List of things.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists",
             Justification = "It's a static method, will not be inherited.")]
+        [CLSCompliant(false)]   // Due to use of IConvertible.
         public static List<T> ToList<T>
             (
             this string value,

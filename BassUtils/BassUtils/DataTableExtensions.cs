@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace BassUtils
 {
@@ -91,41 +89,6 @@ namespace BassUtils
             }
 
             return false;
-        }
-
-        public static string ToCsv(this DataTable dataTable)
-        {
-            dataTable.ThrowIfNull("dataTable");
-
-            return dataTable.DefaultView.ToCsv();
-        }
-
-        public static string ToCsv(this DataTable dataTable, Encoding encoding)
-        {
-            dataTable.ThrowIfNull("dataTable");
-
-            return dataTable.DefaultView.ToCsv(encoding);
-        }
-
-        public static void WriteCsv(this DataTable dataTable, TextWriter writer)
-        {
-            dataTable.ThrowIfNull("dataTable");
-
-            dataTable.DefaultView.WriteCsv(writer, ",", Environment.NewLine, null);
-        }
-
-        public static void WriteCsv
-            (
-            this DataTable dataTable,
-            TextWriter writer,
-            string fieldSeparator,
-            string recordSeparator,
-            IEnumerable<string> columnsToWrite = null
-            )
-        {
-            dataTable.ThrowIfNull("dataTable");
-
-            dataTable.DefaultView.WriteCsv(writer, fieldSeparator, recordSeparator, columnsToWrite);
         }
     }
 }
