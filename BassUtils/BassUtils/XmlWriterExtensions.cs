@@ -4,6 +4,9 @@ using System.Xml;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions to the <code>System.Xml.XmlWriter</code> class.
+    /// </summary>
     public static class XmlWriterExtensions
     {
         /// <summary>
@@ -110,6 +113,12 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, string value)
         {
             writer.ThrowIfNull("writer");
@@ -118,6 +127,12 @@ namespace BassUtils
             writer.WriteAttributeString(attributeName, value);
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, bool? value)
         {
             writer.ThrowIfNull("writer");
@@ -127,6 +142,12 @@ namespace BassUtils
                 writer.WriteAttributeString(attributeName, value.Value.ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, byte? value)
         {
             writer.ThrowIfNull("writer");
@@ -136,6 +157,12 @@ namespace BassUtils
                 writer.WriteAttributeString(attributeName, value.Value.ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, short? value)
         {
             writer.ThrowIfNull("writer");
@@ -145,6 +172,12 @@ namespace BassUtils
                 writer.WriteAttributeString(attributeName, value.Value.ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, int? value)
         {
             writer.ThrowIfNull("writer");
@@ -154,6 +187,12 @@ namespace BassUtils
                 writer.WriteAttributeString(attributeName, value.Value.ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, long? value)
         {
             writer.ThrowIfNull("writer");
@@ -163,6 +202,13 @@ namespace BassUtils
                 writer.WriteAttributeString(attributeName, value.Value.ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
+        /// <param name="format">Format string for the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, decimal? value, string format)
         {
             writer.ThrowIfNull("writer");
@@ -177,6 +223,13 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
+        /// <param name="format">Format string for the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, float? value, string format)
         {
             writer.ThrowIfNull("writer");
@@ -191,6 +244,13 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
+        /// <param name="format">Format string for the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, double? value, string format)
         {
             writer.ThrowIfNull("writer");
@@ -205,6 +265,13 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
+        /// <param name="format">Format string for the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, DateTime? value, string format)
         {
             writer.ThrowIfNull("writer");
@@ -219,6 +286,12 @@ namespace BassUtils
             }
         }
 
+        /// <summary>
+        /// Writes an attribute, but only if the attribute is non-null.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="attributeName">The name of the attribute.</param>
+        /// <param name="value">The value of the attribute.</param>
         public static void WriteAttributeIfNonNull(this XmlWriter writer, string attributeName, Guid? value)
         {
             writer.ThrowIfNull("writer");

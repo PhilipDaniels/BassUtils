@@ -53,6 +53,7 @@
     <Compile Include="DataViewExtensions.cs" />
     <Compile Include="ExpandoExtensions.cs" />
     <Compile Include="FileUtils.cs" />
+    <Compile Include="ICollectionExtensions.cs" />
     <Compile Include="IDataParameterExtensions.cs" />
     <Compile Include="IDataReaderExtensions.cs" />
     <Compile Include="IDataRecordExtensions.cs" />
