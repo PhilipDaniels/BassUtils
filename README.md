@@ -1,27 +1,31 @@
 # BassUtils
-Low-level utility functions for use in any .Net project.
+Low-level utility functions for use in any .Net project. Zero dependencies.
 
 
 # Change History
-**2.0.0**
+## [**Unreleased**]
+Nothing yet.
+
+## [**2.0.0**] - 2015-03-25.
 #### Added
 - PropertyCopier, ThrottledBlockingQueue, ICollectionExtensions.
 - More XML documentation for methods.
+
 #### Removed
 - ToCSV() methods from DataTableExtensions and DataViewExtensions. There are better ways
 of doing this, for example see http://joshclose.github.io/CsvHelper/
 
-**1.1.1** - 2015-03-23.
+## [**1.1.1**] - 2015-03-23.
 #### Added
 - XML documentation for most functions and classes.
 
-**1.1.0** - 2015-03-19.
+## [**1.1.0**] - 2015-03-19.
 #### Added
 - Conv.StringToBest function.
 
 
 
-## Highlights (not exhaustive)
+# Highlights (not exhaustive)
 **ArgumentValidators** Throw exceptions if method arguments do not meet expectations:
 
 ```
