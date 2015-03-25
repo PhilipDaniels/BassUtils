@@ -664,7 +664,7 @@ namespace BassUtils
         /// Gets the column ordinal for the column with the specified name.
         /// </summary>
         /// <param name="name">Name of the column.</param>
-        /// <returns>Corresponding olumn ordinal.</returns>
+        /// <returns>Corresponding column ordinal.</returns>
         public int GetOrdinal(string name)
         {
             return wrappedReader.GetOrdinal(name);

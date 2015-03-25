@@ -11,7 +11,8 @@
     <iconUrl>http://philipdaniels.com/nugeticons/bassutils/bass-clef-32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>BassUtils for .Net - argument validators, FileUtils, IDataReader, IDataRecord extensions etc.</description>
-    <releaseNotes>Add XML documentation for most classes and methods.</releaseNotes>
+    <releaseNotes>See https://github.com/PhilipDaniels/BassUtils Version is bumped to 2 because of removal
+    of ToCSV() methods from the DataTable and DataView extensions.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Argument Validation Comb Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
       StringExtensions SqlBulkCopy bulk copy SQL</tags>
