@@ -3,15 +3,22 @@ Low-level utility functions for use in any .Net project.
 
 
 # Change History
-2.0.0 - Add PropertyCopier, ThrottledBlockingQueue, ICollectionExtensions.
-        Breaking change: remove ToCSV() methods from DataTableExtensions
-        and DataViewExtensions. There are better ways of doing this,
-        for example see http://joshclose.github.io/CsvHelper/
-        More docs.
+**2.0.0**
+#### Added
+- PropertyCopier, ThrottledBlockingQueue, ICollectionExtensions.
+- More XML documentation for methods.
+#### Removed
+- ToCSV() methods from DataTableExtensions and DataViewExtensions. There are better ways
+of doing this, for example see http://joshclose.github.io/CsvHelper/
 
-1.1.1 - Add XML documentation for most functions and classes.
+**1.1.1** - 2015-03-23.
+#### Added
+- XML documentation for most functions and classes.
 
-1.1.0 - Add Conv.StringToBest function.
+**1.1.0** - 2015-03-19.
+#### Added
+- Conv.StringToBest function.
+
 
 
 ## Highlights (not exhaustive)
