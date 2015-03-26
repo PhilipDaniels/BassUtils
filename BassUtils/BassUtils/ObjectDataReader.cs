@@ -669,7 +669,7 @@ namespace BassUtils
         /// Gets the column ordinal for the column with the specified name.
         /// </summary>
         /// <param name="name">Name of the column.</param>
-        /// <returns>Corresponding olumn ordinal.</returns>
+        /// <returns>Corresponding column ordinal.</returns>
         public int GetOrdinal(string name)
         {
             for (int i = 0; i < Attributes.Count; i++)
@@ -690,6 +690,20 @@ namespace BassUtils
         public string GetString(int i)
         {
             return GetValue<string>(i);
+        }
+
+        /// <summary>
+        /// Return the value of the specified field.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Value from column i.</returns>
+        public object GetValue(int i)
+        {
+            object o = GetValue<object>(i);
+            if (NullConversion == NullConversion.ToDBNull && o == null)
+                return DBNull.Value;
+
+            return o;
         }
 
         /// <summary>
@@ -716,20 +730,6 @@ namespace BassUtils
                 values[i] = GetValue(i);
             }
             return Attributes.Count;
-        }
-
-        /// <summary>
-        /// Return the value of the specified field.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Value from column i.</returns>
-        public object GetValue(int i)
-        {
-            object o = GetValue<object>(i);
-            if (NullConversion == NullConversion.ToDBNull && o == null)
-                return DBNull.Value;
-
-            return o;
         }
 
         /// <summary>

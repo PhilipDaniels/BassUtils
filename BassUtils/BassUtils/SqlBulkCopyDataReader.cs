@@ -411,13 +411,168 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Returns a System.Data.DataTable that describes the column metadata of the
-        /// System.Data.IDataReader.
+        /// Gets the number of columns in the current row.
         /// </summary>
-        /// <returns>A System.Data.DataTable that describes the column metadata.</returns>
-        public DataTable GetSchemaTable()
+        /// <returns>Number of columns.</returns>
+        public int FieldCount
         {
-            return wrappedReader.GetSchemaTable();
+            get
+            {
+                return wrappedReader.FieldCount;
+            }
+        }
+
+        /// <summary>
+        /// Gets the boolean at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Boolean value.</returns>
+        public bool GetBoolean(int i)
+        {
+            return wrappedReader.GetBoolean(i);
+        }
+
+        /// <summary>
+        /// Gets the Byte at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Byte value.</returns>
+        public byte GetByte(int i)
+        {
+            return wrappedReader.GetByte(i);
+        }
+
+        /// <summary>
+        /// Reads a stream of bytes from the specified column offset into the buffer
+        /// as an array, starting at the given buffer offset.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <param name="fieldOffset">The index within the row from which to start the read operation.</param>
+        /// <param name="buffer">The buffer into which to read the stream of bytes.</param>
+        /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
+        /// <param name="length">The number of bytes to read.</param>
+        /// <returns>The actual number of bytes read.</returns>
+        public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
+        {
+            return wrappedReader.GetBytes(i, fieldOffset, buffer, bufferoffset, length);
+        }
+
+        /// <summary>
+        /// Gets the char at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Char value.</returns>
+        public char GetChar(int i)
+        {
+            return wrappedReader.GetChar(i);
+        }
+
+        /// <summary>
+        /// Reads a stream of characters from the specified column offset into the buffer
+        /// as an array, starting at the given buffer offset.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <param name="fieldoffset">The index within the row from which to start the read operation.</param>
+        /// <param name="buffer">The buffer into which to read the stream of bytes.</param>
+        /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
+        /// <param name="length">The number of bytes to read.</param>
+        /// <returns>The actual number of characters read.</returns>
+        public long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
+        {
+            return wrappedReader.GetChars(i, fieldoffset, buffer, bufferoffset, length);
+        }
+
+        /// <summary>
+        /// Returns an IDataReader for the specified column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>An IDataReader.</returns>
+        public IDataReader GetData(int i)
+        {
+            return wrappedReader.GetData(i);
+        }
+
+        /// <summary>
+        /// Gets the data type information for the specified column.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>The data type information for the specified field.</returns>
+        public string GetDataTypeName(int i)
+        {
+            return wrappedReader.GetDataTypeName(i);
+        }
+
+        /// <summary>
+        /// Gets the DateTime at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>DateTime value.</returns>
+        public DateTime GetDateTime(int i)
+        {
+            return wrappedReader.GetDateTime(i);
+        }
+
+        /// <summary>
+        /// Gets the Decimal at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Decimal value.</returns>
+        public decimal GetDecimal(int i)
+        {
+            return wrappedReader.GetDecimal(i);
+        }
+
+        /// <summary>
+        /// Gets the double at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Double value.</returns>
+        public double GetDouble(int i)
+        {
+            return wrappedReader.GetDouble(i);
+        }
+
+        /// <summary>
+        /// Gets the System.Type information corresponding to the type of System.Object
+        /// that would be returned from System.Data.IDataRecord.GetValue(System.Int32).
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>The System.Type information corresponding to the type of System.Object that
+        /// would be returned from System.Data.IDataRecord.GetValue(System.Int32).
+        /// </returns>
+        public Type GetFieldType(int i)
+        {
+            return wrappedReader.GetFieldType(i);
+        }
+
+        /// <summary>
+        /// Gets the float at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Float value.</returns>
+        public float GetFloat(int i)
+        {
+            return wrappedReader.GetFloat(i);
+        }
+
+        /// <summary>
+        /// Gets the Guid at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Guid value.</returns>
+        public Guid GetGuid(int i)
+        {
+            return wrappedReader.GetGuid(i);
+        }
+
+        /// <summary>
+        /// Gets the Int16 (short) at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Int16 (short) value.</returns>
+        public short GetInt16(int i)
+        {
+            return wrappedReader.GetInt16(i);
         }
 
         /// <summary>
@@ -431,38 +586,53 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Return the value of the specified field.
+        /// Gets the Int64 at column ordinal i.
         /// </summary>
-        /// <param name="name">Name of the field.</param>
-        /// <returns>Value from the column.</returns>
-        public object this[string name]
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>Int64 value.</returns>
+        public long GetInt64(int i)
         {
-            get
-            {
-                int ordinal = wrappedReader.GetOrdinal(name);
-
-                if (ordinal > -1)
-                {
-                    return (this as IDataRecord).GetValue(ordinal);
-                }
-                else
-                {
-                    return wrappedReader[name];
-                }
-            }
+            return wrappedReader.GetInt64(i);
         }
 
         /// <summary>
-        /// Return the value of the specified field.
+        /// Gets the name of the column at ordinal i.
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Value from column i.</returns>
-        public object this[int i]
+        /// <returns>Name of the field.</returns>
+        public string GetName(int i)
         {
-            get
-            {
-                return (this as IDataRecord).GetValue(i);
-            }
+            return wrappedReader.GetName(i);
+        }
+
+        /// <summary>
+        /// Gets the column ordinal for the column with the specified name.
+        /// </summary>
+        /// <param name="name">Name of the column.</param>
+        /// <returns>Corresponding column ordinal.</returns>
+        public int GetOrdinal(string name)
+        {
+            return wrappedReader.GetOrdinal(name);
+        }
+
+        /// <summary>
+        /// Returns a System.Data.DataTable that describes the column metadata of the
+        /// System.Data.IDataReader.
+        /// </summary>
+        /// <returns>A System.Data.DataTable that describes the column metadata.</returns>
+        public DataTable GetSchemaTable()
+        {
+            return wrappedReader.GetSchemaTable();
+        }
+
+        /// <summary>
+        /// Gets the string at column ordinal i.
+        /// </summary>
+        /// <param name="i">The zero-based column ordinal.</param>
+        /// <returns>String value.</returns>
+        public string GetString(int i)
+        {
+            return (string)(this as IDataRecord).GetValue(i);
         }
 
         /// <summary>
@@ -521,64 +691,6 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Return whether the specified field is null.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>True if the field is DbNull, false otherwise.</returns>
-        public bool IsDBNull(int i)
-        {
-            return wrappedReader.IsDBNull(i);
-        }
-
-        /// <summary>
-        /// Reads a stream of bytes from the specified column offset into the buffer
-        /// as an array, starting at the given buffer offset.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <param name="fieldOffset">The index within the row from which to start the read operation.</param>
-        /// <param name="buffer">The buffer into which to read the stream of bytes.</param>
-        /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
-        /// <param name="length">The number of bytes to read.</param>
-        /// <returns>The actual number of bytes read.</returns>
-        public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
-        {
-            return wrappedReader.GetBytes(i, fieldOffset, buffer, bufferoffset, length);
-        }
-
-        /// <summary>
-        /// Gets the Byte at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Byte value.</returns>
-        public byte GetByte(int i)
-        {
-            return wrappedReader.GetByte(i);
-        }
-
-        /// <summary>
-        /// Gets the System.Type information corresponding to the type of System.Object
-        /// that would be returned from System.Data.IDataRecord.GetValue(System.Int32).
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>The System.Type information corresponding to the type of System.Object that
-        /// would be returned from System.Data.IDataRecord.GetValue(System.Int32).
-        /// </returns>
-        public Type GetFieldType(int i)
-        {
-            return wrappedReader.GetFieldType(i);
-        }
-
-        /// <summary>
-        /// Gets the Decimal at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Decimal value.</returns>
-        public decimal GetDecimal(int i)
-        {
-            return wrappedReader.GetDecimal(i);
-        }
-
-        /// <summary>
         /// Populates an array of objects with the column values of the current record.
         /// </summary>
         /// <param name="values">An array of System.Object to copy the attribute fields into.</param>
@@ -589,160 +701,48 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Gets the name of the column at ordinal i.
+        /// Return whether the specified field is null.
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Name of the field.</returns>
-        public string GetName(int i)
+        /// <returns>True if the field is DbNull, false otherwise.</returns>
+        public bool IsDBNull(int i)
         {
-            return wrappedReader.GetName(i);
+            return wrappedReader.IsDBNull(i);
         }
 
         /// <summary>
-        /// Gets the number of columns in the current row.
+        /// Return the value of the specified field.
         /// </summary>
-        /// <returns>Number of columns.</returns>
-        public int FieldCount
+        /// <param name="name">Name of the field.</param>
+        /// <returns>Value from the column.</returns>
+        public object this[string name]
         {
             get
             {
-                return wrappedReader.FieldCount;
+                int ordinal = wrappedReader.GetOrdinal(name);
+
+                if (ordinal > -1)
+                {
+                    return (this as IDataRecord).GetValue(ordinal);
+                }
+                else
+                {
+                    return wrappedReader[name];
+                }
             }
         }
 
         /// <summary>
-        /// Gets the Int64 at column ordinal i.
+        /// Return the value of the specified field.
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Int64 value.</returns>
-        public long GetInt64(int i)
+        /// <returns>Value from column i.</returns>
+        public object this[int i]
         {
-            return wrappedReader.GetInt64(i);
-        }
-
-        /// <summary>
-        /// Gets the double at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Double value.</returns>
-        public double GetDouble(int i)
-        {
-            return wrappedReader.GetDouble(i);
-        }
-
-        /// <summary>
-        /// Gets the boolean at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Boolean value.</returns>
-        public bool GetBoolean(int i)
-        {
-            return wrappedReader.GetBoolean(i);
-        }
-
-        /// <summary>
-        /// Gets the Guid at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Guid value.</returns>
-        public Guid GetGuid(int i)
-        {
-            return wrappedReader.GetGuid(i);
-        }
-
-        /// <summary>
-        /// Gets the DateTime at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>DateTime value.</returns>
-        public DateTime GetDateTime(int i)
-        {
-            return wrappedReader.GetDateTime(i);
-        }
-
-        /// <summary>
-        /// Gets the column ordinal for the column with the specified name.
-        /// </summary>
-        /// <param name="name">Name of the column.</param>
-        /// <returns>Corresponding column ordinal.</returns>
-        public int GetOrdinal(string name)
-        {
-            return wrappedReader.GetOrdinal(name);
-        }
-
-        /// <summary>
-        /// Gets the data type information for the specified column.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>The data type information for the specified field.</returns>
-        public string GetDataTypeName(int i)
-        {
-            return wrappedReader.GetDataTypeName(i);
-        }
-
-        /// <summary>
-        /// Gets the float at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Float value.</returns>
-        public float GetFloat(int i)
-        {
-            return wrappedReader.GetFloat(i);
-        }
-
-        /// <summary>
-        /// Returns an IDataReader for the specified column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>An IDataReader.</returns>
-        public IDataReader GetData(int i)
-        {
-            return wrappedReader.GetData(i);
-        }
-
-        /// <summary>
-        /// Reads a stream of characters from the specified column offset into the buffer
-        /// as an array, starting at the given buffer offset.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <param name="fieldoffset">The index within the row from which to start the read operation.</param>
-        /// <param name="buffer">The buffer into which to read the stream of bytes.</param>
-        /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
-        /// <param name="length">The number of bytes to read.</param>
-        /// <returns>The actual number of characters read.</returns>
-        public long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
-        {
-            return wrappedReader.GetChars(i, fieldoffset, buffer, bufferoffset, length);
-        }
-
-        /// <summary>
-        /// Gets the string at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>String value.</returns>
-        public string GetString(int i)
-        {
-            return (string)(this as IDataRecord).GetValue(i);
-        }
-
-        /// <summary>
-        /// Gets the char at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Char value.</returns>
-        public char GetChar(int i)
-        {
-            return wrappedReader.GetChar(i);
-        }
-
-        /// <summary>
-        /// Gets the Int16 (short) at column ordinal i.
-        /// </summary>
-        /// <param name="i">The zero-based column ordinal.</param>
-        /// <returns>Int16 (short) value.</returns>
-        public short GetInt16(int i)
-        {
-            return wrappedReader.GetInt16(i);
+            get
+            {
+                return (this as IDataRecord).GetValue(i);
+            }
         }
     }
 }
