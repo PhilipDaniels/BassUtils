@@ -623,5 +623,25 @@ namespace BassUtils
             else
                 return result.Distinct().ToList();
         }
+
+        /// <summary>
+        /// Change a character in a string.
+        /// If you need to change many characters, it is probably best to use a StringBuilder.
+        /// </summary>
+        /// <param name="value">The string to change in.</param>
+        /// <param name="index">The index of the character. An exception results if the index is not in range.</param>
+        /// <param name="newChar">The new character.</param>
+        /// <returns>New string with character replaced.</returns>
+        public static string SetChar(this string value, int index, char newChar)
+        {
+            value.ThrowIfNull("value");
+
+            if (index < 0 || index >= value.Length)
+                throw new ArgumentOutOfRangeException("index", "index must be 0 to value.Length - 1");
+
+            char[] chars = value.ToCharArray();
+            chars[index] = newChar;
+            return new string(chars);
+        }
     }
 }

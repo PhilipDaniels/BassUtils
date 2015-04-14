@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace BassUtils.Tests
 {
+    [TestFixture]
     public class BeforeAndAfterTests
     {
         [Test]

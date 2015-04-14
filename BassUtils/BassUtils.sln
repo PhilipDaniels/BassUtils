@@ -7,17 +7,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils", "BassUtils\Bass
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils.Tests", "BassUtils.Tests\BassUtils.Tests.csproj", "{7FB3917B-2480-46F0-AD73-D37A21FB5D03}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{EBF37525-3D3C-40C5-BCCB-0DB10628EE88}"
-	ProjectSection(SolutionItems) = preProject
-		..\nuget\build.ps1 = ..\nuget\build.ps1
-		..\nuget\pushinternet.ps1 = ..\nuget\pushinternet.ps1
-		..\nuget\pushlocal.ps1 = ..\nuget\pushlocal.ps1
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{AAB1E2F3-0F23-4F96-BDD4-3D28C7086BEB}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 		..\TODO.md = ..\TODO.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{61645300-550D-4B07-862F-1735BB07D1B9}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+		.nuget\PackInternet.ps1 = .nuget\PackInternet.ps1
+		.nuget\PackLocal.ps1 = .nuget\PackLocal.ps1
+		.nuget\PowerPack.psm1 = .nuget\PowerPack.psm1
+		.nuget\PowerPackExample.ps1 = .nuget\PowerPackExample.ps1
+		.nuget\PowerPackREADME.md = .nuget\PowerPackREADME.md
 	EndProjectSection
 EndProject
 Global

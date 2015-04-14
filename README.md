@@ -4,7 +4,8 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 
 # Change History
 #### [Unreleased]
-Nothing yet.
+###### Added
+- StringExtensions.SetChar
 
 #### [2.0.0] - 2015-03-25
 ###### Added

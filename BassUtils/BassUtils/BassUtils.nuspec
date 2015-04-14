@@ -19,8 +19,8 @@
   </metadata>
   <files>
     <!-- Files are relative to the nuspec file. -->
-    <file src="bin\$configuration$\BassUtils.dll" target="lib\BassUtils.dll" />
-    <file src="bin\$configuration$\BassUtils.dll" target="lib\BassUtils.pdb" />
-    <file src="bin\$configuration$\BassUtils.xml" target="lib\BassUtils.xml" />
+    <file src="bin\PowerPack\$configuration$\BassUtils.dll" target="lib\BassUtils.dll" />
+    <file src="bin\PowerPack\$configuration$\BassUtils.dll" target="lib\BassUtils.pdb" />
+    <file src="bin\PowerPack\$configuration$\BassUtils.xml" target="lib\BassUtils.xml" />
   </files>
 </package>
