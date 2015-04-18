@@ -3,14 +3,17 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 
 
 # Change History
+
 #### [Unreleased]
 ###### Added
+- ExportedInterfacesView
+
+#### [2.1.0] - 2015-04-18
+###### Added
 - StringExtensions.SetChar
-- AssemblyExtensions.ExportedInterfaces
 - StringBuilderExtensions.EndsWith, AppendCSV, AppendIfDoesNotEndWith, TrimAppend
 - StringExtensions.AppendCSV, AppendIfDoesNotEndWith, TrimAppend
 - ConfigLoader (see documentation in the class or BassUtils.Tests)
-
 
 #### [2.0.0] - 2015-03-25
 ###### Added
@@ -48,6 +51,12 @@ string sql = typeof(this).Assembly.GetResourceAsString("Foo.sql");
 index fragmentation:
 ```
 Guid g = Comb.NewGuid();
+```
+
+**ConfigurationLoader** Extremely useful class for loading custom configuration sections
+```
+// See documentation in the class or the cases in BassUtils.Tests.
+// You want to use this, trust me.
 ```
 
 **Conv** Convenient conversion functions:
@@ -94,5 +103,10 @@ string key = "Name=Phil".Before("=");
 string value = "Name=Phil".After("=");
 string s = "Hello".Repeat(3);
 string t = "hi".Left(3); // safe.
+
+// Simple CSV-like "listifier". Also on StringBuilder.
+string list = "".AppendCSV(number, name, street, town, county, country);
+list = "Hello,".AppendIfDoesNotEndWith(",");
+list = list.TrimAppend("  world  ");
 ```
  

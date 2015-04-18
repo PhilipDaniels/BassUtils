@@ -1,4 +1,4 @@
-﻿namespace BassUtils.Tests.ConfigLoader
+﻿namespace BassUtils.Tests.ConfigurationLoader
 {
     public enum PaymentClass
     {

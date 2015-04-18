@@ -26,6 +26,10 @@ Restrictions
     do by inheriting this class. However, it means an alternative implementation whereby you use this
     class as a member variable (composition instead of inheritance) is not worth the effort.
 
+This class is based on the code I found in this article http://www.codeproject.com/Articles/6730/Custom-Objects-From-the-App-Config-file,
+which I found via http://codecutout.com/xml-deserialization-from-app-config
+But it has been extensively enhanced.
+
 
 n.b. There is a full working example in the BassUtils.Tests project.
 
@@ -84,13 +88,13 @@ namespace BassUtils
     /// file. This can save a huge amount of boilerplate; there is extensive documentation in the
     /// class source file (available on Github) and a full working example in the BassUtils.Test project.
     /// <typeparam name="T">The type of the configuration section.</typeparam>
-    public abstract class ConfigLoader<T> : IConfigurationSectionHandler
+    public abstract class ConfigurationLoader<T> : IConfigurationSectionHandler
         where T : class
     {
         /// <summary>
         /// Initialise a new instance of the ConfigLoader.
         /// </summary>
-        public ConfigLoader()
+        public ConfigurationLoader()
         {
         }
 
@@ -98,7 +102,7 @@ namespace BassUtils
         /// Initialise a new instance of the ConfigLoader.
         /// </summary>
         /// <param name="load">Whether to load the configuration from file.</param>
-        public ConfigLoader(bool load)
+        public ConfigurationLoader(bool load)
         {
             if (load)
                 Load();

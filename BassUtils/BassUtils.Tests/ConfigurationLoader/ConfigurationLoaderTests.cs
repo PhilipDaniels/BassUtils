@@ -3,10 +3,10 @@ using System.Configuration;
 using System.Linq;
 using NUnit.Framework;
 
-namespace BassUtils.Tests.ConfigLoader
+namespace BassUtils.Tests.ConfigurationLoader
 {
     [TestFixture]
-    public class ConfigLoaderTests
+    public class ConfigurationLoaderTests
     {
         [Test]
         public void Load_CanLoadAttributesCorrectly()

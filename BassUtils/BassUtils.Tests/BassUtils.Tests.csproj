@@ -93,12 +93,12 @@
   <ItemGroup>
     <Compile Include="ArgumentValidatorTests.cs" />
     <Compile Include="BeforeAndAfterTests.cs" />
-    <Compile Include="ConfigLoader\ConfigLoaderTests.cs" />
-    <Compile Include="ConfigLoader\Country.cs" />
-    <Compile Include="ConfigLoader\ContinentConfigurationSection.cs" />
-    <Compile Include="ConfigLoader\FirstConfigurationSection.cs" />
-    <Compile Include="ConfigLoader\PaymentClass.cs" />
-    <Compile Include="ConfigLoader\SecondConfigurationSection.cs" />
+    <Compile Include="ConfigurationLoader\ConfigurationLoaderTests.cs" />
+    <Compile Include="ConfigurationLoader\Country.cs" />
+    <Compile Include="ConfigurationLoader\ContinentConfigurationSection.cs" />
+    <Compile Include="ConfigurationLoader\FirstConfigurationSection.cs" />
+    <Compile Include="ConfigurationLoader\PaymentClass.cs" />
+    <Compile Include="ConfigurationLoader\SecondConfigurationSection.cs" />
     <Compile Include="ConvTests.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="PadAndAlignTests.cs" />
