@@ -38,6 +38,8 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigLoader.cs" />
     <Compile Include="Conv.cs" />
     <Compile Include="CSVOptions.cs" />
     <Compile Include="DataRowExtensions.cs" />
@@ -53,6 +56,8 @@
     <Compile Include="DataTableExtensions.cs" />
     <Compile Include="DataViewExtensions.cs" />
     <Compile Include="ExpandoExtensions.cs" />
+    <Compile Include="Registration\ExportedInterface.cs" />
+    <Compile Include="Registration\ExportedTypeView.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="ICollectionExtensions.cs" />
     <Compile Include="IDataParameterExtensions.cs" />

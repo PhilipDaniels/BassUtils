@@ -9,6 +9,8 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 - AssemblyExtensions.ExportedInterfaces
 - StringBuilderExtensions.EndsWith, AppendCSV, AppendIfDoesNotEndWith, TrimAppend
 - StringExtensions.AppendCSV, AppendIfDoesNotEndWith, TrimAppend
+- ConfigLoader (see documentation in the class or BassUtils.Tests)
+
 
 #### [2.0.0] - 2015-03-25
 ###### Added

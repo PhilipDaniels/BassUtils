@@ -75,9 +75,12 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.XML" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -90,14 +93,23 @@
   <ItemGroup>
     <Compile Include="ArgumentValidatorTests.cs" />
     <Compile Include="BeforeAndAfterTests.cs" />
+    <Compile Include="ConfigLoader\ConfigLoaderTests.cs" />
+    <Compile Include="ConfigLoader\Country.cs" />
+    <Compile Include="ConfigLoader\ContinentConfigurationSection.cs" />
+    <Compile Include="ConfigLoader\FirstConfigurationSection.cs" />
+    <Compile Include="ConfigLoader\PaymentClass.cs" />
+    <Compile Include="ConfigLoader\SecondConfigurationSection.cs" />
     <Compile Include="ConvTests.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="PadAndAlignTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\ExportedTypeViewTests.cs" />
+    <Compile Include="Registration\Interfaces.cs" />
     <Compile Include="StringBuilderExtensionTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +140,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
