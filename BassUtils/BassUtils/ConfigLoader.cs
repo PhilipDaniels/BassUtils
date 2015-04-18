@@ -21,6 +21,11 @@ On your C# classes you can use
   - enumerated members, they will be converted correctly
   - attributes that are themselves classes (nesting).
 
+Restrictions
+  - Your *ConfigurationSection classes must implement IConfigurationSectionHandler, which you automatically
+    do by inheriting this class. However, it means an alternative implementation whereby you use this
+    class as a member variable (composition instead of inheritance) is not worth the effort.
+
 
 n.b. There is a full working example in the BassUtils.Tests project.
 
@@ -86,8 +91,26 @@ namespace BassUtils
         /// Initialise a new instance of the ConfigLoader.
         /// </summary>
         public ConfigLoader()
-            : base()
         {
+        }
+
+        /// <summary>
+        /// Initialise a new instance of the ConfigLoader.
+        /// </summary>
+        /// <param name="load">Whether to load the configuration from file.</param>
+        public ConfigLoader(bool load)
+        {
+            if (load)
+                Load();
+        }
+
+        /// <summary>
+        /// Loads or reloads this configuration from the config file.
+        /// </summary>
+        public void Load()
+        {
+            T config = InnerLoad();
+            PropertyCopier.CopyProperties(config, this);
         }
 
         /// <summary>
@@ -96,7 +119,7 @@ namespace BassUtils
         /// <exception cref="ConfigurationErrorsException">If there are validation errors or any other errors
         /// when loading the section.</exception>
         /// <returns>Loaded configuration object.</returns>
-        public T Load()
+        T InnerLoad()
         {
             // It's weird, but first we have to find our name, then we can call the ConfigurationManager
             // which will in turn call Create().

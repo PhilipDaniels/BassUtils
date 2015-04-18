@@ -13,8 +13,7 @@ namespace BassUtils.Tests.ConfigLoader
         {
             try
             {
-                var config = new FirstConfigurationSection();
-                config = config.Load();
+                var config = new FirstConfigurationSection(true);
                 Assert.AreEqual("Philip", config.FirstName);
                 Assert.AreEqual("Daniels", config.Surname);
             }
@@ -31,8 +30,7 @@ namespace BassUtils.Tests.ConfigLoader
         {
             try
             {
-                var config = new SecondConfigurationSection();
-                config = config.Load();
+                var config = new SecondConfigurationSection(true);
                 Assert.AreEqual("CreditCards", config.Mechanism);
                 Assert.AreEqual("Visa", config.CardType);
                 Assert.AreEqual(20, config.Discount);
@@ -52,8 +50,7 @@ namespace BassUtils.Tests.ConfigLoader
         {
             try
             {
-                var config = new ContinentConfigurationSection();
-                config = config.Load();
+                var config = new ContinentConfigurationSection(true);
                 Assert.AreEqual("North America", config.Name);
                 Assert.AreEqual(3, config.Countries.Count);
 
@@ -75,7 +72,6 @@ namespace BassUtils.Tests.ConfigLoader
                 // what you can do with this class it is useful to look at the message on this exception.
                 string msg = cex.Message;
             }
-
         }
     }
 }
