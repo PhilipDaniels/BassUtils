@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace BassUtils.Tests.ConfigurationLoader
+namespace BassUtils.Tests.ConfigurationLoaderTests
 {
     /// <summary>
     /// Notice this is just a normal class.

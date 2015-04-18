@@ -1,8 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using BassUtils;
+using System.Xml.Serialization;
 
-namespace BassUtils.Tests.ConfigurationLoader
+namespace BassUtils.Tests.ConfigurationLoaderTests
 {
-    public sealed class FirstConfigurationSection : ConfigurationLoader<FirstConfigurationSection>
+    public sealed class FirstConfigurationSection : ConfigurationLoader
     {
         /// <summary>
         /// You must supply a default constructor for the XmlSerializer.

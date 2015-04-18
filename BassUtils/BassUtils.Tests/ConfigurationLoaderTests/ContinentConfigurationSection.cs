@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace BassUtils.Tests.ConfigurationLoader
+namespace BassUtils.Tests.ConfigurationLoaderTests
 {
     [DebuggerDisplay("{Name]")]
-    public sealed class ContinentConfigurationSection : ConfigurationLoader<ContinentConfigurationSection>
+    public sealed class ContinentConfigurationSection : ConfigurationLoader
     {
         /// <summary>
         /// You must supply a default constructor for the XmlSerializer.

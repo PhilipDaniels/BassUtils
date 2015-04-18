@@ -87,9 +87,7 @@ namespace BassUtils
     /// Inherit this class to produce a class which will automatically load the data from the config
     /// file. This can save a huge amount of boilerplate; there is extensive documentation in the
     /// class source file (available on Github) and a full working example in the BassUtils.Test project.
-    /// <typeparam name="T">The type of the configuration section.</typeparam>
-    public abstract class ConfigurationLoader<T> : IConfigurationSectionHandler
-        where T : class
+    public abstract class ConfigurationLoader : IConfigurationSectionHandler
     {
         /// <summary>
         /// Initialise a new instance of the ConfigLoader.
@@ -113,7 +111,7 @@ namespace BassUtils
         /// </summary>
         public void Load()
         {
-            T config = InnerLoad();
+            var config = InnerLoad();
             PropertyCopier.CopyProperties(config, this);
         }
 
@@ -123,7 +121,7 @@ namespace BassUtils
         /// <exception cref="ConfigurationErrorsException">If there are validation errors or any other errors
         /// when loading the section.</exception>
         /// <returns>Loaded configuration object.</returns>
-        T InnerLoad()
+        object InnerLoad()
         {
             // It's weird, but first we have to find our name, then we can call the ConfigurationManager
             // which will in turn call Create().
@@ -134,7 +132,7 @@ namespace BassUtils
                 sectionName = GetConfigurationSectionName();
                 if (sectionName == null)
                     throw new ConfigurationErrorsException("The configuration section for type " + GetType() + " could not be found.");
-                var config = ConfigurationManager.GetSection(sectionName) as T;
+                object config = ConfigurationManager.GetSection(sectionName);
                 return config;
             }
             catch (ConfigurationErrorsException)
@@ -179,7 +177,7 @@ namespace BassUtils
 
             using (XmlNodeReader rdr = new XmlNodeReader(section))
             {
-                T config = ser.Deserialize(rdr) as T;
+                var config = ser.Deserialize(rdr);
                 ApplyDefaultValues(config);
                 var errors = ValidateLoadedObject(config);
                 if (errors != null && errors.Count > 0)

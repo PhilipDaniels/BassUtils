@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Linq;
 using NUnit.Framework;
 
-namespace BassUtils.Tests.ConfigurationLoader
+namespace BassUtils.Tests.ConfigurationLoaderTests
 {
     [TestFixture]
     public class ConfigurationLoaderTests

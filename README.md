@@ -13,7 +13,7 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 - StringExtensions.SetChar
 - StringBuilderExtensions.EndsWith, AppendCSV, AppendIfDoesNotEndWith, TrimAppend
 - StringExtensions.AppendCSV, AppendIfDoesNotEndWith, TrimAppend
-- ConfigLoader (see documentation in the class or BassUtils.Tests)
+- ConfigurationLoader (see documentation in the class or BassUtils.Tests)
 
 #### [2.0.0] - 2015-03-25
 ###### Added
@@ -53,7 +53,7 @@ index fragmentation:
 Guid g = Comb.NewGuid();
 ```
 
-**ConfigurationLoader** Extremely useful class for loading custom configuration sections
+**ConfigurationLoader** Extremely useful class for loading custom configuration sections.
 ```
 // See documentation in the class or the cases in BassUtils.Tests.
 // You want to use this, trust me.

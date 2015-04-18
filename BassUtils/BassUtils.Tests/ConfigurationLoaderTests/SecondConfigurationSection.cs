@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
-namespace BassUtils.Tests.ConfigurationLoader
+namespace BassUtils.Tests.ConfigurationLoaderTests
 {
-    public sealed class SecondConfigurationSection : ConfigurationLoader<SecondConfigurationSection>
+    public sealed class SecondConfigurationSection : ConfigurationLoader
     {
         /// <summary>
         /// You must supply a default constructor for the XmlSerializer.
