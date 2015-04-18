@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace BassUtils
@@ -107,5 +109,35 @@ namespace BassUtils
                 return data;
             }
         }
+
+        /// <summary>
+        /// Gets the interfaces exported by an assembly. Generic type definitions are excluded.
+        /// </summary>
+        /// <param name="assembly">The assembly from which to retrieve interfaces.</param>
+        /// <returns>List of public interfaces.</returns>
+        public static IEnumerable<Type> ExportedInterfaces(this Assembly assembly)
+        {
+            assembly.ThrowIfNull("assembly");
+
+            return from type in assembly.GetExportedTypes()
+                   where type.IsInterface &&
+                         !type.IsGenericTypeDefinition
+                   orderby type.FullName
+                   select type;
+        }
+
+        //public static IEnumerable<Tuple<Type, Type>> GetInterfaceImplementers(this Assembly assembly, IEnumerable<Type> interfaceTypes)
+        //{
+        //    assembly.ThrowIfNull("assembly");
+        //    interfaceTypes.ThrowIfNull("interfaceTypes");
+
+        //    return from type in assembly.GetExportedTypes()
+        //           where !type.IsInterface &&
+        //                 !type.IsAbstract
+        //           let ifaces = type.GetInterfaces().Intersect(interfaceTypes)
+        //           where ifaces.Count() == 1
+        //           orderby type.FullName
+        //           select Tuple.Create<Type, Type>(ifaces.ElementAt(0), type);
+        //}
     }
 }

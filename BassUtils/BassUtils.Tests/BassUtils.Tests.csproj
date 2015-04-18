@@ -94,6 +94,7 @@
     <Compile Include="Data.cs" />
     <Compile Include="PadAndAlignTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringBuilderExtensionTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>

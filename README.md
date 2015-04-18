@@ -6,6 +6,9 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 #### [Unreleased]
 ###### Added
 - StringExtensions.SetChar
+- AssemblyExtensions.ExportedInterfaces
+- StringBuilderExtensions.EndsWith, AppendCSV, AppendIfDoesNotEndWith, TrimAppend
+- StringExtensions.AppendCSV, AppendIfDoesNotEndWith, TrimAppend
 
 #### [2.0.0] - 2015-03-25
 ###### Added

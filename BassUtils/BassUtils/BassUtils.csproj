@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conv.cs" />
+    <Compile Include="CSVOptions.cs" />
     <Compile Include="DataRowExtensions.cs" />
     <Compile Include="DataSetExtensions.cs" />
     <Compile Include="DataTableExtensions.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="SqlName.cs" />
     <Compile Include="SqlParameterCollectionExtensions.cs" />
     <Compile Include="StreamExtensions.cs" />
+    <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TableAdapterBase.cs">
       <SubType>Component</SubType>

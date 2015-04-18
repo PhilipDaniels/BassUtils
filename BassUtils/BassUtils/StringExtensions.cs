@@ -643,5 +643,109 @@ namespace BassUtils
             chars[index] = newChar;
             return new string(chars);
         }
+
+
+
+
+
+        /// <summary>
+        /// Appends a character to the <paramref name="value"/>, but only if the value does not already
+        /// end with that character. This is useful for building up lists.
+        /// </summary>
+        /// <param name="value">The string to append to.</param>
+        /// <param name="charToAppend">The character to append.</param>
+        /// <returns>The appended (or not, as the case may be), string.</returns>
+        public static string AppendIfDoesNotEndWith(this string value, char charToAppend)
+        {
+            value.ThrowIfNull("value");
+
+            if (!value.EndsWith(charToAppend.ToString()))
+                return value + charToAppend;
+            else
+                return value;
+        }
+
+        /// <summary>
+        /// Appends a string to the <paramref name="value"/>, but only if the value does not already
+        /// end with that string. This is useful for building up lists.
+        /// </summary>
+        /// <param name="value">The string to append to.</param>
+        /// <param name="valueToAppend">The string to append.</param>
+        /// <returns>The appended (or not, as the case may be), string.</returns>
+        public static string AppendIfDoesNotEndWith(this string value, string valueToAppend)
+        {
+            return value.AppendIfDoesNotEndWith(valueToAppend, StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// Appends a string to the <paramref name="value"/>, but only if the value does not already
+        /// end with that string. This is useful for building up lists.
+        /// </summary>
+        /// <param name="value">The string to append to.</param>
+        /// <param name="valueToAppend">The string to append.</param>
+        /// <param name="comparisonType">String comparison type to use when checking to see if
+        /// the string ends with the value.</param>
+        /// <returns>The appended (or not, as the case may be), string.</returns>
+        public static string AppendIfDoesNotEndWith(this string value, string valueToAppend, StringComparison comparisonType)
+        {
+            value.ThrowIfNull("value");
+            valueToAppend.ThrowIfNull("valueToAppend");
+
+            if (!value.EndsWith(valueToAppend, comparisonType))
+                return value + valueToAppend;
+            else
+                return value;
+        }
+
+        /// <summary>
+        /// Trims <paramref name="valueToAppend"/> before appending it. The value cannot be null.
+        /// </summary>
+        /// <param name="value">The string to append to.</param>
+        /// <param name="valueToAppend">The value to trim and append.</param>
+        /// <returns>The appended string.</returns>
+        public static string TrimAppend(this string value, string valueToAppend)
+        {
+            value.ThrowIfNull("value");
+            valueToAppend.ThrowIfNull("valueToAppend");
+
+            return value + valueToAppend.Trim();
+        }
+
+        /// <summary>
+        /// Appends <paramref name="args"/> in a "CSV style" to the end of the <paramref name="value"/>.
+        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// This overload uses the default options.
+        /// </summary>
+        /// <param name="value">The string to append to.</param>
+        /// <param name="args">The arguments to append.</param>
+        /// <returns>The appended string.</returns>
+        public static string AppendCSV(this string value, params object[] args)
+        {
+            var options = new CSVOptions();
+            return value.AppendCSV(options, args);
+        }
+
+        /// <summary>
+        /// Appends <paramref name="args"/> in a "CSV style" to the end of the <paramref name="value"/>.
+        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// </summary>
+        /// <param name="value">The string to append to.</param>
+        /// <param name="options">Options to control the appending.</param>
+        /// <param name="args">The arguments to append.</param>
+        /// <returns>The appended string.</returns>
+        public static string AppendCSV
+            (
+            this string value,
+            CSVOptions options,
+            params object[] args
+            )
+        {
+            value.ThrowIfNull("value");
+            options.ThrowIfNull("options");
+
+            var sb = new StringBuilder(value);
+            sb.AppendCSV(options, args);
+            return sb.ToString();
+        }
     }
 }
