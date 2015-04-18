@@ -97,7 +97,7 @@ using (var sbcReader = new SqlBulkCopyDataReader(orderReader, conn, bulkCopy))
 int numRows = bulkCopy.TotalRowsCopied();
 ```
 
-**StringExtensions*** Some handy string extensions:
+**StringExtensions** Some handy string extensions:
 ```
 string key = "Name=Phil".Before("=");
 string value = "Name=Phil".After("=");
