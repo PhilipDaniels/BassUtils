@@ -577,7 +577,6 @@ $options.OutputDirectory = "bin\PowerPack\$($options.Configuration)"
 $options.PackOptions = @(
     "-Verbosity",
     "normal",
-    "-NoPackageAnalysis",
     "-Properties",
     "Configuration=$($options.Configuration)"
     )

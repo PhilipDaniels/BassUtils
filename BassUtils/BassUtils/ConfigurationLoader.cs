@@ -87,6 +87,7 @@ namespace BassUtils
     /// Inherit this class to produce a class which will automatically load the data from the config
     /// file. This can save a huge amount of boilerplate; there is extensive documentation in the
     /// class source file (available on Github) and a full working example in the BassUtils.Test project.
+    /// </summary>
     public abstract class ConfigurationLoader : IConfigurationSectionHandler
     {
         /// <summary>
@@ -155,7 +156,7 @@ namespace BassUtils
         /// passing in the XmlNode required.
         /// </summary>
         /// <param name="parent">The configuration settings in a corresponding parent configuration section.</param>
-        /// <param name="configContext">An <see cref="HttpConfigurationContext"/> when Create is called from the ASP.NET configuration system. Otherwise,
+        /// <param name="configContext">An HttpConfigurationContext when Create is called from the ASP.NET configuration system. Otherwise,
         /// this parameter is reserved and is a null reference (Nothing in Visual Basic).</param>
         /// <param name="section">The <see cref="XmlNode"/> that contains the configuration information from the configuration file.
         /// Provides direct access to the XML contents of the configuration section.</param>
@@ -292,6 +293,7 @@ namespace BassUtils
         /// Render any configuration errors down to a useful string.
         /// </summary>
         /// <param name="errors">Set of errors.</param>
+        /// <param name="section">The XmlNode section, used to get the name.</param>
         /// <returns>String rep.</returns>
         protected virtual string ErrorsToString(IEnumerable<ValidationResult> errors, XmlNode section)
         {

@@ -10,17 +10,17 @@
     <projectUrl>https://github.com/PhilipDaniels/BassUtils</projectUrl>
     <iconUrl>http://philipdaniels.com/nugeticons/bassutils/bass-clef-32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>BassUtils for .Net - argument validators, FileUtils, IDataReader, IDataRecord extensions etc.</description>
-    <releaseNotes>See https://github.com/PhilipDaniels/BassUtils Version is bumped to 2 because of removal
-    of ToCSV() methods from the DataTable and DataView extensions.</releaseNotes>
+    <description>BassUtils for .Net - argument validators, FileUtils, IDataReader, IDataRecord, ConfigurationLoader, extensions etc.</description>
+    <releaseNotes>See https://github.com/PhilipDaniels/BassUtils </releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Argument Validation Comb Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
-      StringExtensions SqlBulkCopy bulk copy SQL</tags>
+    <tags>Argument Validation Comb ConfigurationSection DirectoryWatcher Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
+      StringBuilderExtensions StringExtensions SqlBulkCopy bulk copy SQL app.config web.config
+    </tags>
   </metadata>
   <files>
     <!-- Files are relative to the nuspec file. -->
-    <file src="bin\PowerPack\$configuration$\BassUtils.dll" target="lib\BassUtils.dll" />
-    <file src="bin\PowerPack\$configuration$\BassUtils.dll" target="lib\BassUtils.pdb" />
-    <file src="bin\PowerPack\$configuration$\BassUtils.xml" target="lib\BassUtils.xml" />
+    <file src="bin\PowerPack\$configuration$\BassUtils.dll" target="lib\Net40\BassUtils.dll" />
+    <file src="bin\PowerPack\$configuration$\BassUtils.pdb" target="lib\Net40\BassUtils.pdb" />
+    <file src="bin\PowerPack\$configuration$\BassUtils.xml" target="lib\Net40\BassUtils.xml" />
   </files>
 </package>
