@@ -1,14 +1,24 @@
 $source = @"
 using System.IO;
 
+public class ConfigInfo
+{
+    public string Configuration { get; set; }
+    public string OutputAssemblyFileName { get; set; }
+}
+
 public class Project
 {
     public string Name { get; set; }
     public string FileName { get; set; }
     public string Directory { get; set; }
-    public string PowerPackDirectory { get; set; }
-    public string OutputAssemblyFileName { get; set; }
     public string NuSpecFileName { get; set; }
+    public Dictionary<string, ConfigInfo> Configs { get; private set; }
+
+    public Project()
+    {
+        Configs = new Dictionary<string, ConfigInfo>();
+    }
 }
 "@
 
@@ -117,36 +127,65 @@ function LocateFile
 	}
 }
 
-# Finds the csproj for a project name. Searches in various likely places, which can
-# be customised by adjusting $options.ProjectSearchDirectories before running.
-# Returns an object of type Project which has several useful properties (so we
-# can avoid continually calculating them).
+# Finds the csproj for a project name. Returns an object of type Project which has several useful
+# properties (so we can avoid continually calculating them).
 function LocateProject
 	(
-	[string] $projectName		# For example, "Misc.Core"
+	[string] $projectName,		     # For example, "Misc.Core"
+    [string[]] $searchDirectories    # Array of directories to search. Leave blank to search "the usual places".
 	)
 {
 	$projectFile = "$projectName.csproj"
 
+    if (!$searchDirectories)
+    {
+        $searchDirectories = $defaults.ProjectSearchDirectories
+    }
+
     # Try the search paths as supplied.
-	$f = LocateFile $projectFile $options.ProjectSearchDirectories
+	$f = LocateFile $projectFile $searchDirectories
 	if (!$f)
 	{
         # Try the search paths with the project name on the end as well. (The Foo project is usually in a folder as Foo\Foo.csproj
         # so this is the most likely match).
-    	$f = LocateFile "$projectName\$projectFile" $options.ProjectSearchDirectories
+    	$f = LocateFile "$projectName\$projectFile" $searchDirectories
         if ($f)
         {
             $projectObject = New-Object -type Project
             $projectObject.Name = $projectName
             $projectObject.FileName = $f
             $projectObject.Directory = (Split-Path -Parent $f);
-            $projectObject.PowerPackDirectory = Join-Path -Path $projectObject.Directory -ChildPath ($options.OutputDirectory)
             $projectObject.NuSpecFileName = (LocateNuSpec $projectObject)
 
             return $projectObject
         }
 	}
+}
+
+# Locates a set of projects.
+# Will exit if a project cannot be located.
+function LocateProjects
+    (
+    [string[]] $projects		# Array of projects to locate.
+    )
+{
+    $projectObjects = @()
+
+    foreach ($project in $projects)
+    {
+        $po = LocateProject $project
+        if ($po)
+        {
+            $projectObjects += $po
+        }
+        else
+        {
+            Write-Error "Could not locate $project"
+            Exit 1
+        }
+    }
+
+    return $projectObjects
 }
 
 # Loads the project file and returns it as an XML document.
@@ -165,7 +204,10 @@ function GetMSBuildArguments
     (
     $projectObject,            # From LocateProject.
     [bool] $clean,             # If true, does a clean (before the build).
-    [bool] $build              # If true, does a build.
+    [bool] $build,             # If true, does a build.
+    [string] $verbosity,       # MS Build verbosity. Leave blank to use default from $defaults.
+    [string] $configuration,   # Project configuration to build. Leave blank to use default from $defaults.
+    [string] $platform         # Platform to build. Leave blank to use default from $defaults.
     )
 {
     $targets = ""
@@ -188,15 +230,28 @@ function GetMSBuildArguments
         Exit 1
     }
 
+    if (!$verbosity)
+    {
+        $verbosity = $defaults.MsBuildVerbosity
+    }
+    if (!$configuration)
+    {
+        $configuration = $defaults.Configuration
+    }
+    if (!$platform)
+    {
+        $platform = $defaults.Platform
+    }
+
+
     return @(
         $($projectObject.FileName),
         "/target:$targets",
         "/nologo",
-        "/verbosity:$($options.MsBuildVerbosity)",
-        "/p:Configuration=$($options.Configuration)",
-        "/p:PlatformTarget=$($options.Platform)",
-        "/p:RunCodeAnalysis=False",
-        "/p:OutDir=$($options.OutputDirectory)"
+        "/verbosity:$verbosity",
+        "/p:Configuration=$configuration",
+        "/p:PlatformTarget=$platform",
+        "/p:RunCodeAnalysis=False"
         )
 }
 
@@ -214,15 +269,15 @@ function DeleteDirectory
     }
 }
 
-# Does an MSBuild clean and for good measure removes the PowerPack output folder
-# because it will usually contain the nupkg files.
+# Does an MSBuild clean of the specified configuration.
 function CleanProject
     (
-	$projectObject            # From LocateProject.
+	$projectObject,            # From LocateProject.
+    [string] $configuration    # Configuration to clean. Leave blank to use default from options.
 	)
 {
     $msbuild = LocateMsBuild
-    $args = GetMSBuildArguments $projectObject $true $false
+    $args = GetMSBuildArguments $projectObject $true $false $null $configuration
     Write-Host "Cleaning $($projectObject.FileName)"
     &$msbuild $args
 
@@ -232,25 +287,35 @@ function CleanProject
         Exit 1
     }
 
-    # Go from PowerPack\Release to PowerPack.
-    $pn = Split-Path -Parent $projectObject.PowerPackDirectory
-    if (Test-Path $pn)
-    {
-        DeleteDirectory $pn
-    }
-
     Write-Host "Cleaning $($projectObject.FileName) complete"
 }
 
-# Builds the specified project. Gets put in the special PowerPack output folder.
-# It is recommended that you do a clean first.
-function BuildProject
-	(
+# Deletes the bin and obj directories for the project.
+function DeepCleanProject
+    (
 	$projectObject            # From LocateProject.
 	)
 {
+    foreach ($d in @("bin", "obj"))
+    {
+        $dir = Join-Path $projectObject.Directory $d
+        Write-Host "Deleting $dir"
+        DeleteDirectory $dir
+    }
+}
+
+# Builds the specified project.
+# It is recommended that you do a clean or a deep-clean first.
+function BuildProject
+	(
+	$projectObject,            # From LocateProject.
+    [string] $verbosity,       # MS Build verbosity. Leave blank to use default from $defaults.
+    [string] $configuration,   # Project configuration to build. Leave blank to use default from $defaults.
+    [string] $platform         # Platform to build. Leave blank to use default from $defaults.
+	)
+{
     $msbuild = LocateMsBuild
-    $args = GetMSBuildArguments $projectObject $false $true
+    $args = GetMSBuildArguments $projectObject $false $true $verbosity $configuration $platform
     Write-Host "Building $($projectObject.FileName): MSBuild.exe $args"
     &$msbuild $args
 
@@ -263,12 +328,11 @@ function BuildProject
     Write-Host "Building $($projectObject.FileName) complete"
 }
 
-# Locates the output assembly for a project and stores it on the project object. It looks for the output
-# in $projectObject.PowerPackDirectory. We use a known path when building because it is very difficult
-# to tell from the project file where the assembly will be put.
+# Locates the output assembly for a project and stores it on the project object.
 function SetOutputAssemblyFileName
     (
-    $projectObject            # From LocateProject.
+    $projectObject,           # From LocateProject.
+    [string] $configuration   # Configuration, which will determine the output directory we will be looking in.
     )
 {
     $filename = (Join-Path -Path $projectObject.PowerPackDirectory -ChildPath $projectObject.Name) + ".exe"
@@ -328,57 +392,46 @@ function LocateNuSpec
     }
 }
 
-# Returns the directory in which the nupkg files should be put.
-function GetPackageDirectory
-    (
-    $projectObject            # From LocateProject.
-    )
-{
-    if ($options.PackageDirectory)
-    {
-        return $options.PackageDirectory
-    }
-    else
-    {
-        return $projectObject.PowerPackDirectory
-    }
-}
-
-# Gets all the nupkg filenames that exist for the specified project. Since we have no way of knowing
-# the exact name of the package (it depends on the version number it was built with and it may not
-# have the same name as the project) this function can return 0, 1 (typically) or several filenames.
+# Gets all the nupkg filenames that exist in a directory.
+# Since we have no way of knowing the exact name of the package (it depends on the version number it was built
+# with and it may not have the same name as the project) this function can return 0, 1 (typically) or several
+# filenames, and possibly for several projects.
 function GetExistingNuGetPackageFilenames
     (
-    $projectObject            # From LocateProject.
+    [string] $directory      # Directory to look in. Leave blank to use $defaults.PackageDirectory
     )
 {
-    $packageDir = GetPackageDirectory $projectObject
+    if (!$directory)
+    {
+        $directory = $defaults.PackageDirectory
+    }
+
     $filter = "*.nupkg"
-    $filenames = Get-ChildItem -Path $packageDir -Filter $filter
+    $filenames = Get-ChildItem -Path $directory -Filter $filter
     return $filenames
 }
 
 # Lists the nupkg files that exist for a project in its package output directory.
 function NuGetList
     (
-    $projectObject            # From LocateProject.
+    [string] $directory      # Directory to look in. Leave blank to use $defaults.PackageDirectory
     )
 {
-    $files = GetExistingNuGetPackageFilenames $projectObject
+    $files = GetExistingNuGetPackageFilenames $directory
     foreach ($file in $files)
     {
         Write-Host $file.Fullname
     }
 }
 
-# Removes one or more nupkg file for the specified project.
+# Removes one or more nupkg files in the specified directory.
 # The files to delete are determined by calling GetExistingNuGetPackageFilenames.
 function NuGetClean
     (
-    $projectObject            # From LocateProject.
+    [string] $directory      # Directory to look in. Leave blank to use $defaults.PackageDirectory
     )
 {
-    $files = GetExistingNuGetPackageFilenames $projectObject
+    $files = GetExistingNuGetPackageFilenames $directory
     foreach ($file in $files)
     {
         Remove-Item $file.Fullname
@@ -390,7 +443,8 @@ function NuGetClean
 function NuGetPack
     (
     $projectObject,           # From LocateProject.
-    [string] $version         # Version to use. Optional, in which case the version from the assembly is used.
+    [string] $version,         # Version to use. Optional, in which case the version from the assembly is used.
+    [string] $outputDirectory # Directory to place the nupkg file in. Optional, in which case $defaults.PackageDirectory is used.
     )
 {
     $nuget = LocateNuGet $true
@@ -425,14 +479,12 @@ function NuGetPack
 
 
     # Build the nuspec with that version number.
-    $packageDir = GetPackageDirectory $projectObject
-    if (!$packageDir)
+    if (!$outputDirectory)
     {
-        Write-Error "Could not determine output directory for NuGet pack for project $($projectObject.Name)"
-        Exit 1
+        $outputDirectory = $defaults.PackageDirectory
     }
 
-    $args = @("pack", $projectObject.NuSpecFileName, "-Version", "$version", "-OutputDirectory", "$packageDir") + $options.PackOptions
+    $args = @("pack", $projectObject.NuSpecFileName, "-Version", "$version", "-OutputDirectory", "$outputDirectory") + $defaults.PackOptions
     Write-Host "Running NuGet pack for $($projectObject.Name): NuGet.exe $args"
 
     &$nuget $args
@@ -446,13 +498,12 @@ function NuGetPack
     Write-Host "NuGet pack for $($projectObject.Name) completed"
 }
 
-# Publish the nupkg for a project. The package file is pushed to the NuGetFeed specified in the options object.
-# This function deals with multiple files because we have no way of knowing what the full nupkg filename is,
-# it depends on the version that was used to build it. However, typically there will only be 1 because you do
-# a clean before a build.
+# Publish the specified nupkg files. You can use
+# GetExistingNuGetPackageFilenames to get all the nupkg files in a directory.
 function NuGetPush
     (
-    $projectObject            # From LocateProject.
+    [string[]] $nupkgFilenames,   # Array of .nupkg file to push.
+    [string] $feed                # Feed to push to. Blank means nuget.org.
     )
 {
     $nuget = LocateNuGet $true
@@ -462,56 +513,50 @@ function NuGetPush
         Exit 1
     }
 
-    $packages = GetExistingNuGetPackageFilenames $projectObject
-    if (!$packages)
+    foreach ($nupkgFilenames in $nupkgFilenames)
     {
-        Write-Error "No packages were found for $($projectObject.Name)"
-        Exit 1
-    }
-
-    # Push the package to the configured feed.
-    foreach ($package in $packages)
-    {
-        if ($options.NuGetFeed)
+        if ($feed)
         {
-            $args = @("push", "-Source", "$($options.NuGetFeed)", "$($package.FullName)")
+            $args = @("push", "-Source", "$feed", "$($nupkgFilename.FullName)")
         }
         else
         {
-            $args = @("push", "$($package.FullName)")
+            $args = @("push", "$($nupkgFilename.FullName)")
         }
 
-        Write-Host "Running NuGet push for $($projectObject.Name): NuGet.exe $args"
+        # Push the package to the configured feed.
+        Write-Host "Running NuGet push for $($nupkgFilename.FullName): NuGet.exe $args"
         &$nuget $args
-        Write-Host "NuGet push to $($options.NuGetFeed) of $($package.FullName) completed"
+        Write-Host "NuGet push to $feed of $($nupkgFilename.FullName) completed"
     }
 }
 
+<#
 function PowerPackProject
     (
     $projectObject            # From LocateProject.
     )
 {
-    if ($options.DoClean)
+    if ($defaults.DoClean)
     {
         CleanProject $projectObject
     }
-    if ($options.DoBuild)
+    if ($defaults.DoBuild)
     {
         BuildProject $projectObject
     }
-    if ($options.DoPack)
+    if ($defaults.DoPack)
     {
         NuGetPack $projectObject
     }
-    if ($options.DoPush)
+    if ($defaults.DoPush)
     {
         NuGetPush $projectObject
     }
 }
 
 # Process a list of projects. The projects are processed, in order, according to the current
-# settings of the $options object.
+# settings of the $defaults object.
 function PowerPack
     (
     [string[]] $projects		# Array of projects to build and pack. 
@@ -552,35 +597,23 @@ function PowerPack
         PowerPackProject $projectObject
     }
 }
+#>
 
-$options = new-object -type PSObject -Property @{
+
+$defaults = new-object -type PSObject -Property @{
     ProjectSearchDirectories = @("$PSScriptRoot", "$PSScriptRoot/..");       # Ordered array of places to look for projects.
 	Configuration = "Release";          # Configuration to build.
     Platform = "AnyCPU";                # Platform to build.
-	OutputDirectory = ""                # We put the build artifacts into a well-known place so that we can locate them more easily later. See below.
 	MsBuildVerbosity = "minimal";       # Verbosity flag to pass to MSBuild. quiet, minimal and normal are most used.
 	NuGetFeed = "LocalNuGetFeed";       # The NuGet feed to push to. You probably don't have this which means your pushes will fail unless you change it (a good thing).
                                         # Set to blank to push to nuget.org.
-    PackageDirectory = "";              # Where to place the nupkg files. Blank means "same as OutputDirectory".
+    PackageDirectory = "$PSScriptRoot"; # Where to place the nupkg files after building them (but before pushing).
     PackOptions = ""                    # Default options to NuGet pack. Set below.
-
-    # Things you can do.
-    DoClean = $true;                    # Clean projects before building them (recommended).
-    DoBuild = $true;                    # Build projects.
-    DoPack = $true;                     # Pack projects into .nupkg files using their .nuspec files.
-    DoPush = $false;                    # Push .nupkg files to the configured NuGet feed.
 	}
 
 
-$options.OutputDirectory = "bin\PowerPack\$($options.Configuration)"
-
-$options.PackOptions = @(
-    "-Verbosity",
-    "normal",
-    "-Properties",
-    "Configuration=$($options.Configuration)"
-    )
+$defaults.PackOptions = @("-Verbosity", "normal", "-Properties", "Configuration=$($defaults.Configuration)")
 
 
-Export-ModuleMember -Variable options
+Export-ModuleMember -Variable defaults
 Export-ModuleMember -Function *
