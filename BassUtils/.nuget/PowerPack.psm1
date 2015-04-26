@@ -1323,7 +1323,11 @@ function Invoke-NuGetPush
 				continue
 			}
 
-			$args = @("push", "$filename", "-Source", "$NuGetFeed", "-Verbosity", $Verbosity)
+			$args = @("push", "$filename", "-Verbosity", $Verbosity)
+			if ($NuGetFeed)
+			{
+				$args += "-Source", $NuGetFeed
+			}
 			if ($NonInteractive)
 			{
 				$args += "-NonInteractive"
