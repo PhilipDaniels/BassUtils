@@ -19,8 +19,11 @@
   </metadata>
   <files>
     <!-- Files are relative to the nuspec file. -->
-    <file src="bin\PowerPack\ReleaseNet40\BassUtils.dll" target="lib\Net40\BassUtils.dll" />
-    <file src="bin\PowerPack\ReleaseNet40\BassUtils.pdb" target="lib\Net40\BassUtils.pdb" />
-    <file src="bin\PowerPack\ReleaseNet40\BassUtils.xml" target="lib\Net40\BassUtils.xml" />
+    <file src="bin\Release40\BassUtils.dll" target="lib\Net40\BassUtils.dll" />
+    <file src="bin\Release40\BassUtils.pdb" target="lib\Net40\BassUtils.pdb" />
+    <file src="bin\Release40\BassUtils.xml" target="lib\Net40\BassUtils.xml" />
+    <file src="bin\Release45\BassUtils.dll" target="lib\Net45\BassUtils.dll" />
+    <file src="bin\Release45\BassUtils.pdb" target="lib\Net45\BassUtils.pdb" />
+    <file src="bin\Release45\BassUtils.xml" target="lib\Net45\BassUtils.xml" />
   </files>
 </package>

@@ -15,38 +15,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{AAB1E2F3-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{61645300-550D-4B07-862F-1735BB07D1B9}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-		.nuget\PackInternet.ps1 = .nuget\PackInternet.ps1
-		.nuget\PackLocal.ps1 = .nuget\PackLocal.ps1
-		.nuget\PowerPack.psm1 = .nuget\PowerPack.psm1
-		.nuget\PowerPackExample.ps1 = .nuget\PowerPackExample.ps1
-		.nuget\PowerPackREADME.md = .nuget\PowerPackREADME.md
+		.nuget\PackBassUtils.ps1 = .nuget\PackBassUtils.ps1
+		.nuget\PackMe.ps1 = .nuget\PackMe.ps1
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-		ReleaseNet40|Any CPU = ReleaseNet40|Any CPU
-		ReleaseNet45|Any CPU = ReleaseNet45|Any CPU
+		Release35|Any CPU = Release35|Any CPU
+		Release40|Any CPU = Release40|Any CPU
+		Release45|Any CPU = Release45|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.ReleaseNet40|Any CPU.ActiveCfg = ReleaseNet40|Any CPU
-		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.ReleaseNet40|Any CPU.Build.0 = ReleaseNet40|Any CPU
-		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.ReleaseNet45|Any CPU.ActiveCfg = ReleaseNet45|Any CPU
-		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.ReleaseNet45|Any CPU.Build.0 = ReleaseNet45|Any CPU
+		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Release35|Any CPU.ActiveCfg = Release35|Any CPU
+		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Release35|Any CPU.Build.0 = Release35|Any CPU
+		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Release40|Any CPU.ActiveCfg = Release45|Any CPU
+		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Release40|Any CPU.Build.0 = Release45|Any CPU
+		{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}.Release45|Any CPU.ActiveCfg = Release45|Any CPU
 		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.ReleaseNet40|Any CPU.ActiveCfg = ReleaseNet40|Any CPU
-		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.ReleaseNet40|Any CPU.Build.0 = ReleaseNet40|Any CPU
-		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.ReleaseNet45|Any CPU.ActiveCfg = ReleaseNet45|Any CPU
-		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.ReleaseNet45|Any CPU.Build.0 = ReleaseNet45|Any CPU
+		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release35|Any CPU.ActiveCfg = Release35|Any CPU
+		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release35|Any CPU.Build.0 = Release35|Any CPU
+		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release40|Any CPU.ActiveCfg = Release45|Any CPU
+		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release40|Any CPU.Build.0 = Release45|Any CPU
+		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release45|Any CPU.ActiveCfg = Release45|Any CPU
+		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release45|Any CPU.Build.0 = Release45|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
