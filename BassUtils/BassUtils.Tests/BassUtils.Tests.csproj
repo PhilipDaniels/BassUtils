@@ -74,15 +74,6 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release35|AnyCPU'">
-    <OutputPath>bin\Release35\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.core">
       <HintPath>..\packages\NUnitTestAdapter.2.0.0\lib\nunit.core.dll</HintPath>
@@ -120,6 +111,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AppDomainExtensionTests.cs" />
     <Compile Include="ArgumentValidatorTests.cs" />
     <Compile Include="BeforeAndAfterTests.cs" />
     <Compile Include="ConfigurationLoaderTests\ConfigurationLoaderTests.cs" />

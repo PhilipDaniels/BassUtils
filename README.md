@@ -8,6 +8,15 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 ###### Added
 - ExportedInterfacesView
 
+#### [2.2.0] - 2015-04-26
+###### Added
+- Built 4.0 and 4.5 versions of the assembly.
+- Gave ConfigurationLoader the ability to load a section by name, so you can use
+  the same type to load several different (named!) configuration sections.
+- AppDomainExtensions.IsLoaded
+- FileUtils.GetExeDirectory, NormalizeToExeDirectory, NormalizeToDirectory.
+- IEnumerableExtensions.ToHashSet.
+
 #### [2.1.0] - 2015-04-18
 ###### Added
 - StringExtensions.SetChar

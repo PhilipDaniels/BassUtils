@@ -108,31 +108,57 @@ namespace BassUtils
         }
 
         /// <summary>
+        /// Initialise a new instance of the ConfigLoader. Use this overload when you have
+        /// one type that can be used to load several different configuration sections.
+        /// </summary>
+        /// <param name="sectionName">The name of the configuration section to load. Can be null,
+        /// in which case the name of the first section is used.</param>
+        public ConfigurationLoader(string sectionName)
+        {
+            Load(sectionName);
+        }
+
+        /// <summary>
         /// Loads or reloads this configuration from the config file.
+        /// Uses the name of the first section associated with this type.
         /// </summary>
         public void Load()
         {
-            var config = InnerLoad();
+            Load(null);
+        }
+
+        /// <summary>
+        /// Loads or reloads this configuration from the config file.
+        /// </summary>
+        /// <param name="sectionName">The name of the configuration section to load.</param>
+        public void Load(string sectionName)
+        {
+            var config = InnerLoad(sectionName);
             PropertyCopier.CopyProperties(config, this);
         }
 
         /// <summary>
         /// Loads the configuration.
         /// </summary>
+        /// <param name="sectionName">The name of the section to load. Can be null, in which
+        /// case it will be automatically determined by using the first name in app.config
+        /// that is associated with this type.</param>
         /// <exception cref="ConfigurationErrorsException">If there are validation errors or any other errors
         /// when loading the section.</exception>
         /// <returns>Loaded configuration object.</returns>
-        object InnerLoad()
+        object InnerLoad(string sectionName)
         {
             // It's weird, but first we have to find our name, then we can call the ConfigurationManager
             // which will in turn call Create().
 
-            string sectionName = null;
             try
             {
-                sectionName = GetConfigurationSectionName();
                 if (sectionName == null)
-                    throw new ConfigurationErrorsException("The configuration section for type " + GetType() + " could not be found.");
+                {
+                    sectionName = GetFirstConfigurationSectionName();
+                    if (sectionName == null)
+                        throw new ConfigurationErrorsException("The configuration section for type " + GetType() + " could not be found.");
+                }
                 object config = ConfigurationManager.GetSection(sectionName);
                 return config;
             }
@@ -170,7 +196,7 @@ namespace BassUtils
             Type typeOfThis = GetType();
 
             XmlSerializer ser = null;
-            string rootName = GetConfigurationSectionName();
+            string rootName = GetFirstConfigurationSectionName();
             if (rootName == null)
                 ser = new XmlSerializer(typeOfThis);
             else
@@ -196,7 +222,7 @@ namespace BassUtils
         /// if no such section can be found.
         /// </summary>
         /// <returns>The name of the ConfigurationSection, or null if no matches are found.</returns>
-        protected virtual string GetConfigurationSectionName()
+        protected virtual string GetFirstConfigurationSectionName()
         {
             var configSection = GetFirstSectionForThisType();
             if (configSection == null)

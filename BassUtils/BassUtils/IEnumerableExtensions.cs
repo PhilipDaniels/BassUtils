@@ -78,5 +78,16 @@ namespace BassUtils
 
             return new ObjectDataReader<T>(collection, nullConversion);
         }
+
+        /// <summary>
+        /// Converts an IEnumerable into a HashSet.
+        /// </summary>
+        /// <typeparam name="T">The element type of the collectin.</typeparam>
+        /// <param name="collection">The collection of items.</param>
+        /// <returns>A new HashSet containing all the items.</returns>
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> collection)
+        {
+            return new HashSet<T>(collection);
+        }
     }
 }

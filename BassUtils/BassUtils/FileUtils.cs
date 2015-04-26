@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 
 namespace BassUtils
 {
@@ -179,6 +180,64 @@ namespace BassUtils
 
             foreach (string dir in Directory.EnumerateDirectories(directory))
                 Directory.Delete(dir, true);
+        }
+
+        /// <summary>
+        /// Returns the directory of the EXE (actually the entry assembly).
+        /// </summary>
+        /// <returns>The directory containing the EXE (entry assembly).</returns>
+        public static string GetExeDirectory()
+        {
+            string exeDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            return exeDir;
+        }
+
+        /// <summary>
+        /// Normalizes a path to the directory of the EXE (actually the entry assembly).
+        /// If the path is rooted then it is returned as is, otherwise a new path relative
+        /// to the directory of the exe is returned. In both cases, you get a full
+        /// absolute path.
+        /// </summary>
+        /// <remarks>
+        /// Useful for easily creating paths relative to your EXE, for example
+        /// <code>NormalizeToExeDirectory("Plugins")</code> gives you the Plugins
+        /// folder under your EXE, but <code>NormalizeToExeDirectory("C:\temp")</code>
+        /// gives you C:\temp.
+        /// </remarks>
+        /// <param name="path">The path to normalize.</param>
+        /// <returns>Normalized path.</returns>
+        public static string NormalizeToExeDirectory(string path)
+        {
+            string exeDir = GetExeDirectory();
+            path = NormalizeToDirectory(path, exeDir);
+            return path;
+        }
+
+        /// <summary>
+        /// Normalizes a path to the specified directory.
+        /// If the path is rooted then it is returned as is, otherwise a new path relative
+        /// to the <paramref name="directory"/> is returned. In both cases, you get a full
+        /// absolute path.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="path">The path to normalize.</param>
+        /// <param name="directory">The directory to normalize relative to.</param>
+        /// <returns>Normalized path.</returns>
+        public static string NormalizeToDirectory(string path, string directory)
+        {
+            path.ThrowIfNull("path");
+            directory.ThrowIfNull("directory");
+
+            if (Path.IsPathRooted(path))
+            {
+                return path;
+            }
+            else
+            {
+                path = Path.Combine(directory, path);
+                return path;
+            }
         }
     }
 }

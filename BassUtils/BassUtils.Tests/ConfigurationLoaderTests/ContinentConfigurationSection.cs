@@ -20,6 +20,11 @@ namespace BassUtils.Tests.ConfigurationLoaderTests
         {
         }
 
+        public ContinentConfigurationSection(string sectionName)
+            : base(sectionName)
+        {
+        }
+
         [XmlAttribute]
         [Required]
         public string Name { get; set; }

@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDomainExtensions.cs" />
     <Compile Include="ConfigurationLoader.cs" />
     <Compile Include="Conv.cs" />
     <Compile Include="CSVOptions.cs" />

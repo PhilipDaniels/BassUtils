@@ -11,7 +11,7 @@
     <iconUrl>http://philipdaniels.com/nugeticons/bassutils/bass-clef-32.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>BassUtils for .Net - argument validators, FileUtils, IDataReader, IDataRecord, ConfigurationLoader, extensions etc.</description>
-    <releaseNotes>See https://github.com/PhilipDaniels/BassUtils </releaseNotes>
+    <releaseNotes>See the Project Site link - it will take you to Github.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Argument Validation Comb ConfigurationSection DirectoryWatcher Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
       StringBuilderExtensions StringExtensions SqlBulkCopy bulk copy SQL app.config web.config

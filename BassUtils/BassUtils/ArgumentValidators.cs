@@ -289,7 +289,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentNullException</code> if <paramref name="path"/> is null.
-        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="path"/> is whitespace.
+        /// Throws an <code>ArgumentException</code> if <paramref name="path"/> is whitespace.
         /// Throws a <code>FileNotFoundException</code> if the file <paramref name="path"/> does not exist.
         /// </summary>
         /// <param name="path">Path of the directory.</param>
@@ -316,7 +316,7 @@ namespace BassUtils
 
         /// <summary>
         /// Throws an <code>ArgumentNullException</code> if <paramref name="path"/> is null.
-        /// Throws an <code>ArgumentOutOfRangeException</code> if <paramref name="path"/> is whitespace.
+        /// Throws an <code>ArgumentException</code> if <paramref name="path"/> is whitespace.
         /// Throws a <code>DirectoryNotFoundException</code> if the directory <paramref name="path"/> does not exist.
         /// </summary>
         /// <param name="path">Path of the directory.</param>

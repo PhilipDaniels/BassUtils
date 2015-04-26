@@ -46,11 +46,11 @@ namespace BassUtils.Tests.ConfigurationLoaderTests
         }
 
         [Test]
-        public void Load_CanLoadNestedTypes()
+        public void Load_CanLoadSectionsByName_AndNestedTypes()
         {
             try
             {
-                var config = new ContinentConfigurationSection(true);
+                var config = new ContinentConfigurationSection("Continent");
                 Assert.AreEqual("North America", config.Name);
                 Assert.AreEqual(3, config.Countries.Count);
 
@@ -61,10 +61,22 @@ namespace BassUtils.Tests.ConfigurationLoaderTests
                 Assert.AreEqual(320, usa.PopulationInMillions);
                 Assert.AreEqual(36, canada.PopulationInMillions);
                 Assert.AreEqual(118, mexico.PopulationInMillions);
-
                 Assert.AreEqual(9147593, usa.AreaInSquareKm);
                 Assert.AreEqual(9984670, canada.AreaInSquareKm);
                 Assert.AreEqual(1972550, mexico.AreaInSquareKm);
+
+
+                config = new ContinentConfigurationSection("Continent2");
+                Assert.AreEqual("South America", config.Name);
+                Assert.AreEqual(2, config.Countries.Count);
+
+                var brazil = config.Countries.Single(c => c.Name.Equals("Brazil", StringComparison.OrdinalIgnoreCase));
+                var argentina = config.Countries.Single(c => c.Name.Equals("Argentina", StringComparison.OrdinalIgnoreCase));
+
+                Assert.AreEqual(203, brazil.PopulationInMillions);
+                Assert.AreEqual(43, argentina.PopulationInMillions);
+                Assert.AreEqual(8515767, brazil.AreaInSquareKm);
+                Assert.AreEqual(2780400, argentina.AreaInSquareKm);
             }
             catch (ConfigurationErrorsException cex)
             {
