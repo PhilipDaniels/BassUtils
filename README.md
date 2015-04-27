@@ -8,6 +8,10 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 ###### Added
 - ExportedInterfacesView
 
+#### [2.2.1] - 2015-04-27
+###### Fixed
+- Bug fix in ConfigurationLoader regarding multiple named sections.
+
 #### [2.2.0] - 2015-04-26
 ###### Added
 - Built 4.0 and 4.5 versions of the assembly.

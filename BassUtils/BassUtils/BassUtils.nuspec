@@ -14,7 +14,7 @@
     <releaseNotes>See the Project Site link - it will take you to Github.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Argument Validation Comb ConfigurationSection DirectoryWatcher Expando FileUtils IDataReader IDataRecord IniParser ObjectDataReader
-      StringBuilderExtensions StringExtensions SqlBulkCopy bulk copy SQL app.config web.config
+      StringBuilder StringExtensions SqlBulkCopy bulk copy SQL app.config web.config
     </tags>
   </metadata>
   <files>

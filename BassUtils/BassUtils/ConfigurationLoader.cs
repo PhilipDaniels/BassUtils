@@ -79,7 +79,6 @@ And the configurations can be loaded with
 
 
 
-
 namespace BassUtils
 {
     /// <summary>
@@ -146,11 +145,10 @@ namespace BassUtils
         /// <exception cref="ConfigurationErrorsException">If there are validation errors or any other errors
         /// when loading the section.</exception>
         /// <returns>Loaded configuration object.</returns>
-        object InnerLoad(string sectionName)
+        protected virtual object InnerLoad(string sectionName)
         {
             // It's weird, but first we have to find our name, then we can call the ConfigurationManager
             // which will in turn call Create().
-
             try
             {
                 if (sectionName == null)
@@ -160,6 +158,8 @@ namespace BassUtils
                         throw new ConfigurationErrorsException("The configuration section for type " + GetType() + " could not be found.");
                 }
                 object config = ConfigurationManager.GetSection(sectionName);
+                if (config == null)
+                    throw new ConfigurationErrorsException("The section " + sectionName + " for type " + GetType() + " could not be found.");
                 return config;
             }
             catch (ConfigurationErrorsException)
@@ -196,7 +196,7 @@ namespace BassUtils
             Type typeOfThis = GetType();
 
             XmlSerializer ser = null;
-            string rootName = GetFirstConfigurationSectionName();
+            string rootName = section.Name;
             if (rootName == null)
                 ser = new XmlSerializer(typeOfThis);
             else

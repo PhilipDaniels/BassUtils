@@ -10,11 +10,13 @@ if (!(Test-Path "NuGet.exe"))
 
 Find-File "*.sln" | Invoke-NuGetRestore
 
-$version = "2.2.0.0"
+$version = "2.2.1.0"
 $configs = "Release40", "Release45"
+$feed = "LocalNuGetFeed"
+$feed = $null
 
 Find-Project "BassUtils" | Get-Project | % { $_.VersionNumber = $version; $_ } |
 	Update-NuSpecDependencies | Invoke-DeepClean |
 	% { $project = $_ ; $configs | % { Invoke-MSBuild $project -Configuration $_ } } |
 	Sort -Unique | Invoke-NuGetPack -Version $version |
-    Invoke-NuGetPush -NuGetFeed "LocalNuGetFeed"
+    Invoke-NuGetPush -NuGetFeed $feed
