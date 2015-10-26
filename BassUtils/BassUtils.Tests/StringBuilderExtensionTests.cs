@@ -40,15 +40,7 @@ namespace BassUtils.Tests
             sb.Append("a");
             Assert.IsFalse(sb.EndsWith('x'));
             sb.Append("b");
-            Assert.IsFalse(sb.EndsWith('B'));
-        }
-
-        [Test]
-        public void EndsWithString_ForNullBuilder_ThrowsArgumentNullException()
-        {
-            StringBuilder sb = null;
-            var ex = Assert.Throws<ArgumentNullException>(() => sb.EndsWith(""));
-            Assert.AreEqual("builder", ex.ParamName);
+            Assert.IsTrue(sb.EndsWith('b'));
         }
 
         [Test]

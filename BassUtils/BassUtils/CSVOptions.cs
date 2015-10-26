@@ -16,7 +16,7 @@ namespace BassUtils
         public string Separator { get; set; }
 
         /// <summary>
-        /// The character(s) to use as a delimiter between fields. Defaults to " (double quote).
+        /// The character(s) to use as a delimiter around fields. Defaults to " (double quote).
         /// If the delimiter appears in the terms being appended, it is replaced by doubling it.
         /// </summary>
         public string Delimiter { get; set; }

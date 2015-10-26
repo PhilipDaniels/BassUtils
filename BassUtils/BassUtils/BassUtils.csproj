@@ -132,6 +132,7 @@
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
+      <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
