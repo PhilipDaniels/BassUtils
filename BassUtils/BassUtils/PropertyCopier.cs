@@ -30,11 +30,12 @@ namespace BassUtils
                              let targetProperty = typeDest.GetProperty(srcProp.Name)
                              where srcProp.CanRead &&
                                    targetProperty != null &&
+                                   targetProperty.CanWrite &&
                                    (targetProperty.GetSetMethod().Attributes & MethodAttributes.Static) == 0
                                    && targetProperty.PropertyType.IsAssignableFrom(srcProp.PropertyType)
                              select new { sourceProperty = srcProp, targetProperty = targetProperty };
 
-            // Se the properties in the destination.
+            // Set the properties in the destination.
             foreach (var property in properties)
                 property.targetProperty.SetValue(destination, property.sourceProperty.GetValue(source, null), null);
         }
