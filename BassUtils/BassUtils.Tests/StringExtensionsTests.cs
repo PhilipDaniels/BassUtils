@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
@@ -148,6 +149,79 @@ namespace BassUtils.Tests
             string s = "hello";
             string result = s.AppendCSV(CSVOptions.CrunchingOptions, "world");
             Assert.AreEqual("hello,world", result);
+        }
+
+        [Test]
+        public void SafeFormat_ForNullFormat_ReturnsNull()
+        {
+            string s = null;
+            string result = s.SafeFormat(CultureInfo.InvariantCulture, 42);
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void SafeFormat_ForNullArgs_ReturnsFormatString()
+        {
+            string s = "hello";
+            object[] args = null;
+            string result = s.SafeFormat(CultureInfo.InvariantCulture, args);
+            Assert.AreEqual(s, result);
+        }
+
+        [Test]
+        public void SafeFormat_ForEmptyArgs_ReturnsFormatString()
+        {
+            string s = "hello";
+            object[] args = new object[] { };
+            string result = s.SafeFormat(CultureInfo.InvariantCulture, args);
+            Assert.AreEqual(s, result);
+        }
+
+        [Test]
+        public void SafeFormat_ForValidFormatAndArgs_ReturnsFormattedExpression()
+        {
+            string s = "hello {0} again";
+            string result = s.SafeFormat(CultureInfo.InvariantCulture, "world");
+            Assert.AreEqual("hello world again", result);
+        }
+
+        [Test]
+        public void SafeFormat_ForInvalidFormatAndArgs_ReturnsFormatString()
+        {
+            string s = "hello {0} again {1}";
+            string result = s.SafeFormat(CultureInfo.InvariantCulture, "world");
+            Assert.AreEqual(s, result);
+        }
+
+        [TestCase(null, null)]
+        [TestCase("", "")]
+        [TestCase(" ", " ")]
+        [TestCase("ab ", "ab ")]
+        [TestCase("a b", "a b")]
+        [TestCase(" ab", " ab")]
+        [TestCase("a\nb", "ab")]
+        [TestCase("\nab", "ab")]
+        [TestCase("ab\n", "ab")]
+        [TestCase("a\rb", "ab")]
+        [TestCase("\rab", "ab")]
+        [TestCase("ab\r", "ab")]
+        [TestCase("a\r\nb", "a b")]
+        [TestCase("\r\nab", " ab")]
+        [TestCase("ab\r\n", "ab ")]
+        public void RemoveNewLines_RemovesCorrectly(string input, string expected)
+        {
+            string result = StringExtensions.RemoveNewLines(input);
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestCase(null, false)]
+        [TestCase("a", true)]
+        [TestCase("a", true)]
+        [TestCase("abc", true, "a", "b")]
+        public void ContainsAll_ReturnsCorrectResult(string input, bool expected, params string[] words)
+        {
+            bool result = StringExtensions.ContainsAll(input, words);
+            Assert.AreEqual(expected, result);
         }
     }
 }

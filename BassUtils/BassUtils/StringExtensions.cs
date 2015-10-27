@@ -272,6 +272,41 @@ namespace BassUtils
         }
 
         /// <summary>
+        /// Determines whether <paramref name="value"/> contains all the words
+        /// in <paramref name="words"/>. The check uses <c>StringComparison.OrdinalIgnoreCase</c>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="words">The words to check for.</param>
+        /// <returns><c>True</c> if the value contains all the words, <c>false</c> otherwise</returns>
+        public static bool ContainsAll(this string value, params string[] words)
+        {
+            return ContainsAll(value, StringComparison.OrdinalIgnoreCase, words);
+        }
+
+        /// <summary>
+        /// Determines whether <paramref name="value"/> contains all the words
+        /// in <paramref name="words"/>.
+        /// </summary>
+        /// <param name="value">The value. If null, false is returned.</param>
+        /// <param name="comparisonType">The type of string comparison to use.</param>
+        /// <param name="words">The words to check for. Can be empty or null, in which case <c>true</c> is returned.</param>
+        /// <returns><c>True</c> if the value contains all the words, <c>false</c> otherwise</returns>
+        public static bool ContainsAll(this string value, StringComparison comparisonType, params string[] words)
+        {
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (words == null || words.Count() == 0)
+            {
+                return true;
+            }
+
+            return words.All(w => value.IndexOf(w, comparisonType) != -1);
+        }
+
+        /// <summary>
         /// Replace all occurrences of <paramref name="valueToFind"/> in <paramref name="value"/>
         /// with <paramref name="replacement"/>.
         /// </summary>
@@ -366,7 +401,7 @@ namespace BassUtils
         /// number of placeholders in the format string then just return the format string
         /// rather than throwing an exception.
         /// 
-        /// If the format string is null, String.Empty is returned.
+        /// If the format string or args is null, the original <paramref name="format"/> is returned.
         /// </summary>
         /// <param name="culture">Culture to use for formatting.</param>
         /// <param name="format">The format string.</param>
@@ -376,13 +411,47 @@ namespace BassUtils
         {
             try
             {
-                string result = (format == null) ? String.Empty : String.Format(culture, format, args);
+                if (format == null || args == null || !args.Any())
+                    return format;
+
+                string result = String.Format(culture, format, args);
                 return result;
             }
             catch (FormatException)
             {
                 return format;
             }
+        }
+
+        /// <summary>
+        /// Call String.Format in a safe fashion; if the number of args doesn't match the
+        /// number of placeholders in the format string then just return the format string
+        /// rather than throwing an exception. The InvariantCulture is used for formatting.
+        ///
+        /// If the format string or args is null, the original <paramref name="format"/> is returned.
+        /// </summary>
+        /// <param name="format">The format string.</param>
+        /// <param name="args">Arguments to be substituted.</param>
+        /// <returns>Formatted string, or the original string if the formatting fails.</returns>
+        public static string SafeFormat(this string format, params object[] args)
+        {
+            return SafeFormat(format, CultureInfo.InvariantCulture, args);
+        }
+
+        /// <summary>
+        /// Removes the newlines characters '\r' and '\n' from the specified string by replacing them
+        /// with <c>string.Empty</c>. An '\r\n' pair is replaced by a single space (to avoid joining
+        /// words across line endings).
+        /// </summary>
+        /// <param name="value">The string to remove newlines from. Can be null, in which case
+        /// null is returned.</param>
+        /// <returns>String with newlines removed.</returns>
+        public static string RemoveNewLines(this string value)
+        {
+            if (value == null)
+                return null;
+
+            return value.Replace("\r\n", " ").Replace("\r", string.Empty).Replace("\n", string.Empty);
         }
 
         /// <summary>
