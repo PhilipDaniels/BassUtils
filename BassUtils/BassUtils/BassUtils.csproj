@@ -80,6 +80,7 @@
     <Compile Include="DataTableExtensions.cs" />
     <Compile Include="DataViewExtensions.cs" />
     <Compile Include="ExpandoExtensions.cs" />
+    <Compile Include="Glob.cs" />
     <Compile Include="Registration\ExportedInterface.cs" />
     <Compile Include="Registration\ExportedTypeView.cs" />
     <Compile Include="FileUtils.cs" />

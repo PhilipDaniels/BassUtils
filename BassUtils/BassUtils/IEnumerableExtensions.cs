@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace BassUtils
@@ -88,6 +89,30 @@ namespace BassUtils
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> collection)
         {
             return new HashSet<T>(collection);
+        }
+
+        /// <summary>
+        /// Allows a "distinct" operation to be performed with a key selected function.
+        /// </summary>
+        /// <typeparam name="TSource">The type of the source.</typeparam>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <param name="source">The source.</param>
+        /// <param name="keySelector">The key selector.</param>
+        /// <returns>A subset of <paramref name="source"/>, where each element only occurs once per the key selector function.</returns>
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+        {
+            source.ThrowIfNull("source");
+            keySelector.ThrowIfNull("keySelector");
+
+            var knownKeys = new HashSet<TKey>();
+
+            foreach (TSource element in source)
+            {
+                if (knownKeys.Add(keySelector(element)))
+                {
+                    yield return element;
+                }
+            }
         }
     }
 }
