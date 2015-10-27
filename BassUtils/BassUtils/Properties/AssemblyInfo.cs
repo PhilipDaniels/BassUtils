@@ -39,3 +39,5 @@ using System.Resources;
 
 [assembly: CLSCompliant(true)]
 [assembly: NeutralResourcesLanguageAttribute("en-GB")]
+
+[assembly: InternalsVisibleTo("BassUtils.Tests")]

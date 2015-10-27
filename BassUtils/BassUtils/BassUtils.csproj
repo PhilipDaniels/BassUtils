@@ -81,6 +81,9 @@
     <Compile Include="DataViewExtensions.cs" />
     <Compile Include="ExpandoExtensions.cs" />
     <Compile Include="Glob.cs" />
+    <Compile Include="IEnumerableStringExtensions.cs" />
+    <Compile Include="IniData.cs" />
+    <Compile Include="IniSection.cs" />
     <Compile Include="Registration\ExportedInterface.cs" />
     <Compile Include="Registration\ExportedTypeView.cs" />
     <Compile Include="FileUtils.cs" />
@@ -103,7 +106,6 @@
     <Compile Include="EncodingStringWriter.cs" />
     <Compile Include="IEnumerableExtensions.cs" />
     <Compile Include="IndentingStringBuilder.cs" />
-    <Compile Include="IniParser.cs" />
     <Compile Include="IntExtensions.cs" />
     <Compile Include="PredicateBuilder.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
