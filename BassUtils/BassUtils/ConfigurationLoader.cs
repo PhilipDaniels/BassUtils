@@ -90,31 +90,90 @@ namespace BassUtils
     public abstract class ConfigurationLoader : IConfigurationSectionHandler
     {
         /// <summary>
-        /// Initialise a new instance of the ConfigLoader.
+        /// Initialize a new instance of the ConfigLoader.
         /// </summary>
-        public ConfigurationLoader()
+        protected ConfigurationLoader()
         {
         }
 
         /// <summary>
-        /// Initialise a new instance of the ConfigLoader.
+        /// Initialize a new instance of the ConfigLoader.
         /// </summary>
         /// <param name="load">Whether to load the configuration from file.</param>
-        public ConfigurationLoader(bool load)
+        protected ConfigurationLoader(bool load)
         {
             if (load)
                 Load();
         }
 
         /// <summary>
-        /// Initialise a new instance of the ConfigLoader. Use this overload when you have
+        /// Initialize a new instance of the ConfigLoader. Use this overload when you have
         /// one type that can be used to load several different configuration sections.
         /// </summary>
         /// <param name="sectionName">The name of the configuration section to load. Can be null,
         /// in which case the name of the first section is used.</param>
-        public ConfigurationLoader(string sectionName)
+        protected ConfigurationLoader(string sectionName)
         {
             Load(sectionName);
+        }
+
+        /// <summary>
+        /// Finds the name of the configuration section that is handling this type, or returns null
+        /// if no such section can be found.
+        /// </summary>
+        /// <returns>The name of the ConfigurationSection, or null if no matches are found.</returns>
+        protected virtual string FirstConfigurationSectionName
+        {
+            get
+            {
+                var configSection = FirstSectionForThisType;
+                if (configSection == null)
+                    return null;
+                else
+                    return configSection.SectionInformation.Name;
+            }
+        }
+
+        /// <summary>
+        /// Find the first configuration section designed to handle this type. This is done by scanning
+        /// the configSections element in the config file for a section that is implementing this type.
+        /// </summary>
+        /// <returns>The matching ConfigurationSection object, or null if no matches are found.</returns>
+        protected virtual ConfigurationSection FirstSectionForThisType
+        {
+            get
+            {
+                // TODO: Search other nodes, see http://stackoverflow.com/questions/10331844/how-to-read-configsections
+                var cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                foreach (var sec in cfg.Sections.Cast<ConfigurationSection>())
+                {
+                    if (IsSectionForThisType(sec))
+                        return sec;
+                }
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance can be loaded. Essentially this is a
+        /// check whether there is a section defined for it in <c>configSections</c> and also
+        /// an actual section of the corresponding name.
+        /// </summary>
+        /// <param name="sectionName">The name of the configuration section to load. Can be null,
+        /// in which case the name of the first section is used.</param>
+        /// <returns><c>True</c> if the section can be loaded using that name, <c>false</c> otherwise.</returns>
+        public bool CanLoad(string sectionName)
+        {
+            try
+            {
+                Load(sectionName);
+                return true;
+            }
+            catch (ConfigurationErrorsException)
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -137,46 +196,6 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Loads the configuration.
-        /// </summary>
-        /// <param name="sectionName">The name of the section to load. Can be null, in which
-        /// case it will be automatically determined by using the first name in app.config
-        /// that is associated with this type.</param>
-        /// <exception cref="ConfigurationErrorsException">If there are validation errors or any other errors
-        /// when loading the section.</exception>
-        /// <returns>Loaded configuration object.</returns>
-        protected virtual object InnerLoad(string sectionName)
-        {
-            // It's weird, but first we have to find our name, then we can call the ConfigurationManager
-            // which will in turn call Create().
-            try
-            {
-                if (sectionName == null)
-                {
-                    sectionName = GetFirstConfigurationSectionName();
-                    if (sectionName == null)
-                        throw new ConfigurationErrorsException("The configuration section for type " + GetType() + " could not be found.");
-                }
-                object config = ConfigurationManager.GetSection(sectionName);
-                if (config == null)
-                    throw new ConfigurationErrorsException("The section " + sectionName + " for type " + GetType() + " could not be found.");
-                return config;
-            }
-            catch (ConfigurationErrorsException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                string msg = "An error occurred while loading the section";
-                if (sectionName != null)
-                    msg += " " + sectionName;
-                var cex = new ConfigurationErrorsException(msg, ex);
-                throw cex;
-            }
-        }
-
-        /// <summary>
         /// A method which is called by the CLR when parsing the App.Config file. If custom sections
         /// are found, then an entry in the configuration file will tell the runtime to call this method,
         /// passing in the XmlNode required.
@@ -193,6 +212,8 @@ namespace BassUtils
         /// </exception>
         public object Create(object parent, object configContext, XmlNode section)
         {
+            section.ThrowIfNull("section");
+
             Type typeOfThis = GetType();
 
             XmlSerializer ser = null;
@@ -218,60 +239,42 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Finds the name of the configuration section that is handling this type, or returns null
-        /// if no such section can be found.
+        /// Loads the configuration.
         /// </summary>
-        /// <returns>The name of the ConfigurationSection, or null if no matches are found.</returns>
-        protected virtual string GetFirstConfigurationSectionName()
+        /// <param name="sectionName">The name of the section to load. Can be null, in which
+        /// case it will be automatically determined by using the first name in app.config
+        /// that is associated with this type.</param>
+        /// <exception cref="ConfigurationErrorsException">If there are validation errors or any other errors
+        /// when loading the section.</exception>
+        /// <returns>Loaded configuration object.</returns>
+        protected virtual object InnerLoad(string sectionName)
         {
-            var configSection = GetFirstSectionForThisType();
-            if (configSection == null)
-                return null;
-            else
-                return configSection.SectionInformation.Name;
-        }
-
-        /// <summary>
-        /// Find the first configuration section designed to handle this type. This is done by scanning
-        /// the configSections element in the config file for a section that is implementing this type.
-        /// </summary>
-        /// <returns>The matching ConfigurationSection object, or null if no matches are found.</returns>
-        protected virtual ConfigurationSection GetFirstSectionForThisType()
-        {
-            // TODO: Search other nodes, see http://stackoverflow.com/questions/10331844/how-to-read-configsections
-            var cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            foreach (var sec in cfg.Sections.Cast<ConfigurationSection>())
-            {
-                if (IsSectionForThisType(sec))
-                    return sec;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Determine whether a configuration section is designed to handle this type
-        /// by checking the "type" property of the declaration refers to this type.
-        /// </summary>
-        /// <param name="section">The section to check.</param>
-        /// <returns>True if the section is for this type, false otherwise.</returns>
-        protected virtual bool IsSectionForThisType(ConfigurationSection section)
-        {
+            // It's weird, but first we have to find our name, then we can call the ConfigurationManager
+            // which will in turn call Create().
             try
             {
-                Type thisType = this.GetType();
-                var info = section.SectionInformation;
-                if (info.Type.StartsWith(thisType.FullName, StringComparison.Ordinal))
+                if (sectionName == null)
                 {
-                    // Double check.
-                    Type sectionType = Type.GetType(info.Type);
-                    return thisType == sectionType;
+                    sectionName = FirstConfigurationSectionName;
+                    if (sectionName == null)
+                        throw new ConfigurationErrorsException("The configuration section for type " + GetType() + " could not be found.");
                 }
-                return false;
+                object config = ConfigurationManager.GetSection(sectionName);
+                if (config == null)
+                    throw new ConfigurationErrorsException("The section " + sectionName + " for type " + GetType() + " could not be found.");
+                return config;
             }
-            catch
+            catch (ConfigurationErrorsException)
             {
-                return false;
+                throw;
+            }
+            catch (Exception ex)
+            {
+                string msg = "An error occurred while loading the section";
+                if (sectionName != null)
+                    msg += " " + sectionName;
+                var cex = new ConfigurationErrorsException(msg, ex);
+                throw cex;
             }
         }
 
@@ -336,6 +339,33 @@ namespace BassUtils
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Determine whether a configuration section is designed to handle this type
+        /// by checking the "type" property of the declaration refers to this type.
+        /// </summary>
+        /// <param name="section">The section to check.</param>
+        /// <returns>True if the section is for this type, false otherwise.</returns>
+        protected virtual bool IsSectionForThisType(ConfigurationSection section)
+        {
+            section.ThrowIfNull("section");
+
+            Type thisType = this.GetType();
+            var info = section.SectionInformation;
+            if (info == null || info.Type == null)
+            {
+                return false;
+            }
+
+            if (info.Type.StartsWith(thisType.FullName, StringComparison.Ordinal))
+            {
+                // Double check.
+                Type sectionType = Type.GetType(info.Type);
+                return thisType == sectionType;
+            }
+
+            return false;
         }
     }
 }
