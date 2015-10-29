@@ -10,7 +10,7 @@ if (!(Test-Path "NuGet.exe"))
 
 Find-File "*.sln" | Invoke-NuGetRestore
 
-$version = "2.2.1.0"
+$version = "3.0.0.0"
 $configs = "Release40", "Release45"
 $feed = "LocalNuGetFeed"
 $feed = $null

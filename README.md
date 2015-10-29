@@ -4,9 +4,23 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 
 # Change History
 
-#### [Unreleased]
+#### [3.0.0] - 2015-10-29
+###### Fixed
+- In PropertyCopier, only write to properties with a setter.
+
 ###### Added
-- ExportedInterfacesView
+- StringExtensions.TrimAll, RemoveNewLines, ContainsAll.
+- New overload of StringExtensions.SafeFormat that defaults to InvariantCulture.
+- New Glob class (Unix-like file globber)
+- IEnumerableExtensions.DistinctBy.
+- ConfigurationLoader.CanLoad method.
+
+###### Changed
+- IniParser has been refactored into IniData and IniSection classes, and a
+  static Parse method is now the starting point. Tests added, and the ability
+  to parse INI files with duplicate keys and valueless keys added (based on
+  data seen in real-life INI files). This change is the reason for the bump
+  in the version number.
 
 #### [2.2.1] - 2015-04-27
 ###### Fixed
@@ -80,6 +94,11 @@ int x = Conv.StringToBest("42");
 **DirectoryWatcher** A wrapper around FileSystemWatcher that will de-duplicate
 events.
 
+**Glob** A Unix-like file globber, capable of recursing globbing, for example@
+```
+var filenames = Glob.ExpandNames(@"C:\temp\**\*.cs");
+```
+
 **IDataReaderExtensions, IDataRecordExtensions** Many extensions to make working
 with these classes more convenient, including extensions to get columns by name,
 get columns with defaults if null, and get nullable columns. Also includes
@@ -88,7 +107,7 @@ convenient Hydrate() methods to create entities.
 **IndentingStringBuilder** A wrapper around StringBuilder that can create
 indented text. Handy for code generation.
 
-**IniParser** A simple parser for INI files.
+**IniData** A simple parser for INI files.
 
 **ObjectDataReader** A very useful class that can wrap any class in an IDataReader,
 making it possible to bind to it, use SqlBulkCopy etc. Often used in conjunction

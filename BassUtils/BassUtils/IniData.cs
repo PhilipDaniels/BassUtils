@@ -7,15 +7,15 @@ namespace BassUtils
     /// <summary>
     /// Class to read INI data and parse it out into sections.
     /// This class supports duplicate keys (the latest key wins) and keys without values, for example
-    ///     [Permissions]
-    ///     CreateTable
+    ///     [ValidNames]
+    ///     Philip
     /// The returned data structure is immutable.
     /// The names of keys and section names can be configured to be case-sensitive or not.
     /// </summary>
     /// <remarks>
     /// This class does not provide any support for writing or modifying INI files, and it ignores comments.
     /// If more sophisticated support is required, the package at <c>https://github.com/rickyah/ini-parser</c>
-    /// is recommended, but you will need to subclass it to get it to parse Quest.ini files.
+    /// is recommended.
     /// </remarks>
     [DebuggerDisplay("{iniSections.Count} sections")]
     public class IniData
