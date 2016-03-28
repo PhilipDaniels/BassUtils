@@ -14,7 +14,14 @@ namespace BassUtils
     {
         /// <summary>
         /// Gets the full manifest filename of a manifest resource. The <paramref name="fileName" />
-        /// is of the format "folder.folder.filename.ext" and is case sensitive.
+        /// is of the format "folder.folder.filename.ext" and is case sensitive. The method first
+        /// tries to find an exact matching name based on the name of the <paramref name="assembly"/>
+        /// and the <paramref name="fileName"/>. Normally, this will find the resource, however
+        /// if you have used ILMerge the name won't be correct, so the method then tries a fallback
+        /// method where it tries to find a resource whose name ends with <paramref name="fileName"/>.
+        /// This should work with ILMerged assemblies as long as your embedded resources have
+        /// sufficiently unique names. If your name is not sufficiently unique, an exception will
+        /// be thrown.
         /// </summary>
         /// <param name="assembly">The assembly in which to form the filename.</param>
         /// <param name="fileName">Filename you want to refer to.</param>
@@ -24,8 +31,19 @@ namespace BassUtils
             assembly.ThrowIfNull("assembly");
             fileName.ThrowIfNullOrWhiteSpace("fileName");
 
-            string name = String.Concat(assembly.GetName().Name, ".", fileName);
-            return name;
+            string[] allNames = assembly.GetManifestResourceNames();
+            string candidateName = string.Concat(assembly.GetName().Name, ".", fileName);
+
+            // Exact match?
+            string actualName = allNames.SingleOrDefault(s => s == candidateName);
+
+            // If not, look for a unique suffix match.
+            if (actualName == null)
+            {
+                actualName = allNames.SingleOrDefault(s => s.EndsWith(fileName, StringComparison.Ordinal));
+            }
+
+            return actualName;
         }
 
         /// <summary>
