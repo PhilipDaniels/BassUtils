@@ -4,6 +4,20 @@ Low-level utility functions for use in any .Net project. Zero dependencies.
 
 # Change History
 
+#### [3.1.0]
+###### Fixed
+- Make AssemblyExtensions.GetResourceFileName work in ILMerge scenarios by searching for names by
+  partial match if an exact match cannot be found. Still requires unique names.
+
+###### Added
+- Take the existing AppendCSV functionality and move it to be extensions to the TextWriter class,
+  therefore making it available for use in StreamWriter and StringWriter classes. Also extend the
+  CSVOptions so that the class writes CSV that is more in line with the unofficial CSV
+  specification as described [on Wikipedia](https://en.wikipedia.org/wiki/Comma-separated_values);
+  in particular see the [Standardization](https://en.wikipedia.org/wiki/Comma-separated_values#Standardization)
+  section.
+- Add `[DebuggerStepThrough]` attributes to the ArgumentValidators.
+
 #### [3.0.0] - 2015-10-29
 ###### Fixed
 - In PropertyCopier, only write to properties with a setter.

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 
@@ -16,6 +17,7 @@ namespace BassUtils
         /// <param name="parameter">The parameter itself.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfNull<T>([ValidatedNotNull] this T parameter, string parameterName)
         {
             return parameter.ThrowIfNull(parameterName, null);
@@ -29,6 +31,7 @@ namespace BassUtils
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="message">Message to associate with the exception.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfNull<T>([ValidatedNotNull] this T parameter, string parameterName, string message)
         {
             if (parameter == null)
@@ -44,6 +47,7 @@ namespace BassUtils
         /// <param name="parameter">The parameter itself.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static string ThrowIfNullOrEmpty([ValidatedNotNull] this string parameter, string parameterName)
         {
             return parameter.ThrowIfNullOrEmpty(parameterName, null);
@@ -57,6 +61,7 @@ namespace BassUtils
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="message">Message to associate with the exception.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static string ThrowIfNullOrEmpty([ValidatedNotNull] this string parameter, string parameterName, string message)
         {
             if (parameter == null)
@@ -74,6 +79,7 @@ namespace BassUtils
         /// <param name="parameter">The parameter itself.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static string ThrowIfNullOrWhiteSpace([ValidatedNotNull] this string parameter, string parameterName)
         {
             return parameter.ThrowIfNullOrWhiteSpace(parameterName, null);
@@ -87,6 +93,7 @@ namespace BassUtils
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="message">Message to associate with the exception.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static string ThrowIfNullOrWhiteSpace([ValidatedNotNull] this string parameter, string parameterName, string message)
         {
             if (parameter == null)
@@ -105,6 +112,7 @@ namespace BassUtils
         /// <param name="comparisonValue">The value to compare against.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfLessThan<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName)
             where T : IComparable<T>
         {
@@ -120,6 +128,7 @@ namespace BassUtils
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="message">Message to associate with the exception.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfLessThan<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName, string message)
             where T : IComparable<T>
         {
@@ -152,6 +161,7 @@ namespace BassUtils
         /// <param name="comparisonValue">The value to compare against.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfLessThanOrEqualTo<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName)
             where T : IComparable<T>
         {
@@ -168,6 +178,7 @@ namespace BassUtils
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="message">Message to associate with the exception.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfLessThanOrEqualTo<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName, string message)
             where T : IComparable<T>
         {
@@ -200,6 +211,7 @@ namespace BassUtils
         /// <param name="comparisonValue">The value to compare against.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfMoreThan<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName)
             where T : IComparable<T>
         {
@@ -216,6 +228,7 @@ namespace BassUtils
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="message">Message to associate with the exception.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfMoreThan<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName, string message)
             where T : IComparable<T>
         {
@@ -248,6 +261,7 @@ namespace BassUtils
         /// <param name="comparisonValue">The value to compare against.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfMoreThanOrEqualTo<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName)
             where T : IComparable<T>
         {
@@ -264,8 +278,9 @@ namespace BassUtils
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="message">Message to associate with the exception.</param>
         /// <returns><paramref name="parameter"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfMoreThanOrEqualTo<T>([ValidatedNotNull] this T parameter, T comparisonValue, string parameterName, string message)
-        where T : IComparable<T>
+            where T : IComparable<T>
         {
             parameter.ThrowIfNull(parameterName, message);
 
@@ -295,6 +310,7 @@ namespace BassUtils
         /// <param name="path">Path of the directory.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="path"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static string ThrowIfFileDoesNotExist([ValidatedNotNull] this string path, string parameterName)
         {
             path.ThrowIfNullOrWhiteSpace(parameterName, Properties.Resources.ArgVal_PathMustBeSpecified);
@@ -322,6 +338,7 @@ namespace BassUtils
         /// <param name="path">Path of the directory.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="path"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static string ThrowIfDirectoryDoesNotExist([ValidatedNotNull] this string path, string parameterName)
         {
             path.ThrowIfNullOrWhiteSpace(parameterName, Properties.Resources.ArgVal_PathMustBeSpecified);
@@ -349,6 +366,7 @@ namespace BassUtils
         /// <param name="enumerand">The value of the enumeration.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns><paramref name="enumerand"/> if no exception is thrown.</returns>
+        [DebuggerStepThrough]
         public static T ThrowIfInvalidEnumerand<T>([ValidatedNotNull] this T enumerand, string parameterName)
         {
             Type enumType = typeof(T);
