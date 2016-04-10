@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 
 namespace BassUtils
@@ -137,8 +138,14 @@ namespace BassUtils
         /// <returns>The builder that was passed in, to enable chaining.</returns>
         public static StringBuilder AppendCSV(this StringBuilder builder, params object[] args)
         {
-            var options = new CSVOptions();
-            return builder.AppendCSV(options, args);
+            builder.ThrowIfNull(nameof(builder));
+
+            using (var sw = new StringWriter(builder))
+            {
+                sw.AppendCSV(args);
+            }
+
+            return builder;
         }
 
         /// <summary>
@@ -156,47 +163,12 @@ namespace BassUtils
             params object[] args
             )
         {
-            builder.ThrowIfNull("builder");
-            options.ThrowIfNull("options");
+            builder.ThrowIfNull(nameof(builder));
+            options.ThrowIfNull(nameof(options));
 
-            if (args == null || args.Length == 0)
-                return builder;
-
-            bool separatorRequired = builder.Length > 0;
-
-            foreach (var arg in args)
+            using (var sw = new StringWriter(builder))
             {
-                if (arg == null && options.SkipNullValues)
-                    continue;
-
-                string s = String.Empty;
-                if (arg != null)
-                {
-                    s = arg.ToString();
-                    if (options.TrimStrings)
-                        s = s.Trim();
-                }
-
-                if (options.SkipEmptyValues && s.Length == 0)
-                    continue;
-
-                // Delimiters inside terms cause problems, usually this is dealt with by doubling them.
-                if (!String.IsNullOrEmpty(options.Delimiter) && s.Contains(options.Delimiter))
-                    s = s.Replace(options.Delimiter, options.Delimiter + options.Delimiter);
-
-                // We are now ready to output a term.
-                if (separatorRequired)
-                    builder.Append(options.Separator);
-                else
-                    separatorRequired = true;
-
-                if (!String.IsNullOrEmpty(options.Delimiter))
-                    builder.Append(options.Delimiter);
-
-                builder.Append(s);
-
-                if (!String.IsNullOrEmpty(options.Delimiter))
-                    builder.Append(options.Delimiter);
+                sw.AppendCSV(options, args);
             }
 
             return builder;

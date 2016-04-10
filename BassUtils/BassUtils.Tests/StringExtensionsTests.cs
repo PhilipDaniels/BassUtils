@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace BassUtils.Tests
@@ -130,8 +128,12 @@ namespace BassUtils.Tests
         public void AppendCSV_ForNullValue_ThrowsArgumentNullException()
         {
             string s = null;
-            var ex = Assert.Throws<ArgumentNullException>(() => s.AppendCSV(""));
-            Assert.AreEqual("value", ex.ParamName);
+
+            Action act = () => StringExtensions.AppendCSV(null, "");
+
+            act.ShouldThrow<ArgumentNullException>()
+                    .WithMessage("*value*")
+                    .And.ParamName.Should().Be("value");
         }
 
         [Test]
@@ -144,10 +146,18 @@ namespace BassUtils.Tests
         }
 
         [Test]
-        public void AppendCSV_ForNonEmptyString_PreservesOriginalString()
+        public void AppendCSV_AgainstEmptyString_DoesNotWriteLeadingSeparator()
+        {
+            string s = "";
+            string result = s.AppendCSV("world");
+            Assert.AreEqual("world", result);
+        }
+
+        [Test]
+        public void AppendCSV_ForNonEmptyString_PreservesOriginalStringAndWritesInitialSeparator()
         {
             string s = "hello";
-            string result = s.AppendCSV(CSVOptions.CrunchingOptions, "world");
+            string result = s.AppendCSV("world");
             Assert.AreEqual("hello,world", result);
         }
 

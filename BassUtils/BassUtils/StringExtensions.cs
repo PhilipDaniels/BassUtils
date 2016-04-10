@@ -790,7 +790,12 @@ namespace BassUtils
         /// <returns>The appended string.</returns>
         public static string AppendCSV(this string value, params object[] args)
         {
-            var options = new CSVOptions();
+            value.ThrowIfNull(nameof(value));
+
+            var options = value.Length > 0
+                          ? WithLeadingSeparator
+                          : NoLeadingSeparator;
+
             return value.AppendCSV(options, args);
         }
 
@@ -809,12 +814,24 @@ namespace BassUtils
             params object[] args
             )
         {
-            value.ThrowIfNull("value");
-            options.ThrowIfNull("options");
+            value.ThrowIfNull(nameof(value));
+            options.ThrowIfNull(nameof(options));
 
             var sb = new StringBuilder(value);
             sb.AppendCSV(options, args);
             return sb.ToString();
         }
+
+        private static readonly CSVOptions WithLeadingSeparator = new CSVOptions()
+        {
+            WriteLeadingSeparator = true,
+            IsReadOnly = true
+        };
+
+        private static readonly CSVOptions NoLeadingSeparator = new CSVOptions()
+        {
+            WriteLeadingSeparator = false,
+            IsReadOnly = true
+        };
     }
 }

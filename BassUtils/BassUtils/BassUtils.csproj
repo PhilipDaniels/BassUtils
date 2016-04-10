@@ -125,6 +125,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MemberInfoExtensions.cs" />
+    <Compile Include="TextWriterExtensions.cs" />
     <Compile Include="ThrottledBlockingQueue.cs" />
     <Compile Include="ValidatedNotNullAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
