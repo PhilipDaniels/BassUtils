@@ -11,9 +11,11 @@ namespace BassUtils.Tests
         [Test]
         public void EndsWithChar_ForNullBuilder_ThrowsArgumentNullException()
         {
-            StringBuilder sb = null;
-            var ex = Assert.Throws<ArgumentNullException>(() => sb.EndsWith(','));
-            Assert.AreEqual("builder", ex.ParamName);
+            Action act = () => StringBuilderExtensions.EndsWith(null, 'c');
+
+            act.ShouldThrow<ArgumentNullException>()
+                .WithMessage("*builder*")
+                .And.ParamName.Should().Be("builder");
         }
 
         [Test]

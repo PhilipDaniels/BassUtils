@@ -495,6 +495,8 @@ namespace BassUtils
         /// <returns>String with spaces inserted at word breaks.</returns>
         public static string SplitCamelCaseIntoWords(this string value)
         {
+            value.ThrowIfNull(nameof(value));
+
             string result = Regex.Replace
                 (
                 value,
@@ -712,10 +714,6 @@ namespace BassUtils
             chars[index] = newChar;
             return new string(chars);
         }
-
-
-
-
 
         /// <summary>
         /// Appends a character to the <paramref name="value"/>, but only if the value does not already

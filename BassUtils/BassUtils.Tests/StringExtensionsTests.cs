@@ -129,7 +129,7 @@ namespace BassUtils.Tests
         {
             string s = null;
 
-            Action act = () => StringExtensions.AppendCSV(null, "");
+            Action act = () => StringExtensions.AppendCSV(s, "");
 
             act.ShouldThrow<ArgumentNullException>()
                     .WithMessage("*value*")
@@ -232,6 +232,59 @@ namespace BassUtils.Tests
         {
             bool result = StringExtensions.ContainsAll(input, words);
             Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void ToProperCase_ForNullValue_ThrowsArgumentNullException()
+        {
+            Action act = () => StringExtensions.ToProperCase(null, CultureInfo.InvariantCulture);
+
+            act.ShouldThrow<ArgumentNullException>()
+                .WithMessage("*value*")
+                .And.ParamName.Should().Be("value");
+        }
+
+        [Test]
+        public void ToProperCase_ForEmptyString_ReturnsEmptyString()
+        {
+            string.Empty.ToProperCase(CultureInfo.InvariantCulture).Should().BeEmpty();
+        }
+
+        [Test]
+        public void ToProperCase_ForWhitespaceString_ReturnsOriginalString()
+        {
+            const string input = " \r\n";
+            input.ToProperCase(CultureInfo.InvariantCulture).Should().Be(input);
+        }
+
+        [Test]
+        public void ToProperCase_ForVariousInputs_ReturnsExpectedResults()
+        {
+            "a".ToProperCase(CultureInfo.InvariantCulture).Should().Be("A");
+            "abc".ToProperCase(CultureInfo.InvariantCulture).Should().Be("Abc");
+            "a b".ToProperCase(CultureInfo.InvariantCulture).Should().Be("A B");
+            "Hello world".ToProperCase(CultureInfo.InvariantCulture).Should().Be("Hello World");
+        }
+
+        [Test]
+        public void SplitCamelCaseIntoWords_ForNullValue_ThrowsArgumentNullException()
+        {
+            Action act = () => StringExtensions.SplitCamelCaseIntoWords(null);
+
+            act.ShouldThrow<ArgumentNullException>()
+                .WithMessage("*value*")
+                .And.ParamName.Should().Be("value");
+        }
+
+        [Test]
+        public void SplitCamelCaseIntoWords_ForVariousInputs_ReturnsExpectedResults()
+        {
+            string.Empty.SplitCamelCaseIntoWords().Should().Be(string.Empty);
+            " ".SplitCamelCaseIntoWords().Should().Be(string.Empty, "Result is expected to be trimmed");
+            "abc".SplitCamelCaseIntoWords().Should().Be("abc");
+            "HelloWorld  ".SplitCamelCaseIntoWords().Should().Be("Hello World");
+            "HelloWorld again ".SplitCamelCaseIntoWords().Should().Be("Hello World again");
+            "TheQualityOfMercy".SplitCamelCaseIntoWords().Should().Be("The Quality Of Mercy");
         }
     }
 }

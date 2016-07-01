@@ -79,6 +79,7 @@
     <Compile Include="DataSetExtensions.cs" />
     <Compile Include="DataTableExtensions.cs" />
     <Compile Include="DataViewExtensions.cs" />
+    <Compile Include="DirectoryWatcherOptions.cs" />
     <Compile Include="ExpandoExtensions.cs" />
     <Compile Include="Glob.cs" />
     <Compile Include="IEnumerableStringExtensions.cs" />

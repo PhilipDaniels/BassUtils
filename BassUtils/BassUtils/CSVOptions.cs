@@ -155,8 +155,8 @@ namespace BassUtils
 
 
         /// <summary>
-        /// Returns an instance of the <code>CSVOptions</code> class that is compliant with
-        /// the RFC 4180 spec as described at https://en.wikipedia.org/wiki/Comma-separated_values#Standardization
+        /// A <see cref="CSVOptions"/> object that is compliant with the the RFC 4180 spec as described at
+        /// https://en.wikipedia.org/wiki/Comma-separated_values#Standardization
         /// and https://tools.ietf.org/html/rfc4180
         /// </summary>
         public static readonly CSVOptions Default = new CSVOptions()
@@ -181,6 +181,10 @@ namespace BassUtils
             IsReadOnly = true
         };
 
+        /// <summary>
+        /// A <see cref="CSVOptions"/> object that will produce human-readable CSV by using a separator of ","
+        /// and eliminating null and empty strings.
+        /// </summary>
         public static readonly CSVOptions HumanReadable = new CSVOptions()
         {
             Delimiter = String.Empty,
@@ -191,6 +195,10 @@ namespace BassUtils
             IsReadOnly = true
         };
 
+        /// <summary>
+        /// A <see cref="CSVOptions"/> object that will produce human-readable CSV by using a separator of ", "
+        /// and eliminating null and empty strings.
+        /// </summary>
         public static readonly CSVOptions HumanReadableWithSpace = new CSVOptions()
         {
             Delimiter = String.Empty,

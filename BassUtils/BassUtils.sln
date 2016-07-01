@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils", "BassUtils\BassUtils.csproj", "{7076EB59-BA3F-4F09-8A9C-71E845EEBBD6}"
 EndProject
@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{616453
 	ProjectSection(SolutionItems) = preProject
 		.nuget\PackBassUtils.ps1 = .nuget\PackBassUtils.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils.ConsoleTestHarness", "BassUtils.ConsoleTestHarness\BassUtils.ConsoleTestHarness.csproj", "{4D297E29-68E1-4377-AF61-F05D822BAF97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,14 @@ Global
 		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release40|Any CPU.Build.0 = Release40|Any CPU
 		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release45|Any CPU.ActiveCfg = Release45|Any CPU
 		{7FB3917B-2480-46F0-AD73-D37A21FB5D03}.Release45|Any CPU.Build.0 = Release45|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Release40|Any CPU.ActiveCfg = Release|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Release40|Any CPU.Build.0 = Release|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Release45|Any CPU.ActiveCfg = Release|Any CPU
+		{4D297E29-68E1-4377-AF61-F05D822BAF97}.Release45|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
