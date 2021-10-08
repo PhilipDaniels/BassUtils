@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -15,12 +15,17 @@
 	  <Copyright>Philip Daniels</Copyright>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReleaseNotes>2021-10-08 Convert to .Net Standard 2.0. See README.md.</PackageReleaseNotes>
+	  <PackageIcon>bass-clef-32.png</PackageIcon>
+	  <PackageIconUrl>http://philipdaniels.com/nugeticons/bassutils/bass-clef-32.png</PackageIconUrl>
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Dawn.Guard" Version="1.12.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="MsSql\" />
+	  <None Include="Icons\bass-clef-32.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
 	</ItemGroup>
 </Project>
