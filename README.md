@@ -1,8 +1,32 @@
 # BassUtils
-Low-level utility functions for use in any .Net project. Zero dependencies.
+Low-level utility functions for use in any .Net Standard 2.0 project.
+
+<PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
 
 
 # Change History
+
+#### [4.0.0]
+
+###### Changed
+- Upgraded to Net Standard 2.0.
+- Some things moved to sub-namespaces 'Data' and 'MsSql'.
+- IniData remains, but the recommendation in its doc-comment has changed to reference
+  [ini-parser-netstandard](https://www.nuget.org/packages/ini-parser-netstandard/).
+- StreamExtensions.ReadFully has become ReadToEnd.
+- The SqlBulkCopyDataReader class now targets Microsoft.Data.SqlClient, not System.Data.SqlClient.
+  See https://devblogs.microsoft.com/dotnet/introducing-the-new-microsoftdatasqlclient/ for background.
+  This means that BassUtils now has a dependency on the Microsoft.Data.SqlClient package.
+- CSV has been changed to 'Csv' for compliance with Microsoft recommended naming standards.
+
+###### Removed
+- Various utilities have been removed due to better alternatives now becoming available in the community
+  or me simply not making any use of them.
+- ArgumentValidators - use [Dawn.Guard](https://www.nuget.org/packages/Dawn.Guard/) instead.
+- Glob - use [Microsoft.Extensions.FileSystemGlobbing](https://www.nuget.org/packages/Microsoft.Extensions.FileSystemGlobbing)
+- Partition and DistinctBy methods - use [MoreLinq](https://www.nuget.org/packages/morelinq/).
+- ConfigurationLoader, DoubleExtensions, ExpandoExtensions, PredicateBuilder, PropertyCopier, TableAdapterBase,
+  ThrottledBlockingQueue, XmlWriterExtensions have been removed.
 
 #### [3.1.0]
 ###### Fixed
