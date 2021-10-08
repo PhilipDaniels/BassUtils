@@ -4,11 +4,11 @@ using System.Diagnostics;
 namespace BassUtils
 {
     /// <summary>
-    /// Represents the different options that can be used by the AppendCSV methods of
+    /// Represents the different options that can be used by the AppendCsv methods of
     /// StringExtensions and StringBuilder extensions.
     /// </summary>
     [DebuggerDisplay("Sep={Separator}, Del={Delimiter}, SkipNull={SkipNullValues}, SkipEmpty={SkipEmptyValues}, TrimStrings={TrimStrings}")]
-    public class CSVOptions : ICloneable
+    public class CsvOptions : ICloneable
     {
         /// <summary>
         /// Flag which allows us to optimise the static default instances - we can allocate
@@ -142,11 +142,11 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Initialises a new instance of the <code>CSVOptions</code> class that is compliant with
+        /// Initialises a new instance of the <code>CsvOptions</code> class that is compliant with
         /// the RFC 4180 spec as described at https://en.wikipedia.org/wiki/Comma-separated_values#Standardization
         /// and https://tools.ietf.org/html/rfc4180
         /// </summary>
-        public CSVOptions()
+        public CsvOptions()
         {
             Separator = ",";
             Delimiter = "\"";
@@ -155,23 +155,20 @@ namespace BassUtils
 
 
         /// <summary>
-        /// A <see cref="CSVOptions"/> object that is compliant with the the RFC 4180 spec as described at
+        /// A <see cref="CsvOptions"/> object that is compliant with the the RFC 4180 spec as described at
         /// https://en.wikipedia.org/wiki/Comma-separated_values#Standardization
         /// and https://tools.ietf.org/html/rfc4180
         /// </summary>
-        public static readonly CSVOptions Default = new CSVOptions()
+        public static readonly CsvOptions Default = new CsvOptions()
         {
             IsReadOnly = true
         };
 
         /// <summary>
-        /// Returns a CSVOptions object configured suitable for "crunching down" objects
-        /// into human readable strings. It skips null or empty strings and does not use
-        /// a delimiter. The end result is a compact, comma-separated list, but it is not
-        /// necessarily valid if written to a file.
+        /// A <see cref="CsvOptions"/> object that will produce human-readable CSV by using a separator of ","
+        /// and eliminating null and empty strings.
         /// </summary>
-        [Obsolete("Use HumanReadable or HumanReadableWithSpace instead.")]
-        public static readonly CSVOptions CrunchingOptions = new CSVOptions()
+        public static readonly CsvOptions HumanReadable = new CsvOptions()
         {
             Delimiter = String.Empty,
             CharactersForcingDelimiter = null,
@@ -182,24 +179,10 @@ namespace BassUtils
         };
 
         /// <summary>
-        /// A <see cref="CSVOptions"/> object that will produce human-readable CSV by using a separator of ","
+        /// A <see cref="CsvOptions"/> object that will produce human-readable CSV by using a separator of ", "
         /// and eliminating null and empty strings.
         /// </summary>
-        public static readonly CSVOptions HumanReadable = new CSVOptions()
-        {
-            Delimiter = String.Empty,
-            CharactersForcingDelimiter = null,
-            SkipNullValues = true,
-            SkipEmptyValues = true,
-            TrimStrings = true,
-            IsReadOnly = true
-        };
-
-        /// <summary>
-        /// A <see cref="CSVOptions"/> object that will produce human-readable CSV by using a separator of ", "
-        /// and eliminating null and empty strings.
-        /// </summary>
-        public static readonly CSVOptions HumanReadableWithSpace = new CSVOptions()
+        public static readonly CsvOptions HumanReadableWithSpace = new CsvOptions()
         {
             Delimiter = String.Empty,
             Separator = ", ",
@@ -213,11 +196,15 @@ namespace BassUtils
         private void CheckReadOnly()
         {
             if (IsReadOnly)
-                throw new InvalidOperationException("This " + nameof(CSVOptions) + " instance cannot be changed.");
+                throw new InvalidOperationException("This " + nameof(CsvOptions) + " instance cannot be changed.");
         }
 
         #region ICloneable Implementation (Copy constructor style)
-        public CSVOptions(CSVOptions rhs)
+        /// <summary>
+        /// Create a new <see cref="CsvOptions"/> object by cloning an existing object.
+        /// </summary>
+        /// <param name="rhs">The object to be cloned.</param>
+        public CsvOptions(CsvOptions rhs)
         {
             separator = rhs.separator;
             writeLeadingSeparator = rhs.writeLeadingSeparator;
@@ -235,9 +222,13 @@ namespace BassUtils
             return Clone();
         }
 
-        public CSVOptions Clone()
+        /// <summary>
+        /// Clones this object.
+        /// </summary>
+        /// <returns>A new clone of this object.</returns>
+        public CsvOptions Clone()
         {
-            return new CSVOptions(this);
+            return new CsvOptions(this);
         }
         #endregion
     }

@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Xml.Serialization;
+using Dawn;
 
 namespace BassUtils
 {
@@ -16,8 +17,9 @@ namespace BassUtils
         /// <param name="value">The thing to serialize.</param>
         /// <returns>XML string represenation of the thing.</returns>
         public static string SerializeObjectToXmlString<T>(T value)
+            where T: class
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             var serializer = new XmlSerializer(typeof(T));
             using (var sw = new StringWriter(CultureInfo.InvariantCulture))
@@ -35,7 +37,7 @@ namespace BassUtils
         /// <returns>The deserialized object instance.</returns>
         public static T DeserializeXmlStringToObject<T>(string xml)
         {
-            xml.ThrowIfNullOrWhiteSpace("xml");
+            Guard.Argument(xml, nameof(xml)).NotNull();
 
             var serializer = new XmlSerializer(typeof(T));
             using (var reader = new StringReader(xml))

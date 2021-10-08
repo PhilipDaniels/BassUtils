@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using Dawn;
 
 namespace BassUtils
 {
@@ -17,10 +18,10 @@ namespace BassUtils
         /// <returns>The bytes converted to a string.</returns>
         public static string BytesToString(this byte[] data, Encoding sourceEncoding, Encoding targetEncoding)
         {
-            data.ThrowIfNull("data");
-            data.Length.ThrowIfLessThanOrEqualTo(0, "data.Length");
-            sourceEncoding.ThrowIfNull("sourceEncoding");
-            targetEncoding.ThrowIfNull("targetEncoding");
+            Guard.Argument(data, nameof(data)).NotNull();
+            Guard.Argument(data.Length, nameof(data.Length)).Min(1);
+            Guard.Argument(sourceEncoding, nameof(sourceEncoding)).NotNull();
+            Guard.Argument(targetEncoding, nameof(targetEncoding)).NotNull();
 
             byte[] bytesInTargetEncoding = Encoding.Convert(sourceEncoding, targetEncoding, data);
             return targetEncoding.GetString(bytesInTargetEncoding);
@@ -35,7 +36,7 @@ namespace BassUtils
         /// <returns>The encoding of the file, or the default if it could not be determined.</returns>
         public static Encoding GuessEncodingFromByteOrderMark(string fileName)
         {
-            fileName.ThrowIfFileDoesNotExist("fileName");
+            Guard.Argument(fileName, nameof(fileName)).NotNull().NotEmpty();
 
             var Bom = new byte[4];
             using (var file = new FileStream(fileName, FileMode.Open, FileAccess.Read))
@@ -69,7 +70,7 @@ namespace BassUtils
         /// <returns>The encoding of the data, or the default if it could not be determined.</returns>
         public static Encoding GuessEncodingFromByteOrderMark(byte[] data, Encoding defaultIfUndetermined)
         {
-            data.ThrowIfNull("data");
+            Guard.Argument(data, nameof(data)).NotNull();
 
             if (data.Length < 4)
                 return defaultIfUndetermined;

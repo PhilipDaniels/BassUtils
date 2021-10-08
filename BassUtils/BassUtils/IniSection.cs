@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Dawn;
 
 namespace BassUtils
 {
@@ -21,8 +22,8 @@ namespace BassUtils
         /// <param name="keyComparer">Type of comparer to use for key name comparisons.</param>
         internal IniSection(string name, StringComparer keyComparer)
         {
-            Name = name.ThrowIfNull("name").Trim();
-            keyComparer.ThrowIfNull("keyComparer");
+            Name = Guard.Argument(name, nameof(name)).NotNull().Value.Trim();
+            Guard.Argument(keyComparer, nameof(keyComparer)).NotNull();
 
             innerDict = new Dictionary<string, string>(keyComparer);
         }

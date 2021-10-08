@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Dawn;
 
 namespace BassUtils
 {
@@ -17,7 +18,7 @@ namespace BassUtils
         /// <returns>List of attributes. Can be empty. Will not be null.</returns>
         public static IEnumerable<T> GetAttributes<T>(this MemberInfo member)
         {
-            member.ThrowIfNull("member");
+            Guard.Argument(member, nameof(member)).NotNull();
 
             var attributes = member.GetCustomAttributes(typeof(T), true);
             return attributes.Cast<T>();

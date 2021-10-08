@@ -1,9 +1,6 @@
 # BassUtils
 Low-level utility functions for use in any .Net Standard 2.0 project.
 
-<PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
-
-
 # Change History
 
 #### [4.0.0]

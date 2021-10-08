@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Dawn;
 
 namespace BassUtils
 {
@@ -64,9 +65,9 @@ namespace BassUtils
         /// <returns>Padded result.</returns>
         public static string PadAndAlign(this string value, int minWidth, int maxWidth, PaddingAlignment alignment, char paddingCharacter)
         {
-            minWidth.ThrowIfLessThan(0, "minWidth");
-            maxWidth.ThrowIfLessThan(0, "maxWidth");
-            minWidth.ThrowIfMoreThan(maxWidth, "minWidth", "minWidth must be less than or equal to the maxWidth.");
+            Guard.Argument(minWidth, nameof(minWidth)).Min(0);
+            Guard.Argument(maxWidth, nameof(maxWidth)).Min(0);
+            Guard.Argument(minWidth, nameof(minWidth)).Max(maxWidth, (x, y) => "minWidth must be less than or equal to the maxWidth.");
 
             if (value == null)
                 value = "";
@@ -140,7 +141,7 @@ namespace BassUtils
         /// <returns>The portion of text before the value.</returns>
         public static string Before(this string value, string separator, StringComparison comparisonType)
         {
-            separator.ThrowIfNull("separator");
+            Guard.Argument(separator, nameof(separator)).NotNull();
 
             if (value == null)
                 return null;
@@ -176,7 +177,7 @@ namespace BassUtils
         /// <returns>The portion of text after the value.</returns>
         public static string After(this string value, string separator, StringComparison comparisonType)
         {
-            separator.ThrowIfNull("separator");
+            Guard.Argument(separator, nameof(separator)).NotNull();
 
             if (value == null)
                 return null;
@@ -217,7 +218,7 @@ namespace BassUtils
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "4#")]
         public static void BeforeAndAfter(this string value, string separator, StringComparison comparisonType, out string before, out string after)
         {
-            separator.ThrowIfNull("separator");
+            Guard.Argument(separator, nameof(separator)).NotNull();
 
             before = value.Before(separator, comparisonType);
             after = value.After(separator, comparisonType);
@@ -247,7 +248,7 @@ namespace BassUtils
         /// <returns>A 2-tuple, where the first item is the substring before the value, and the second item is the substring after the value.</returns>
         public static Tuple<string, string> BeforeAndAfter(this string value, string separator, StringComparison comparisonType)
         {
-            separator.ThrowIfNull("separator");
+            Guard.Argument(separator, nameof(separator)).NotNull();
 
             string before = value.Before(separator, comparisonType);
             string after = value.After(separator, comparisonType);
@@ -265,8 +266,8 @@ namespace BassUtils
         /// <returns>True if text contains the value according to the comparisonType.</returns>
         public static bool Contains(this string value, string valueToFind, StringComparison comparisonType)
         {
-            value.ThrowIfNull("value");
-            valueToFind.ThrowIfNull("valueToFind");
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(valueToFind, nameof(valueToFind)).NotNull();
 
             return value.IndexOf(valueToFind, comparisonType) != -1;
         }
@@ -317,9 +318,9 @@ namespace BassUtils
         /// <returns>String with appropriate replacements made.</returns>
         public static string Replace(this string value, string valueToFind, string replacement, StringComparison comparison)
         {
-            value.ThrowIfNull("value");
-            valueToFind.ThrowIfNull("stringToReplace");
-            replacement.ThrowIfNull("replacement");
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(valueToFind, nameof(valueToFind)).NotNull();
+            Guard.Argument(replacement, nameof(replacement)).NotNull();
 
             var sb = new StringBuilder();
 
@@ -370,7 +371,7 @@ namespace BassUtils
         /// <returns>Proper cased string.</returns>
         public static string ToProperCase(this string value, CultureInfo culture)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             StringBuilder sb = new StringBuilder();
             bool emptyBefore = true;
@@ -495,7 +496,7 @@ namespace BassUtils
         /// <returns>String with spaces inserted at word breaks.</returns>
         public static string SplitCamelCaseIntoWords(this string value)
         {
-            value.ThrowIfNull(nameof(value));
+            Guard.Argument(value, nameof(value)).NotNull();
 
             string result = Regex.Replace
                 (
@@ -519,7 +520,7 @@ namespace BassUtils
         /// <returns>Leftmost <paramref name="length"/> characters of <paramref name="value"/>.</returns>
         public static string Left(this string value, int length)
         {
-            length.ThrowIfLessThan(0, "length");
+            Guard.Argument(length, nameof(length)).Min(0);
 
             if (value == null)
                 return null;
@@ -540,7 +541,7 @@ namespace BassUtils
         /// <returns>Rightmost <paramref name="length"/> characters of <paramref name="value"/>.</returns>
         public static string Right(this string value, int length)
         {
-            length.ThrowIfLessThan(0, "length");
+            Guard.Argument(length, nameof(length)).Min(0);
 
             if (value == null)
                 return null;
@@ -563,7 +564,7 @@ namespace BassUtils
         /// <returns>Leading number.</returns>
         public static T GetLeadingNumber<T>(this string value)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             return GetLeadingNumber<T>(value, CultureInfo.InvariantCulture);
         }
@@ -577,7 +578,7 @@ namespace BassUtils
         /// <returns>Leading number.</returns>
         public static T GetLeadingNumber<T>(this string value, IFormatProvider provider)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             Match m = Regex.Match(value, "^" + NUMBER_PATTERN);
             T result = (T)Convert.ChangeType(m.Value, typeof(T), provider);
@@ -605,7 +606,7 @@ namespace BassUtils
         /// <returns>Leading number.</returns>
         public static T GetTrailingNumber<T>(this string value, IFormatProvider provider)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             Match m = Regex.Match(value, NUMBER_PATTERN + "$");
             T result = (T)Convert.ChangeType(m.Value, typeof(T), provider);
@@ -632,8 +633,8 @@ namespace BassUtils
         /// <returns>Repeated string.</returns>
         public static string Repeat(this string value, int count)
         {
-            value.ThrowIfNull("value");
-            count.ThrowIfLessThan(0, "count");
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(count, nameof(count)).Min(0);
 
             var sb = new StringBuilder(value.Length * count + 1);
             for (int i = 0; i < count; i++)
@@ -651,10 +652,12 @@ namespace BassUtils
         /// <returns>List of things.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists",
             Justification = "It's a static method, will not be inherited.")]
-        [CLSCompliant(false)]   // Due to use of IConvertible.
         public static List<T> ToList<T>(this string value, string delimiter, bool allowDuplicates)
             where T : IConvertible
         {
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(delimiter, nameof(delimiter)).NotNull();
+
             var result = value.ToList((string s) => (T)Convert.ChangeType(s, typeof(T), CultureInfo.InvariantCulture), delimiter, allowDuplicates);
             return result;
         }
@@ -671,7 +674,6 @@ namespace BassUtils
         /// <returns>List of things.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists",
             Justification = "It's a static method, will not be inherited.")]
-        [CLSCompliant(false)]   // Due to use of IConvertible.
         public static List<T> ToList<T>
             (
             this string value,
@@ -681,6 +683,10 @@ namespace BassUtils
             )
         where T : IConvertible
         {
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(converter, nameof(converter)).NotNull();
+            Guard.Argument(delimiter, nameof(delimiter)).NotNull();
+
             var result = new List<T>();
 
             if (!String.IsNullOrEmpty(value))
@@ -705,7 +711,7 @@ namespace BassUtils
         /// <returns>New string with character replaced.</returns>
         public static string SetChar(this string value, int index, char newChar)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             if (index < 0 || index >= value.Length)
                 throw new ArgumentOutOfRangeException("index", "index must be 0 to value.Length - 1");
@@ -724,7 +730,7 @@ namespace BassUtils
         /// <returns>The appended (or not, as the case may be), string.</returns>
         public static string AppendIfDoesNotEndWith(this string value, char charToAppend)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             if (!value.EndsWith(charToAppend.ToString()))
                 return value + charToAppend;
@@ -755,8 +761,8 @@ namespace BassUtils
         /// <returns>The appended (or not, as the case may be), string.</returns>
         public static string AppendIfDoesNotEndWith(this string value, string valueToAppend, StringComparison comparisonType)
         {
-            value.ThrowIfNull("value");
-            valueToAppend.ThrowIfNull("valueToAppend");
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(valueToAppend, nameof(valueToAppend)).NotNull();
 
             if (!value.EndsWith(valueToAppend, comparisonType))
                 return value + valueToAppend;
@@ -772,64 +778,65 @@ namespace BassUtils
         /// <returns>The appended string.</returns>
         public static string TrimAppend(this string value, string valueToAppend)
         {
-            value.ThrowIfNull("value");
-            valueToAppend.ThrowIfNull("valueToAppend");
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(valueToAppend, nameof(valueToAppend)).NotNull();
 
             return value + valueToAppend.Trim();
         }
 
         /// <summary>
         /// Appends <paramref name="args"/> in a "CSV style" to the end of the <paramref name="value"/>.
-        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// See the <see cref="CsvOptions"/> class for ways to control the appending.
         /// This overload uses the default options.
         /// </summary>
         /// <param name="value">The string to append to.</param>
         /// <param name="args">The arguments to append.</param>
         /// <returns>The appended string.</returns>
-        public static string AppendCSV(this string value, params object[] args)
+        public static string AppendCsv(this string value, params object[] args)
         {
-            value.ThrowIfNull(nameof(value));
+            Guard.Argument(value, nameof(value)).NotNull();
 
             var options = value.Length > 0
                           ? WithLeadingSeparator
                           : NoLeadingSeparator;
 
-            return value.AppendCSV(options, args);
+            return value.AppendCsv(options, args);
         }
 
         /// <summary>
         /// Appends <paramref name="args"/> in a "CSV style" to the end of the <paramref name="value"/>.
-        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// See the <see cref="CsvOptions"/> class for ways to control the appending.
         /// </summary>
         /// <param name="value">The string to append to.</param>
         /// <param name="options">Options to control the appending.</param>
         /// <param name="args">The arguments to append.</param>
         /// <returns>The appended string.</returns>
-        public static string AppendCSV
+        public static string AppendCsv
             (
             this string value,
-            CSVOptions options,
+            CsvOptions options,
             params object[] args
             )
         {
-            value.ThrowIfNull(nameof(value));
-            options.ThrowIfNull(nameof(options));
+            Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(options, nameof(options)).NotNull();
 
             var sb = new StringBuilder(value);
-            sb.AppendCSV(options, args);
+            sb.AppendCsv(options, args);
             return sb.ToString();
         }
 
-        private static readonly CSVOptions WithLeadingSeparator = new CSVOptions()
+        private static readonly CsvOptions WithLeadingSeparator = new CsvOptions()
         {
             WriteLeadingSeparator = true,
             IsReadOnly = true
         };
 
-        private static readonly CSVOptions NoLeadingSeparator = new CSVOptions()
+        private static readonly CsvOptions NoLeadingSeparator = new CsvOptions()
         {
             WriteLeadingSeparator = false,
             IsReadOnly = true
         };
+
     }
 }

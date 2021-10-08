@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Dawn;
 
 namespace BassUtils
 {
@@ -18,8 +19,8 @@ namespace BassUtils
         /// <returns>True if the builder ends with the character, false otherwise.</returns>
         public static bool EndsWith(this StringBuilder builder, char value)
         {
-            builder.ThrowIfNull("builder");
-
+            Guard.Argument(builder, nameof(builder)).NotNull();
+            
             if (builder.Length == 0)
                 return false;
             else
@@ -51,8 +52,8 @@ namespace BassUtils
         /// <returns>True if the builder ends with the string, false otherwise.</returns>
         public static bool EndsWith(this StringBuilder builder, string value, StringComparison comparisonType)
         {
-            builder.ThrowIfNull("builder");
-            value.ThrowIfNull("value");
+            Guard.Argument(builder, nameof(builder)).NotNull();
+            Guard.Argument(value, nameof(value)).NotNull();
 
             if (builder.Length == 0 || value.Length == 0 || builder.Length < value.Length)
                 return false;
@@ -71,7 +72,7 @@ namespace BassUtils
         /// <returns>The builder that was passed in, to enable chaining.</returns>
         public static StringBuilder AppendIfDoesNotEndWith(this StringBuilder builder, char value)
         {
-            builder.ThrowIfNull("builder");
+            Guard.Argument(builder, nameof(builder)).NotNull();
 
             if (!builder.EndsWith(value))
                 builder.Append(value);
@@ -105,8 +106,8 @@ namespace BassUtils
         /// <returns>The builder that was passed in, to enable chaining.</returns>
         public static StringBuilder AppendIfDoesNotEndWith(this StringBuilder builder, string value, StringComparison comparisonType)
         {
-            builder.ThrowIfNull("builder");
-            value.ThrowIfNull("value");
+            Guard.Argument(builder, nameof(builder)).NotNull();
+            Guard.Argument(value, nameof(value)).NotNull();
 
             if (!builder.EndsWith(value, comparisonType))
                 builder.Append(value);
@@ -121,8 +122,8 @@ namespace BassUtils
         /// <returns>The builder that was passed in, to enable chaining.</returns>
         public static StringBuilder TrimAppend(this StringBuilder builder, string value)
         {
-            builder.ThrowIfNull("builder");
-            value.ThrowIfNull("value");
+            Guard.Argument(builder, nameof(builder)).NotNull();
+            Guard.Argument(value, nameof(value)).NotNull();
 
             builder.Append(value.Trim());
             return builder;
@@ -130,19 +131,19 @@ namespace BassUtils
 
         /// <summary>
         /// Appends <paramref name="args"/> in a "CSV style" to the end of the builder.
-        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// See the <see cref="CsvOptions"/> class for ways to control the appending.
         /// This overload uses the default options.
         /// </summary>
         /// <param name="builder">The builder to append to.</param>
         /// <param name="args">The arguments to append.</param>
         /// <returns>The builder that was passed in, to enable chaining.</returns>
-        public static StringBuilder AppendCSV(this StringBuilder builder, params object[] args)
+        public static StringBuilder AppendCsv(this StringBuilder builder, params object[] args)
         {
-            builder.ThrowIfNull(nameof(builder));
+            Guard.Argument(builder, nameof(builder)).NotNull();
 
             using (var sw = new StringWriter(builder))
             {
-                sw.AppendCSV(args);
+                sw.AppendCsv(args);
             }
 
             return builder;
@@ -150,25 +151,25 @@ namespace BassUtils
 
         /// <summary>
         /// Appends <paramref name="args"/> in a "CSV style" to the end of the builder.
-        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// See the <see cref="CsvOptions"/> class for ways to control the appending.
         /// </summary>
         /// <param name="builder">The builder to append to.</param>
         /// <param name="options">Options to control the appending.</param>
         /// <param name="args">The arguments to append.</param>
         /// <returns>The builder that was passed in, to enable chaining.</returns>
-        public static StringBuilder AppendCSV
+        public static StringBuilder AppendCsv
             (
             this StringBuilder builder,
-            CSVOptions options,
+            CsvOptions options,
             params object[] args
             )
         {
-            builder.ThrowIfNull(nameof(builder));
-            options.ThrowIfNull(nameof(options));
+            Guard.Argument(builder, nameof(builder)).NotNull();
+            Guard.Argument(options, nameof(options)).NotNull();
 
             using (var sw = new StringWriter(builder))
             {
-                sw.AppendCSV(options, args);
+                sw.AppendCsv(options, args);
             }
 
             return builder;

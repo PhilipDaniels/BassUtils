@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dawn;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -17,14 +18,14 @@ namespace BassUtils
         /// <see cref="ToBoolean"/> method.
         /// The strings are used in case-insensitive comparisons.
         /// </summary>
-        static List<string> trueStrings = new List<string> { "TRUE", "T", "YES", "Y", "1" };
+        static readonly List<string> trueStrings = new List<string> { "TRUE", "T", "YES", "Y", "1" };
 
         /// <summary>
         /// The set of strings that are considered to equate to <c>false</c> by the
         /// <see cref="ToBoolean"/> method.
         /// The strings are used in case-insensitive comparisons.
         /// </summary>
-        static List<string> falseStrings = new List<string> { "FALSE", "F", "NO", "N", "0" };
+        static readonly List<string> falseStrings = new List<string> { "FALSE", "F", "NO", "N", "0" };
 
         /// <summary>
         /// Convert a <paramref name="value"/> to the corresponding enumeration value. First checks to see if the
@@ -41,8 +42,8 @@ namespace BassUtils
         /// <returns>An enum value of the specified type.</returns>
         public static object ToEnum(Type enumType, object value)
         {
-            enumType.ThrowIfNull("enumType");
-            value.ThrowIfNull("value");
+            Guard.Argument(enumType, nameof(enumType)).NotNull();
+            Guard.Argument(value, nameof(value)).NotNull();
 
             if (!enumType.IsEnum)
                 throw new InvalidOperationException("Result type (" + enumType.FullName + ") is not an enum.");
@@ -123,7 +124,7 @@ namespace BassUtils
         /// <returns>true or false, as appropriate.</returns>
         public static bool ToBoolean(object value)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             if (value.GetType() == typeof(Boolean))
                 return (Boolean)value;
@@ -220,7 +221,7 @@ namespace BassUtils
         /// <returns>True if the value is considered to be an integer type.</returns>
         public static bool IsIntegerType(object value)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             return IsIntegerTypeCode(Type.GetTypeCode(value.GetType()));
         }
@@ -243,7 +244,7 @@ namespace BassUtils
         /// <returns>True if the value is considered to be a floating point type.</returns>
         public static bool IsFloatingPointType(object value)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             return IsFloatingPointTypeCode(Type.GetTypeCode(value.GetType()));
         }
@@ -266,7 +267,7 @@ namespace BassUtils
         /// <returns>True if the value is considered to be a numeric type.</returns>
         public static bool IsNumericType(object value)
         {
-            value.ThrowIfNull("value");
+            Guard.Argument(value, nameof(value)).NotNull();
 
             return IsNumericTypeCode(Type.GetTypeCode(value.GetType()));
         }
@@ -326,8 +327,7 @@ namespace BassUtils
                 }
                 */
 
-                double num2;
-                return Double.TryParse(valueAsString, out num2);
+                return Double.TryParse(valueAsString, out _);
             }
 
             return IsNumericTypeCode(typeCode);
@@ -340,8 +340,7 @@ namespace BassUtils
         /// <returns>True if the string can be parsed as a hex number.</returns>
         public static bool IsHexValue(string value)
         {
-            int result;
-            return Int32.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out result);
+            return Int32.TryParse(value, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out _);
         }
 
         /// <summary>
@@ -434,11 +433,10 @@ namespace BassUtils
             }
 
             // Check for numbers with explicit type suffixes.
-            decimal decimal_result;
             if (value.EndsWith("M", StringComparison.OrdinalIgnoreCase))
             {
                 string v = value.Substring(0, value.Length - 1);
-                if (Decimal.TryParse(v, NumberStyles.Number, culture, out decimal_result))
+                if (Decimal.TryParse(v, NumberStyles.Number, culture, out decimal decimal_result))
                     return decimal_result;
             }
 
@@ -458,10 +456,9 @@ namespace BassUtils
                     return long_result;
             }
 
-            int int_result;
             bool double_ok = Double.TryParse(value, NumberStyles.Number | NumberStyles.AllowExponent, culture, out double_result);
             bool long_ok = Int64.TryParse(value, NumberStyles.Integer | NumberStyles.AllowThousands, culture, out long_result);
-            bool int_ok = Int32.TryParse(value, NumberStyles.Integer | NumberStyles.AllowThousands, culture, out int_result);
+            bool int_ok = Int32.TryParse(value, NumberStyles.Integer | NumberStyles.AllowThousands, culture, out int int_result);
 
             if (value.Contains(culture.NumberFormat.CurrencyDecimalSeparator, StringComparison.OrdinalIgnoreCase) ||
                 value.Contains("e", StringComparison.OrdinalIgnoreCase))

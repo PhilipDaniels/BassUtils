@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Dawn;
 
 namespace BassUtils
 {
@@ -20,7 +21,7 @@ namespace BassUtils
         /// <param name="fileSystemEvents">List of file system event args. Cannot be null.</param>
         public DirectoryWatcherEventArgs(IEnumerable<FileSystemEventArgs> fileSystemEvents)
         {
-            FileSystemEvents = fileSystemEvents.ThrowIfNull("fileSystemEvents");
+            FileSystemEvents = Guard.Argument(fileSystemEvents, nameof(fileSystemEvents)).NotNull().Value;
         }
     }
 }

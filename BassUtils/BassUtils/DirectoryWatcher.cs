@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Dawn;
 
 namespace BassUtils
 {
@@ -45,15 +46,12 @@ namespace BassUtils
         }
 
         /// <summary>
-        /// Create a new <code>DirectoryWatcher</code> on <paramref name="directory"/>
-        /// using the default timeout. Does not ignore any files or directories and includes
-        /// sub-directories.
+        /// Create a new <code>DirectoryWatcher</code> based on the specified <paramref name="options"/>.
         /// </summary>
-        /// <param name="directory">The directory to watch.</param>
+        /// <param name="options">Options used to configure the watcher.</param>
         public DirectoryWatcher(DirectoryWatcherOptions options)
         {
-            Options = options.ThrowIfNull(nameof(options));
-            //Options.Directory.ThrowIfDirectoryDoesNotExist(nameof(Options.Directory));
+            Options = Guard.Argument(options, nameof(options)).NotNull().Value;
 
             watcher = new FileSystemWatcher();
             notifiedEvents = new List<FileSystemEventArgs>();

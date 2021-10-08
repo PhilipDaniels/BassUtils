@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Dawn;
 
 namespace BassUtils
 {
@@ -23,7 +24,7 @@ namespace BassUtils
         public EncodingStringWriter(StringBuilder builder, IFormatProvider formatProvider, Encoding encoding)
             : base(builder, formatProvider)
         {
-            Encoding = encoding.ThrowIfNull("encoding");
+            Encoding = Guard.Argument(encoding, nameof(encoding)).NotNull();
         }
     }
 }

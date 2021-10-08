@@ -20,7 +20,7 @@ namespace BassUtils.ConsoleTestHarness
                 {
                     new Regex(@".*\.md")
                 },
-                 IgnoreCallback = (f) => { return f.EndsWith(".got"); }
+                IgnoreCallback = (f) => { return f.EndsWith(".got"); }
             };
 
             var watcher = new DirectoryWatcher(options);

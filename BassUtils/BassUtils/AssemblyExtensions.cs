@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Dawn;
 
 namespace BassUtils
 {
@@ -12,6 +11,16 @@ namespace BassUtils
     /// </summary>
     public static class AssemblyExtensions
     {
+        /// <summary>
+        /// Returns the directory of the EXE (actually the entry assembly).
+        /// </summary>
+        /// <returns>The directory containing the EXE (entry assembly).</returns>
+        public static string GetExeDirectory()
+        {
+            string exeDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            return exeDir;
+        }
+
         /// <summary>
         /// Gets the full manifest filename of a manifest resource. The <paramref name="fileName" />
         /// is of the format "folder.folder.filename.ext" and is case sensitive. The method first
@@ -28,8 +37,8 @@ namespace BassUtils
         /// <returns>Fully qualified manifest resource filename.</returns>
         public static string GetResourceFileName(this Assembly assembly, string fileName)
         {
-            assembly.ThrowIfNull("assembly");
-            fileName.ThrowIfNullOrWhiteSpace("fileName");
+            Guard.Argument(assembly, nameof(assembly)).NotNull();
+            Guard.Argument(fileName, nameof(fileName)).NotNull().NotWhiteSpace();
 
             string[] allNames = assembly.GetManifestResourceNames();
             string candidateName = string.Concat(assembly.GetName().Name, ".", fileName);
@@ -57,8 +66,8 @@ namespace BassUtils
         /// <returns>Stream object.</returns>
         public static Stream GetResourceStream(this Assembly assembly, string fileName)
         {
-            assembly.ThrowIfNull("assembly");
-            fileName.ThrowIfNullOrWhiteSpace("fileName");
+            Guard.Argument(assembly, nameof(assembly)).NotNull();
+            Guard.Argument(fileName, nameof(fileName)).NotNull().NotWhiteSpace();
 
             string name = assembly.GetResourceFileName(fileName);
             Stream s = assembly.GetManifestResourceStream(name);
@@ -74,37 +83,17 @@ namespace BassUtils
         /// <param name="fileName">Filename whose contents you want.</param>
         /// <returns>String object.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times",
-            Justification="Known to be safe")]
+            Justification = "Known to be safe")]
         public static string GetResourceAsString(this Assembly assembly, string fileName)
         {
-            assembly.ThrowIfNull("assembly");
-            fileName.ThrowIfNullOrWhiteSpace("fileName");
+            Guard.Argument(assembly, nameof(assembly)).NotNull();
+            Guard.Argument(fileName, nameof(fileName)).NotNull().NotWhiteSpace();
 
             using (Stream s = GetResourceStream(assembly, fileName))
             using (StreamReader sr = new StreamReader(s))
             {
                 string fileContents = sr.ReadToEnd();
                 return fileContents;
-            }
-        }
-
-        /// <summary>
-        /// Get the contents of an embedded file as an Image.
-        /// The filename is of the format "folder.folder.filename.ext"
-        /// and is case sensitive.
-        /// </summary>
-        /// <param name="assembly">The assembly from which to retrieve the image.</param>
-        /// <param name="fileName">Filename whose contents you want.</param>
-        /// <returns>Image object.</returns>
-        public static Image GetResourceAsImage(this Assembly assembly, string fileName)
-        {
-            assembly.ThrowIfNull("assembly");
-            fileName.ThrowIfNullOrWhiteSpace("fileName");
-
-            using (Stream s = GetResourceStream(assembly, fileName))
-            {
-                Image i = Image.FromStream(s);
-                return i;
             }
         }
 
@@ -118,12 +107,12 @@ namespace BassUtils
         /// <returns>The manifest resource as an array of bytes.</returns>
         public static byte[] GetResourceAsBytes(this Assembly assembly, string fileName)
         {
-            assembly.ThrowIfNull("assembly");
-            fileName.ThrowIfNullOrWhiteSpace("fileName");
+            Guard.Argument(assembly, nameof(assembly)).NotNull();
+            Guard.Argument(fileName, nameof(fileName)).NotNull().NotWhiteSpace();
 
             using (Stream s = GetResourceStream(assembly, fileName))
             {
-                byte[] data = s.ReadFully();
+                byte[] data = s.ReadToEnd();
                 return data;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Dawn;
 
 namespace BassUtils
 {
@@ -15,8 +16,8 @@ namespace BassUtils
         /// <param name="itemsToAdd">The collection of items to add.</param>
         public static void AddRange<T>(this ICollection<T> sequence, IEnumerable<T> itemsToAdd)
         {
-            sequence.ThrowIfNull("sequence");
-            itemsToAdd.ThrowIfNull("itemsToAdd");
+            Guard.Argument(sequence, nameof(sequence)).NotNull();
+            Guard.Argument(itemsToAdd, nameof(itemsToAdd)).NotNull();
 
             foreach (var item in itemsToAdd)
                 sequence.Add(item);

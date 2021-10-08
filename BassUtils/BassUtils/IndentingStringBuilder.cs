@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using Dawn;
 
 namespace BassUtils
 {
@@ -10,7 +11,6 @@ namespace BassUtils
     /// that automatically adds indentation when you add a new line. The amount
     /// of indentation is setup upon construction.
     /// </summary>
-    [CLSCompliant(false)]
     public class IndentingStringBuilder
     {
         const string DefaultIndentation = "    ";
@@ -32,7 +32,7 @@ namespace BassUtils
         /// <param name="indentation">The string to use for indentation.</param>
         public IndentingStringBuilder(string indentation)
         {
-            Indentation = indentation.ThrowIfNull("indentation");
+            Indentation = Guard.Argument(indentation, nameof(indentation)).NotNull().Value;
             sb = new StringBuilder();
             CurrentLineIsEmpty = true;
         }
@@ -53,7 +53,7 @@ namespace BassUtils
         /// <param name="indentation">The string to use for indentation.</param>
         public IndentingStringBuilder(int capacity, string indentation)
         {
-            Indentation = indentation.ThrowIfNull("indentation");
+            Indentation = Guard.Argument(indentation, nameof(indentation)).NotNull().Value;
             sb = new StringBuilder(capacity);
             CurrentLineIsEmpty = true;
         }
@@ -65,7 +65,7 @@ namespace BassUtils
         /// <param name="indentation">The string to use for indentation.</param>
         public IndentingStringBuilder(string value, string indentation)
         {
-            Indentation = indentation.ThrowIfNull("indentation");
+            Indentation = Guard.Argument(indentation, nameof(indentation)).NotNull().Value;
             sb = new StringBuilder(value);
             CurrentLineIsEmpty = true;
         }
@@ -88,7 +88,7 @@ namespace BassUtils
         /// <param name="indentation">The string to use for indentation.</param>
         public IndentingStringBuilder(int capacity, int maxCapacity, string indentation)
         {
-            Indentation = indentation.ThrowIfNull("indentation");
+            Indentation = Guard.Argument(indentation, nameof(indentation)).NotNull().Value;
             sb = new StringBuilder(capacity, maxCapacity);
             CurrentLineIsEmpty = true;
         }
@@ -111,7 +111,7 @@ namespace BassUtils
         /// <param name="indentation">The string to use for indentation.</param>
         public IndentingStringBuilder(string value, int capacity, string indentation)
         {
-            Indentation = indentation.ThrowIfNull("indentation");
+            Indentation = Guard.Argument(indentation, nameof(indentation)).NotNull().Value;
             sb = new StringBuilder(value, capacity);
             CurrentLineIsEmpty = true;
         }
@@ -138,7 +138,7 @@ namespace BassUtils
         /// <param name="indentation">The string to use for indentation.</param>
         public IndentingStringBuilder(string value, int startIndex, int length, int capacity, string indentation)
         {
-            Indentation = indentation.ThrowIfNull("indentation");
+            Indentation = Guard.Argument(indentation, nameof(indentation)).NotNull().Value;
             sb = new StringBuilder(value, startIndex, length, capacity);
             CurrentLineIsEmpty = true;
         }
@@ -154,8 +154,7 @@ namespace BassUtils
             }
             set
             {
-                value.ThrowIfLessThan(0, "IndentationLevel");
-                _IndentationLevel = value;
+                _IndentationLevel = Guard.Argument(value, "IndentationLevel").Min(0);
             }
         }
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

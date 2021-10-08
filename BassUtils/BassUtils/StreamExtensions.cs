@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Dawn;
 
 namespace BassUtils
 {
@@ -12,9 +13,9 @@ namespace BassUtils
         /// </summary>
         /// <param name="stream">The stream to read.</param>
         /// <returns>Array of bytes from the stream.</returns>
-        public static byte[] ReadFully(this Stream stream)
+        public static byte[] ReadToEnd(this Stream stream)
         {
-            stream.ThrowIfNull("stream");
+            Guard.Argument(stream, nameof(stream)).NotNull();
 
             using (var ms = new MemoryStream())
             {

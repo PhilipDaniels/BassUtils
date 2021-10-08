@@ -1,42 +1,45 @@
 ﻿using System;
 using System.IO;
+using Dawn;
 
 namespace BassUtils
 {
+    /// <summary>
+    /// Extensions for the <seealso cref="TextWriter"/> class.
+    /// </summary>
     public static class TextWriterExtensions
     {
         /// <summary>
         /// Appends <paramref name="args"/> in a "CSV style" to the end of the writer.
-        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// See the <see cref="CsvOptions"/> class for ways to control the appending.
         /// This overload uses the default options, which results in output compliant with
         /// <c>https://tools.ietf.org/html/rfc4180</c>.
         /// </summary>
         /// <param name="writer">The writer to append to.</param>
         /// <param name="args">The arguments to append.</param>
         /// <returns>The writer that was passed in, to enable chaining.</returns>
-        public static TextWriter AppendCSV(this TextWriter writer, params object[] args)
+        public static TextWriter AppendCsv(this TextWriter writer, params object[] args)
         {
-            return writer.AppendCSV(CSVOptions.Default, args);
+            return writer.AppendCsv(CsvOptions.Default, args);
         }
 
         /// <summary>
         /// Appends <paramref name="args"/> in a "CSV style" to the end of the writer.
-        /// See the <see cref="CSVOptions"/> class for ways to control the appending.
+        /// See the <see cref="CsvOptions"/> class for ways to control the appending.
         /// </summary>
         /// <param name="writer">The writer to append to.</param>
         /// <param name="options">Options to control the appending.</param>
         /// <param name="args">The arguments to append.</param>
         /// <returns>The writer that was passed in, to enable chaining.</returns>
-        public static TextWriter AppendCSV
+        public static TextWriter AppendCsv
             (
             this TextWriter writer,
-            CSVOptions options,
+            CsvOptions options,
             params object[] args
             )
         {
-            writer.ThrowIfNull(nameof(writer));
-            options.ThrowIfNull(nameof(options));
-
+            Guard.Argument(writer, nameof(writer)).NotNull();
+            Guard.Argument(options, nameof(options)).NotNull();
 
             if (options.AlwaysWriteDelimiter && options.Delimiter == null)
                 throw new ArgumentException("If options.AlwaysWriteDelimiter is true, options.Delimiter must be non-null.", nameof(options));

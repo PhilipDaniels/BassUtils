@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Dawn;
 
 namespace BassUtils
 {
@@ -14,7 +15,7 @@ namespace BassUtils
     /// </summary>
     /// <remarks>
     /// This class does not provide any support for writing or modifying INI files, and it ignores comments.
-    /// If more sophisticated support is required, the package at <c>https://github.com/rickyah/ini-parser</c>
+    /// If more sophisticated support is required, the package at <code>https://www.nuget.org/packages/ini-parser-netstandard/</code>
     /// is recommended.
     /// </remarks>
     [DebuggerDisplay("{iniSections.Count} sections")]
@@ -67,8 +68,8 @@ namespace BassUtils
         /// <returns>The parsed INI data.</returns>
         public static IniData Parse(string iniData, bool coalesceLineContinuations, StringComparer stringComparer)
         {
-            iniData.ThrowIfNull("iniData");
-            stringComparer.ThrowIfNull("stringComparer");
+            Guard.Argument(iniData, nameof(iniData)).NotNull();
+            Guard.Argument(stringComparer, nameof(stringComparer)).NotNull();
 
             var result = new IniData();
             result.iniSections = new Dictionary<string, IniSection>(stringComparer);
@@ -130,7 +131,7 @@ namespace BassUtils
         /// <returns>Value of the <paramref name="key"/>.</returns>
         public string GetValue(string key)
         {
-            key.ThrowIfNull("key");
+            Guard.Argument(key, nameof(key)).NotNull();
 
             return GetValue(string.Empty, key, string.Empty);
         }
@@ -143,8 +144,8 @@ namespace BassUtils
         /// <returns>Value of the <paramref name="key"/>.</returns>
         public string GetValue(string section, string key)
         {
-            section.ThrowIfNull("section");
-            key.ThrowIfNull("key");
+            Guard.Argument(section, nameof(section)).NotNull();
+            Guard.Argument(key, nameof(key)).NotNull();
 
             return GetValue(section, key, string.Empty);
         }
@@ -158,8 +159,8 @@ namespace BassUtils
         /// <returns>Value of the <paramref name="key"/>.</returns>
         public string GetValue(string section, string key, string defaultIfNotFound)
         {
-            section.ThrowIfNull("section");
-            key.ThrowIfNull("key");
+            Guard.Argument(section, nameof(section)).NotNull();
+            Guard.Argument(key, nameof(key)).NotNull();
 
             if (!iniSections.ContainsKey(section))
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Dawn;
 
 namespace BassUtils
 {
@@ -69,7 +70,7 @@ namespace BassUtils
 
             set
             {
-                timerPeriodMilliseconds = value.ThrowIfLessThan(1, nameof(timerPeriodMilliseconds));
+                timerPeriodMilliseconds = Guard.Argument(value, nameof(value)).NotZero().NotNegative().Value;
             }
         }
 

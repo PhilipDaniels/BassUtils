@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Dawn;
 
 namespace BassUtils
 {
@@ -16,7 +17,7 @@ namespace BassUtils
         /// <returns>Set of trimmed strings.</returns>
         public static IEnumerable<string> TrimAll(this IEnumerable<string> values)
         {
-            values.ThrowIfNull("values");
+            Guard.Argument(values, nameof(values)).NotNull();
 
             return values.Select(s => s == null ? null : s.Trim());
         }
