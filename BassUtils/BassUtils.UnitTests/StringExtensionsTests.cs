@@ -289,5 +289,42 @@ namespace BassUtils.UnitTests
             "TheQualityOfMercy".SplitCamelCaseIntoWords().Should().Be("The Quality Of Mercy");
         }
 
+        [TestMethod]
+        public void GetLeadingNumber_ForVariousInputs_ReturnsExpectedResults()
+        {
+            "".GetLeadingNumber().Should().BeNull(); ;
+            "a".GetLeadingNumber().Should().BeNull();
+
+            "abc123".GetLeadingNumber().Should().BeNull();
+            "123abc".GetLeadingNumber().Should().Be(123m); ;
+
+            "abc123.456".GetLeadingNumber().Should().BeNull();
+            "123.456abc".GetLeadingNumber().Should().Be(123.456m);
+
+            "123".GetLeadingNumber().Should().Be(123m);
+            "123.456".GetLeadingNumber().Should().Be(123.456m);
+
+            var ci = new CultureInfo("fr-FR");
+            "123,456".GetLeadingNumber(ci.NumberFormat).Should().Be(123.456m);
+        }
+        
+        [TestMethod]
+        public void GetTrailingNumber_ForVariousInputs_ReturnsExpectedResults()
+        {
+            "".GetTrailingNumber().Should().BeNull(); ;
+            "a".GetTrailingNumber().Should().BeNull();
+
+            "abc123".GetTrailingNumber().Should().Be(123m);
+            "123abc".GetTrailingNumber().Should().BeNull(); ;
+
+            "abc123.456".GetTrailingNumber().Should().Be(123.456m);
+            "123.456abc".GetTrailingNumber().Should().BeNull();
+
+            "123".GetTrailingNumber().Should().Be(123m);
+            "123.456".GetTrailingNumber().Should().Be(123.456m);
+
+            var ci = new CultureInfo("fr-FR");
+            "123,456".GetTrailingNumber(ci.NumberFormat).Should().Be(123.456m);
+        }
     }
 }

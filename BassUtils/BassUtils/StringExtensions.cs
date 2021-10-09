@@ -552,65 +552,78 @@ namespace BassUtils
                 return value.Substring(value.Length - length, length);
         }
 
-        // Should match decimal numbers.
-        const string NUMBER_PATTERN = @"[0-9]([.,][0-9]{1,3})?";
-
         /// <summary>
         /// Returns a leading number from a string such as "123Hello", using the InvariantCulture
         /// for conversion.
         /// </summary>
-        /// <typeparam name="T">The type of number to return.</typeparam>
         /// <param name="value">The value to extract the number from.</param>
-        /// <returns>Leading number.</returns>
-        public static T GetLeadingNumber<T>(this string value)
+        /// <returns>The leading number, or null if there is no leading number.</returns>
+        public static decimal? GetLeadingNumber(this string value)
         {
             Guard.Argument(value, nameof(value)).NotNull();
 
-            return GetLeadingNumber<T>(value, CultureInfo.InvariantCulture);
+            return GetLeadingNumber(value, CultureInfo.InvariantCulture.NumberFormat);
         }
 
         /// <summary>
         /// Returns a leading number from a string such as "123Hello".
         /// </summary>
-        /// <typeparam name="T">The type of number to return.</typeparam>
         /// <param name="value">The value to extract the number from.</param>
-        /// <param name="provider">Format provider to use for conversion.</param>
-        /// <returns>Leading number.</returns>
-        public static T GetLeadingNumber<T>(this string value, IFormatProvider provider)
+        /// <param name="numberFormatInfo">Number format to use for conversion.</param>
+        /// <returns>The leading number, or null if there is no leading number.</returns>
+        public static decimal? GetLeadingNumber(this string value, NumberFormatInfo numberFormatInfo)
         {
             Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(numberFormatInfo, nameof(numberFormatInfo)).NotNull();
 
-            Match m = Regex.Match(value, "^" + NUMBER_PATTERN);
-            T result = (T)Convert.ChangeType(m.Value, typeof(T), provider);
-            return result;
+            var index = 0;
+            while (index < value.Length && (Char.IsDigit(value[index]) || value[index].ToString() == numberFormatInfo.NumberDecimalSeparator))
+            {
+                index++;
+            }
+
+            if (index == 0)
+                return null;
+
+            var s = value.Substring(0, index);
+            return Convert.ToDecimal(s, numberFormatInfo);
         }
 
         /// <summary>
         /// Returns a trailing number from a string such as "Hello123", using the InvariantCulture
         /// for conversion.
         /// </summary>
-        /// <typeparam name="T">The type of number to return.</typeparam>
         /// <param name="value">The value to extract the number from.</param>
-        /// <returns>Leading number.</returns>
-        public static T GetTrailingNumber<T>(this string value)
+        /// <returns>The trailing number, or null if there is no trailing number.</returns>
+        public static decimal? GetTrailingNumber(this string value)
         {
-            return GetTrailingNumber<T>(value, CultureInfo.InvariantCulture);
+            return GetTrailingNumber(value, CultureInfo.InvariantCulture.NumberFormat);
         }
 
         /// <summary>
-        /// Returns a trailing number from a string such as "Hello123".
+        /// Returns a trailing number from a string such as "Hello123". This will handle ints and
+        /// numbers with a decimal point (as specified by the number format), but not scientific notation.
+        /// You can get a <seealso cref="NumberFormatInfo"/> from a <seealso cref="CultureInfo"/> object.
         /// </summary>
-        /// <typeparam name="T">The type of number to return.</typeparam>
         /// <param name="value">The value to extract the number from.</param>
-        /// <param name="provider">Format provider to use for conversion.</param>
-        /// <returns>Leading number.</returns>
-        public static T GetTrailingNumber<T>(this string value, IFormatProvider provider)
+        /// <param name="numberFormatInfo">Number format to use for conversion.</param>
+        /// <returns>The trailing number, or null if there is no trailing number.</returns>
+        public static decimal? GetTrailingNumber(this string value, NumberFormatInfo numberFormatInfo)
         {
             Guard.Argument(value, nameof(value)).NotNull();
+            Guard.Argument(numberFormatInfo, nameof(numberFormatInfo)).NotNull();
 
-            Match m = Regex.Match(value, NUMBER_PATTERN + "$");
-            T result = (T)Convert.ChangeType(m.Value, typeof(T), provider);
-            return result;
+            var index = value.Length - 1;
+            while (index >= 0 && (Char.IsDigit(value[index]) || value[index].ToString() == numberFormatInfo.NumberDecimalSeparator))
+            {
+                index--;
+            }
+
+            if (index == value.Length - 1)
+                return null;
+
+            var s = value.Substring(index + 1);
+            return Convert.ToDecimal(s, numberFormatInfo);
         }
 
         static readonly Regex BadFileNameCharacters = new Regex(@"[\\\/:\*\?""<>|]");

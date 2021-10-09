@@ -15,6 +15,7 @@ Low-level utility functions for use in any .Net Standard 2.0 project.
   See https://devblogs.microsoft.com/dotnet/introducing-the-new-microsoftdatasqlclient/ for background.
   This means that BassUtils now has a dependency on the Microsoft.Data.SqlClient package.
 - CSV has been changed to 'Csv' for compliance with Microsoft recommended naming standards.
+- GetLeadingNumber and GetTrailingNumber have had their APIs change, and they now work!
 
 ###### Removed
 - Various utilities have been removed due to better alternatives now becoming available in the community
