@@ -20,7 +20,8 @@ Low-level utility functions for use in any .Net Standard 2.0 project.
 ###### Removed
 - Various utilities have been removed due to better alternatives now becoming available in the community
   or me simply not making any use of them.
-- ArgumentValidators - use [Dawn.Guard](https://www.nuget.org/packages/Dawn.Guard/) instead.
+- ArgumentValidators - use [Dawn.Guard](https://www.nuget.org/packages/Dawn.Guard/) instead (this
+  library includes it as a dependency).
 - Glob - use [Microsoft.Extensions.FileSystemGlobbing](https://www.nuget.org/packages/Microsoft.Extensions.FileSystemGlobbing)
 - Partition and DistinctBy methods - use [MoreLinq](https://www.nuget.org/packages/morelinq/).
 - ConfigurationLoader, DoubleExtensions, ExpandoExtensions, PredicateBuilder, PropertyCopier, TableAdapterBase,
@@ -98,13 +99,6 @@ of doing this, for example see http://joshclose.github.io/CsvHelper/
 
 
 # Highlights (not exhaustive)
-**ArgumentValidators** Throw exceptions if method arguments do not meet expectations:
-
-```
-Name = name.ThrowIfNull("name");
-FileName = fileName.ThrowIfFileDoesNotExist("name");
-```
-
 **AssemblyExtensions** Get embedded resources:
 ```
 string sql = typeof(this).Assembly.GetResourceAsString("Foo.sql");
@@ -116,12 +110,6 @@ index fragmentation:
 Guid g = Comb.NewGuid();
 ```
 
-**ConfigurationLoader** Extremely useful class for loading custom configuration sections.
-```
-// See documentation in the class or the cases in BassUtils.Tests.
-// You want to use this, trust me.
-```
-
 **Conv** Convenient conversion functions:
 ```
 int x = Conv.StringToBest("42");
@@ -129,11 +117,6 @@ int x = Conv.StringToBest("42");
 
 **DirectoryWatcher** A wrapper around FileSystemWatcher that will de-duplicate
 events.
-
-**Glob** A Unix-like file globber, capable of recursing globbing, for example@
-```
-var filenames = Glob.ExpandNames(@"C:\temp\**\*.cs");
-```
 
 **IDataReaderExtensions, IDataRecordExtensions** Many extensions to make working
 with these classes more convenient, including extensions to get columns by name,
@@ -172,8 +155,8 @@ string value = "Name=Phil".After("=");
 string s = "Hello".Repeat(3);
 string t = "hi".Left(3); // safe.
 
-// Simple CSV-like "listifier". Also on StringBuilder.
-string list = "".AppendCSV(number, name, street, town, county, country);
+// Simple CSV-like "listifier". Also on StringBuilder and TextWriter.
+string list = "".AppendCsv(number, name, street, town, county, country);
 list = "Hello,".AppendIfDoesNotEndWith(",");
 list = list.TrimAppend("  world  ");
 ```
