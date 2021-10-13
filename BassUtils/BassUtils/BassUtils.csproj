@@ -5,7 +5,7 @@
 	<DebugType>embedded</DebugType>
 	  <EmbedAllSources>true</EmbedAllSources>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
-	  <Version>4.0.1-pre</Version>
+	  <Version>4.0.2-pre</Version>
 	  <Authors>Philip Daniels</Authors>
 	  <Company>Philip Daniels</Company>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
