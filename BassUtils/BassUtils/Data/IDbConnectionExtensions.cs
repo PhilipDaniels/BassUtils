@@ -24,7 +24,7 @@ namespace BassUtils.Data
             using (var cmd = connection.CreateCommand())
             {
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from " + tableName + " where 1 == 0";
+                cmd.CommandText = "SELECT * FROM " + tableName + " WHERE 1 == 0";
 
                 using (var rdr = cmd.ExecuteReader())
                 {
