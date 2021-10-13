@@ -44,7 +44,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>True if the field is DbNull, false otherwise.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean IsDbNull(this IDataRecord record, string name)
+        public static bool IsDbNull(this IDataRecord record, string name)
         {
             return record.IsDBNull(record.GetOrdinal(name));
         }
@@ -56,7 +56,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean GetBoolean(this IDataRecord record, string name)
+        public static bool GetBoolean(this IDataRecord record, string name)
         {
             return record.GetBoolean(record.GetOrdinal(name));
         }
@@ -70,7 +70,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean GetBoolean(this IDataRecord record, int i, bool defaultIfNull)
+        public static bool GetBoolean(this IDataRecord record, int i, bool defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetBoolean(i);
         }
@@ -83,7 +83,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean GetBoolean(this IDataRecord record, string name, bool defaultIfNull)
+        public static bool GetBoolean(this IDataRecord record, string name, bool defaultIfNull)
         {
             return record.GetBoolean(record.GetOrdinal(name), defaultIfNull);
         }
@@ -96,9 +96,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean? GetNullableBoolean(this IDataRecord record, int i)
+        public static bool? GetNullableBoolean(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Boolean?) : record.GetBoolean(i);
+            return record.IsDBNull(i) ? (bool?)null : record.GetBoolean(i);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean? GetNullableBoolean(this IDataRecord record, string name)
+        public static bool? GetNullableBoolean(this IDataRecord record, string name)
         {
             return record.GetNullableBoolean(record.GetOrdinal(name));
         }
@@ -120,7 +120,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Byte GetByte(this IDataRecord record, string name)
+        public static byte GetByte(this IDataRecord record, string name)
         {
             return record.GetByte(record.GetOrdinal(name));
         }
@@ -134,7 +134,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Byte GetByte(this IDataRecord record, int i, Byte defaultIfNull)
+        public static byte GetByte(this IDataRecord record, int i, byte defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetByte(i);
         }
@@ -147,7 +147,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Byte GetByte(this IDataRecord record, string name, Byte defaultIfNull)
+        public static byte GetByte(this IDataRecord record, string name, byte defaultIfNull)
         {
             return record.GetByte(record.GetOrdinal(name), defaultIfNull);
         }
@@ -159,7 +159,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Byte? GetNullableByte(this IDataRecord record, string name)
+        public static byte? GetNullableByte(this IDataRecord record, string name)
         {
             return record.GetNullableByte(record.GetOrdinal(name));
         }
@@ -172,9 +172,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Byte? GetNullableByte(this IDataRecord record, int i)
+        public static byte? GetNullableByte(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Byte?) : record.GetByte(i);
+            return record.IsDBNull(i) ? (byte?)null : record.GetByte(i);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Char GetChar(this IDataRecord record, string name)
+        public static char GetChar(this IDataRecord record, string name)
         {
             return record.GetChar(record.GetOrdinal(name));
         }
@@ -198,7 +198,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Char GetChar(this IDataRecord record, int i, Char defaultIfNull)
+        public static char GetChar(this IDataRecord record, int i, char defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetChar(i);
         }
@@ -211,7 +211,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Char GetChar(this IDataRecord record, string name, Char defaultIfNull)
+        public static char GetChar(this IDataRecord record, string name, char defaultIfNull)
         {
             return record.GetChar(record.GetOrdinal(name), defaultIfNull);
         }
@@ -223,7 +223,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Char? GetNullableChar(this IDataRecord record, string name)
+        public static char? GetNullableChar(this IDataRecord record, string name)
         {
             return record.GetNullableChar(record.GetOrdinal(name));
         }
@@ -236,9 +236,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Char? GetNullableChar(this IDataRecord record, int i)
+        public static char? GetNullableChar(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Char?) : record.GetChar(i);
+            return record.IsDBNull(i) ? (char?)null : record.GetChar(i);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace BassUtils.Data
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static DateTime? GetNullableDateTime(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(DateTime?) : record.GetDateTime(i);
+            return record.IsDBNull(i) ? (DateTime?)null : record.GetDateTime(i);
         }
 
         /// <summary>
@@ -312,7 +312,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Decimal GetDecimal(this IDataRecord record, string name)
+        public static decimal GetDecimal(this IDataRecord record, string name)
         {
             return record.GetDecimal(record.GetOrdinal(name));
         }
@@ -326,7 +326,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Decimal GetDecimal(this IDataRecord record, int i, Decimal defaultIfNull)
+        public static decimal GetDecimal(this IDataRecord record, int i, decimal defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetDecimal(i);
         }
@@ -339,7 +339,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Decimal GetDecimal(this IDataRecord record, string name, Decimal defaultIfNull)
+        public static decimal GetDecimal(this IDataRecord record, string name, decimal defaultIfNull)
         {
             return record.GetDecimal(record.GetOrdinal(name), defaultIfNull);
         }
@@ -351,7 +351,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Decimal? GetNullableDecimal(this IDataRecord record, string name)
+        public static decimal? GetNullableDecimal(this IDataRecord record, string name)
         {
             return record.GetNullableDecimal(record.GetOrdinal(name));
         }
@@ -364,9 +364,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Decimal? GetNullableDecimal(this IDataRecord record, int i)
+        public static decimal? GetNullableDecimal(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Decimal?) : record.GetDecimal(i);
+            return record.IsDBNull(i) ? (decimal?)null : record.GetDecimal(i);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Double GetDouble(this IDataRecord record, string name)
+        public static double GetDouble(this IDataRecord record, string name)
         {
             return record.GetDouble(record.GetOrdinal(name));
         }
@@ -390,7 +390,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Double GetDouble(this IDataRecord record, int i, Double defaultIfNull)
+        public static double GetDouble(this IDataRecord record, int i, double defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetDouble(i);
         }
@@ -403,7 +403,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Double GetDouble(this IDataRecord record, string name, Double defaultIfNull)
+        public static double GetDouble(this IDataRecord record, string name, double defaultIfNull)
         {
             return record.GetDouble(record.GetOrdinal(name), defaultIfNull);
         }
@@ -415,7 +415,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Double? GetNullableDouble(this IDataRecord record, string name)
+        public static double? GetNullableDouble(this IDataRecord record, string name)
         {
             return record.GetNullableDouble(record.GetOrdinal(name));
         }
@@ -428,9 +428,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Double? GetNullableDouble(this IDataRecord record, int i)
+        public static double? GetNullableDouble(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Double?) : record.GetDouble(i);
+            return record.IsDBNull(i) ? (double?)null : record.GetDouble(i);
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Single GetSingle(this IDataRecord record, string name)
+        public static float GetFloat(this IDataRecord record, string name)
         {
             return record.GetFloat(record.GetOrdinal(name));
         }
@@ -454,7 +454,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Single GetSingle(this IDataRecord record, int i, Single defaultIfNull)
+        public static float GetFloat(this IDataRecord record, int i, float defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetFloat(i);
         }
@@ -467,9 +467,9 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Single GetSingle(this IDataRecord record, string name, Single defaultIfNull)
+        public static float GetFloat(this IDataRecord record, string name, float defaultIfNull)
         {
-            return record.GetSingle(record.GetOrdinal(name), defaultIfNull);
+            return record.GetFloat(record.GetOrdinal(name), defaultIfNull);
         }
 
         /// <summary>
@@ -479,7 +479,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Single? GetNullableFloat(this IDataRecord record, string name)
+        public static float? GetNullableFloat(this IDataRecord record, string name)
         {
             return record.GetNullableFloat(record.GetOrdinal(name));
         }
@@ -492,9 +492,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Single? GetNullableFloat(this IDataRecord record, int i)
+        public static float? GetNullableFloat(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Single?) : record.GetFloat(i);
+            return record.IsDBNull(i) ? (float?)null : record.GetFloat(i);
         }
 
         /// <summary>
@@ -504,7 +504,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int16 GetInt16(this IDataRecord record, string name)
+        public static short GetInt16(this IDataRecord record, string name)
         {
             return record.GetInt16(record.GetOrdinal(name));
         }
@@ -518,7 +518,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int16 GetInt16(this IDataRecord record, int i, Int16 defaultIfNull)
+        public static short GetInt16(this IDataRecord record, int i, short defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetInt16(i);
         }
@@ -531,7 +531,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int16 GetInt16(this IDataRecord record, string name, Int16 defaultIfNull)
+        public static short GetInt16(this IDataRecord record, string name, short defaultIfNull)
         {
             return record.GetInt16(record.GetOrdinal(name), defaultIfNull);
         }
@@ -543,7 +543,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int16? GetNullableInt16(this IDataRecord record, string name)
+        public static short? GetNullableInt16(this IDataRecord record, string name)
         {
             return record.GetNullableInt16(record.GetOrdinal(name));
         }
@@ -556,9 +556,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int16? GetNullableInt16(this IDataRecord record, int i)
+        public static short? GetNullableInt16(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Int16?) : record.GetInt16(i);
+            return record.IsDBNull(i) ? (short?)null : record.GetInt16(i);
         }
 
         /// <summary>
@@ -568,7 +568,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int32 GetInt32(this IDataRecord record, string name)
+        public static int GetInt32(this IDataRecord record, string name)
         {
             return record.GetInt32(record.GetOrdinal(name));
         }
@@ -582,7 +582,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int32 GetInt32(this IDataRecord record, int i, Int32 defaultIfNull)
+        public static int GetInt32(this IDataRecord record, int i, int defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetInt32(i);
         }
@@ -595,7 +595,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int32 GetInt32(this IDataRecord record, string name, Int32 defaultIfNull)
+        public static int GetInt32(this IDataRecord record, string name, int defaultIfNull)
         {
             return record.GetInt32(record.GetOrdinal(name), defaultIfNull);
         }
@@ -607,7 +607,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int32? GetNullableInt32(this IDataRecord record, string name)
+        public static int? GetNullableInt32(this IDataRecord record, string name)
         {
             return record.GetNullableInt32(record.GetOrdinal(name));
         }
@@ -620,9 +620,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int32? GetNullableInt32(this IDataRecord record, int i)
+        public static int? GetNullableInt32(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Int32?) : record.GetInt32(i);
+            return record.IsDBNull(i) ? (int?)null : record.GetInt32(i);
         }
 
         /// <summary>
@@ -632,7 +632,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int64 GetInt64(this IDataRecord record, string name)
+        public static long GetInt64(this IDataRecord record, string name)
         {
             return record.GetInt64(record.GetOrdinal(name));
         }
@@ -646,7 +646,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int64 GetInt64(this IDataRecord record, int i, Int64 defaultIfNull)
+        public static long GetInt64(this IDataRecord record, int i, long defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetInt64(i);
         }
@@ -659,7 +659,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int64 GetInt64(this IDataRecord record, string name, Int64 defaultIfNull)
+        public static long GetInt64(this IDataRecord record, string name, long defaultIfNull)
         {
             return record.GetInt64(record.GetOrdinal(name), defaultIfNull);
         }
@@ -671,7 +671,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int64? GetNullableInt64(this IDataRecord record, string name)
+        public static long? GetNullableInt64(this IDataRecord record, string name)
         {
             return record.GetNullableInt64(record.GetOrdinal(name));
         }
@@ -684,9 +684,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Int64? GetNullableInt64(this IDataRecord record, int i)
+        public static long? GetNullableInt64(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Int64?) : record.GetInt64(i);
+            return record.IsDBNull(i) ? (long?)null : record.GetInt64(i);
         }
 
         /// <summary>
@@ -696,7 +696,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static String GetString(this IDataRecord record, string name)
+        public static string GetString(this IDataRecord record, string name)
         {
             return record.GetString(record.GetOrdinal(name));
         }
@@ -710,7 +710,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static String GetString(this IDataRecord record, int i, string defaultIfNull)
+        public static string GetString(this IDataRecord record, int i, string defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetString(i);
         }
@@ -723,7 +723,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static String GetString(this IDataRecord record, string name, string defaultIfNull)
+        public static string GetString(this IDataRecord record, string name, string defaultIfNull)
         {
             return record.GetString(record.GetOrdinal(name), defaultIfNull);
         }
@@ -735,9 +735,9 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static String GetStringOrNull(this IDataRecord record, string name)
+        public static string GetNullableString(this IDataRecord record, string name)
         {
-            return record.GetStringOrNull(record.GetOrdinal(name));
+            return record.GetNullableString(record.GetOrdinal(name));
         }
 
         /// <summary>
@@ -748,9 +748,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static String GetStringOrNull(this IDataRecord record, int i)
+        public static string GetNullableString(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default : record.GetString(i);
+            return record.IsDBNull(i) ? null : record.GetString(i);
         }
 
         /// <summary>
@@ -760,7 +760,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Object GetValue(this IDataRecord record, string name)
+        public static object GetValue(this IDataRecord record, string name)
         {
             return record.GetValue(record.GetOrdinal(name));
         }
@@ -774,7 +774,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Object GetValue(this IDataRecord record, int i, Object defaultIfNull)
+        public static object GetValue(this IDataRecord record, int i, object defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetValue(i);
         }
@@ -787,7 +787,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Object GetValue(this IDataRecord record, string name, Object defaultIfNull)
+        public static object GetValue(this IDataRecord record, string name, object defaultIfNull)
         {
             return record.GetValue(record.GetOrdinal(name), defaultIfNull);
         }
@@ -799,7 +799,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Object GetValueOrNull(this IDataRecord record, string name)
+        public static object GetValueOrNull(this IDataRecord record, string name)
         {
             return record.GetValueOrNull(record.GetOrdinal(name));
         }
@@ -812,7 +812,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Object GetValueOrNull(this IDataRecord record, int i)
+        public static object GetValueOrNull(this IDataRecord record, int i)
         {
             return record.IsDBNull(i) ? null : record.GetValue(i);
         }
@@ -878,7 +878,7 @@ namespace BassUtils.Data
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
         public static Guid? GetNullableGuid(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Guid?) : record.GetGuid(i);
+            return record.IsDBNull(i) ? (Guid?)null : record.GetGuid(i);
         }
 
         /// <summary>
@@ -890,7 +890,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .Net Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean GetBooleanExtended(this IDataRecord record, int i)
+        public static bool GetBooleanExtended(this IDataRecord record, int i)
         {
             return Conv.ToBoolean(record.GetValue(i));
         }
@@ -903,7 +903,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean GetBooleanExtended(this IDataRecord record, string name)
+        public static bool GetBooleanExtended(this IDataRecord record, string name)
         {
             return record.GetBooleanExtended(record.GetOrdinal(name));
         }
@@ -918,7 +918,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean GetBooleanExtended(this IDataRecord record, int i, bool defaultIfNull)
+        public static bool GetBooleanExtended(this IDataRecord record, int i, bool defaultIfNull)
         {
             return record.IsDBNull(i) ? defaultIfNull : record.GetBooleanExtended(i);
         }
@@ -932,7 +932,7 @@ namespace BassUtils.Data
         /// <param name="defaultIfNull">The value to return if the value of the column is null.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean GetBooleanExtended(this IDataRecord record, string name, bool defaultIfNull)
+        public static bool GetBooleanExtended(this IDataRecord record, string name, bool defaultIfNull)
         {
             return record.GetBooleanExtended(record.GetOrdinal(name), defaultIfNull);
         }
@@ -946,9 +946,9 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean? GetNullableBooleanExtended(this IDataRecord record, int i)
+        public static bool? GetNullableBooleanExtended(this IDataRecord record, int i)
         {
-            return record.IsDBNull(i) ? default(Boolean?) : record.GetBooleanExtended(i);
+            return record.IsDBNull(i) ? (bool?)null : record.GetBooleanExtended(i);
         }
 
         /// <summary>
@@ -959,7 +959,7 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static Boolean? GetNullableBooleanExtended(this IDataRecord record, string name)
+        public static bool? GetNullableBooleanExtended(this IDataRecord record, string name)
         {
             return record.GetNullableBooleanExtended(record.GetOrdinal(name));
         }
@@ -1036,7 +1036,7 @@ namespace BassUtils.Data
         public static T? GetNullableEnum<T>(this IDataRecord record, int i)
              where T : struct
         {
-            return record.IsDBNull(i) ? default(T?) : record.GetEnum<T>(i);
+            return record.IsDBNull(i) ? (T?)null : record.GetEnum<T>(i);
         }
 
         /// <summary>
