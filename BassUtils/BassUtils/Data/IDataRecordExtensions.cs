@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
-using System.Reflection;
 using Dawn;
 
 namespace BassUtils.Data
@@ -23,53 +21,6 @@ namespace BassUtils.Data
     /// </summary>
     public static class IDataRecordExtensions
     {
-        /// <summary>
-        /// Attempt to create an object of type T and initialise it using an IDataRecord.
-        /// The method looks for an instance constructor that takes an IDataRecord. If none
-        /// is found it looks for a static method on the class that takes an IDataRecord and
-        /// returns an object of type T, and assumes that this is a factory method.
-        /// If this lookup fails, an exception is thrown.
-        /// </summary>
-        /// <typeparam name="T">The type of object to create.</typeparam>
-        /// <param name="record">The data record.</param>
-        /// <returns>A new object of type T.</returns>
-        public static T Hydrate<T>(this IDataRecord record)
-        {
-            Guard.Argument(record, nameof(record)).NotNull();
-
-            Type theType = typeof(T);
-
-            // Look for an instance constructor on T that takes just an IDataRecord.
-            var instanceConstructor = (from ci in theType.GetConstructors()
-                                       where ci.GetParameters().Count() == 1
-                                         && ci.GetParameters()[0].ParameterType == typeof(IDataRecord)
-                                       select ci).FirstOrDefault();
-
-            if (instanceConstructor != null)
-            {
-                return (T)instanceConstructor.Invoke(new object[] { record });
-            }
-
-
-            // Look for a static factory method on T that takes just an IDataRecord
-            // and returns an instance of T.
-            var factoryMethod = (from fm in theType.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                                 where fm.GetParameters().Count() == 1
-                                    && fm.GetParameters()[0].ParameterType == typeof(IDataRecord)
-                                    && fm.ReturnType.IsAssignableFrom(theType)
-                                 select fm).FirstOrDefault();
-
-            if (factoryMethod != null)
-            {
-                return (T)factoryMethod.Invoke(null, new object[] { record });
-            }
-
-            // TODO: Look for an instance constructor that takes no params
-            // and then initialise the public settable properties and fields.
-
-            throw new InvalidConstraintException("Could not find an instance constructor or static factory method that takes just an IDataRecord.");
-        }
-
         /// <summary>
         /// Create a new object of type T using the specified delegate.
         /// </summary>

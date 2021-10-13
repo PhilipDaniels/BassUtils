@@ -14,21 +14,6 @@ namespace BassUtils.Data
     {
         /// <summary>
         /// Create an object of the specified type for every row in the DataReader.
-        /// </summary>
-        /// <typeparam name="T">The type of object to create.</typeparam>
-        /// <param name="reader">The data reader to iterate.</param>
-        /// <returns>An enumerable of objects of the specified type.</returns>
-        public static IEnumerable<T> HydrateAll<T>(this IDataReader reader)
-        {
-            Guard.Argument(reader, nameof(reader)).NotNull();
-
-            return (from r in reader.CurrentRecords()
-                    let rec = r as IDataRecord
-                    select rec.Hydrate<T>()).AsEnumerable();
-        }
-
-        /// <summary>
-        /// Create an object of the specified type for every row in the DataReader.
         /// A delegate is asked to do the actual object construction.
         /// </summary>
         /// <typeparam name="T">The type of object to create.</typeparam>

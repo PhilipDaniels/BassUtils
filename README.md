@@ -26,6 +26,8 @@ Low-level utility functions for use in any .Net Standard 2.0 project.
 - Partition and DistinctBy methods - use [MoreLinq](https://www.nuget.org/packages/morelinq/).
 - ConfigurationLoader, DoubleExtensions, ExpandoExtensions, PredicateBuilder, PropertyCopier, TableAdapterBase,
   ThrottledBlockingQueue, XmlWriterExtensions have been removed.
+- Removed the Hydate and HydrateAll functions that use reflection to guess a ctor to call. Use the
+  overloads that take a lambda instead, they are more predictable.
 
 #### [3.1.0]
 ###### Fixed
