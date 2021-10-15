@@ -16,7 +16,8 @@ Low-level utility functions for use in any .Net Standard 2.0 project.
   This means that BassUtils now has a dependency on the Microsoft.Data.SqlClient package.
 - CSV has been changed to 'Csv' for compliance with Microsoft recommended naming standards.
 - GetLeadingNumber and GetTrailingNumber have had their APIs change, and they now work!
-- Regularzie naming in IDataRecordExtensions: GetSingle becomes GetFloat, GetStringOrNull becomes GetNullableString.
+- Regularzie naming in IDataRecordExtensions: GetSingle becomes GetFloat, GetStringOrNull
+  becomes GetNullableString, GetValueOrNull becomes GetNullableValue.
 
 ###### Removed
 - Various utilities have been removed due to better alternatives now becoming available in the community

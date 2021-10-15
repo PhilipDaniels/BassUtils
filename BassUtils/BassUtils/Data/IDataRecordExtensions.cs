@@ -799,9 +799,9 @@ namespace BassUtils.Data
         /// <param name="name">The name of the column.</param>
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static object GetValueOrNull(this IDataRecord record, string name)
+        public static object GetNullableValue(this IDataRecord record, string name)
         {
-            return record.GetValueOrNull(record.GetOrdinal(name));
+            return record.GetNullableValue(record.GetOrdinal(name));
         }
 
         /// <summary>
@@ -812,7 +812,7 @@ namespace BassUtils.Data
         /// <returns>The value of the column.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "i", Justification = "Consistent with .NET Framework."),
         System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Unnecessary overhead.")]
-        public static object GetValueOrNull(this IDataRecord record, int i)
+        public static object GetNullableValue(this IDataRecord record, int i)
         {
             return record.IsDBNull(i) ? null : record.GetValue(i);
         }
