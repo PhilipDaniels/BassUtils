@@ -20,6 +20,14 @@
 	  <PackageIcon>bass-clef-128.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\Icons\bass-clef-128.png" Link="bass-clef-128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </Content>
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Dawn.Guard" Version="1.12.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
@@ -29,9 +37,5 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-	  <None Include="Icons\bass-clef-128.png">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
 	</ItemGroup>
 </Project>
