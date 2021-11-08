@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Builder;
 
 namespace BassUtils.NetCore
 {
+    /// <summary>
+    /// Extensions for <c>IApplicationBuilder</c>.
+    /// </summary>
     public static class IApplicationBuilderExtensions
     {
         /// <summary>

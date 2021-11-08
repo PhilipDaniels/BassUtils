@@ -2,6 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DebugType>embedded</DebugType>
+    <EmbedAllSources>true</EmbedAllSources>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>4.1.0</Version>
+    <Authors>Philip Daniels</Authors>
+    <Company>Philip Daniels</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Useful extension methods for .Net Core 3.1 and above.</Description>
+    <RepositoryUrl>https://github.com/PhilipDaniels/BassUtils</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/PhilipDaniels/BassUtils</PackageProjectUrl>
+    <Copyright>Philip Daniels</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>
+      2021-11-08 Add BassUtils.NetCore package.
+    </PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,4 +31,6 @@
     <ProjectReference Include="..\BassUtils\BassUtils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+  </ItemGroup>
 </Project>

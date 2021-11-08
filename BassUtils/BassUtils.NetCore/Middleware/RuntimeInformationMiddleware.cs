@@ -9,22 +9,36 @@ namespace BassUtils.NetCore.Middleware
     /// <summary>
     /// A middleware to serve information about the current domain and loaded assemblies
     /// at the '/runtimeinfo' endpoint. It can serve as HTML or JSON.
+    /// See https://stevetalkscode.co.uk/middleware-styles
     /// </summary>
     public class RuntimeInformationMiddleware
     {
-        static readonly PathString _pathString = new PathString("/runtimeinfo");
-        readonly RequestDelegate _next;
+        /// <summary>
+        /// URL to check against. This must be set before you register the middleware!
+        /// In other words, it is a one-time initialisation.
+        /// </summary>
+        public static string Url { get; set; }
 
-        public RuntimeInformationMiddleware(RequestDelegate next)
+        readonly RequestDelegate nextRequestDelegate;
+
+        /// <summary>
+        /// Construct a new instance of the middleware.
+        /// </summary>
+        /// <param name="nextRequestDelegate">Middleware delegate - the next in the chain.</param>
+        public RuntimeInformationMiddleware(RequestDelegate nextRequestDelegate)
         {
-            _next = next;
+            this.nextRequestDelegate = nextRequestDelegate;
         }
 
+        /// <summary>
+        /// Invoke the middleware.
+        /// </summary>
+        /// <param name="httpContext">Http context to invoke within.</param>
         public async Task Invoke(HttpContext httpContext)
         {
             httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
 
-            if (httpContext.Request.Path == _pathString)
+            if (httpContext.Request.Path == new PathString(Url))
             {
                 var info = new RuntimeInformation();
 
@@ -44,7 +58,7 @@ namespace BassUtils.NetCore.Middleware
             }
 
             // Not us, pass request to next in chain.
-            await _next.Invoke(httpContext);
+            await nextRequestDelegate.Invoke(httpContext);
         }
     }
 }
