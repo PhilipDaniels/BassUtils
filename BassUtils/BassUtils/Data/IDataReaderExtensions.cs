@@ -14,6 +14,19 @@ namespace BassUtils.Data
     public static class IDataReaderExtensions
     {
         /// <summary>
+        /// Calls <c>Read</c> on the <paramref name="rdr"/> and throws
+        /// an exception if it returns false - so this method will either
+        /// throw or position you on the first record.
+        /// </summary>
+        public static void ReadOne(this IDataReader rdr)
+        {
+            if (!rdr.Read())
+            {
+                throw new Exception("No rows returned in " + nameof(ReadOne) + "()");
+            }
+        }
+
+        /// <summary>
         /// Create an object of the specified type for every row in the DataReader.
         /// A delegate is asked to do the actual object construction.
         /// </summary>
