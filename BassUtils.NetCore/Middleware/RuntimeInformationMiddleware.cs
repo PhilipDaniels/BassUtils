@@ -90,6 +90,29 @@ namespace BassUtils.NetCore.Middleware
                                 h1 {
                                     color: DodgerBlue;
                                 }
+                                table {
+                                    border-collapse: collapse;
+                                    margin: 25px 0;
+                                    font-size: 0.9em;
+                                    font-family: sans-serif;
+                                    min-width: 400px;
+                                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                                }
+                                table thead tr {
+                                    background-color: black;
+                                    color: white;
+                                    text-align: left;
+                                }
+                                table th, table td {
+                                    padding: 3px;
+                                }
+                                table tbody tr:nth-of-type(even) {
+                                    background-color: lightgrey;
+                                }
+                                table tbody tr:active-row {
+                                    font-weight: bold;
+                                    color: #009879;
+                                }
                               </style>
                             </head>");
 
