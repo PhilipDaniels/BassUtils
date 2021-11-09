@@ -109,9 +109,9 @@ namespace BassUtils.NetCore.Middleware
                                 table tbody tr:nth-of-type(even) {
                                     background-color: lightgrey;
                                 }
-                                table tbody tr:active-row {
-                                    font-weight: bold;
-                                    color: #009879;
+                                .left-table td:nth-child(1) {
+                                    background-color: black;
+                                    color: white;
                                 }
                               </style>
                             </head>");
@@ -208,9 +208,9 @@ namespace BassUtils.NetCore.Middleware
             sb.AppendLine("    <th>Informational Version</th>");
             sb.AppendLine("    <th>Configuration</th>");
             sb.AppendLine("    <th>Framework Name</th>");
-            sb.AppendLine("    <th>Full Name</th>");
             sb.AppendLine("    <th>Location </th>");
             sb.AppendLine("    <th>Meta Data</th>");
+            sb.AppendLine("    <th>Full Name</th>");
             sb.AppendLine("  </tr>");
             sb.AppendLine("</thead>");
         }
@@ -224,11 +224,10 @@ namespace BassUtils.NetCore.Middleware
             sb.AppendFormat("    <td>{0}</td>\n", info.InformationalVersion);
             sb.AppendFormat("    <td>{0}</td>\n", info.Configuration);
             sb.AppendFormat("    <td>{0}</td>\n", info.FrameworkName);
-            sb.AppendFormat("    <td>{0}</td>\n", info.FullName);
             sb.AppendFormat("    <td>{0}</td>\n", info.Location);
             sb.AppendFormat("    <td>{0}</td>\n", string.Join(" ", info.MetaData));
+            sb.AppendFormat("    <td>{0}</td>\n", info.FullName);
             sb.AppendLine("  </tr>");
         }
-
     }
 }
