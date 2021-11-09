@@ -12,6 +12,11 @@ namespace BassUtils.Runtime
     public class RuntimeInformation
     {
         /// <summary>
+        /// Server name.
+        /// </summary>
+        public string ServerName { get; set; }
+
+        /// <summary>
         /// Current UTC server time.
         /// </summary>
         public DateTime CurrentServerTimeUtc { get; private set; }
@@ -42,6 +47,7 @@ namespace BassUtils.Runtime
         /// </summary>
         public RuntimeInformation()
         {
+            ServerName = Environment.MachineName;
             CurrentServerTimeUtc = DateTime.UtcNow;
             CurrentServerTimeLocal = DateTime.Now;
             CurrentDomainInfo = new AppDomainRuntimeInformation();

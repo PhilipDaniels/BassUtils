@@ -10,11 +10,13 @@ namespace BassUtils.NetCore
     {
         /// <summary>
         /// Installs the runtime info middleware, which makes a diagnostics report
-        /// available in HTML and JSON at "/runtimeinfo".
+        /// available in HTML and JSON. The path defaults to "/runtimeinfo".
         /// </summary>
-        public static IApplicationBuilder UseRuntimeInfo(this IApplicationBuilder app)
+        /// <param name="app">The app builder.</param>
+        /// <param name="path">URL to expose the runtime information on.</param>
+        public static IApplicationBuilder UseRuntimeInfo(this IApplicationBuilder app, string path = "/runtimeinfo")
         {
-            return app.UseMiddleware<RuntimeInformationMiddleware>();
+            return app.UseMiddleware<RuntimeInformationMiddleware>(path);
         }
     }
 }

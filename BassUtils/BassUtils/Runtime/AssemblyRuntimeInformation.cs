@@ -9,9 +9,14 @@ namespace BassUtils.Runtime
     /// <summary>
     /// Specifies information about assemblies loaded at runtime.
     /// </summary>
-    [DebuggerDisplay("{FullName}")]
+    [DebuggerDisplay("{ShortName}")]
     public class AssemblyRuntimeInformation
     {
+        /// <summary>
+        /// Shortname of the assembly.
+        /// </summary>
+        public string ShortName { get; private set; }
+
         /// <summary>
         /// The fullname of the assembly.
         /// </summary>
@@ -57,9 +62,24 @@ namespace BassUtils.Runtime
         {
             try
             {
-                FullName = asm.FullName;
-                Location = asm.Location;
+                ShortName = asm.GetName().Name;
+            }
+            catch { }
 
+            try
+            {
+                FullName = asm.FullName;
+            }
+            catch { }
+
+            try
+            {
+                Location = asm.Location;
+            }
+            catch { }
+
+            try
+            {
                 var ava = asm.GetCustomAttribute<AssemblyVersionAttribute>();
                 if (ava != null)
                 {
@@ -72,34 +92,54 @@ namespace BassUtils.Runtime
                         Version = asm.GetName().Version.ToString();
                     }
                 }
+            }
+            catch { }
 
+            try
+            {
                 var afva = asm.GetCustomAttribute<AssemblyFileVersionAttribute>();
                 if (afva != null)
                 {
                     FileVersion = afva.Version;
                 }
+            }
+            catch { }
 
+            try
+            {
                 var aiva = asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
                 if (aiva != null)
                 {
                     InformationalVersion = aiva.InformationalVersion;
                 }
+            }
+            catch { }
 
+            try
+            {
                 var aca = asm.GetCustomAttribute<AssemblyConfigurationAttribute>();
                 if (aca != null)
                 {
                     Configuration = aca.Configuration;
                 }
+            }
+            catch { }
 
+            try
+            {
                 var tfa = asm.GetCustomAttribute<TargetFrameworkAttribute>();
                 if (tfa != null)
                 {
                     FrameworkName = tfa.FrameworkName;
                 }
+            }
+            catch { }
 
+            try
+            {
                 MetaData = asm.GetCustomAttributes<AssemblyMetadataAttribute>()
-                    .Select(ma => $"{ma.Key}={ma.Value}")
-                    .OrderBy(s => s)
+                    .OrderBy(mda => mda.Key)
+                    .Select(mda => $"{mda.Key}={mda.Value}")
                     .ToList();
             }
             catch { }

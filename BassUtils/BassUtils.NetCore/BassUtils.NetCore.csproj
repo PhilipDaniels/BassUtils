@@ -5,7 +5,7 @@
     <DebugType>embedded</DebugType>
     <EmbedAllSources>true</EmbedAllSources>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>4.1.0</Version>
+    <Version>4.1.4-alpha</Version>
     <Authors>Philip Daniels</Authors>
     <Company>Philip Daniels</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -15,7 +15,7 @@
     <Copyright>Philip Daniels</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>
-      2021-11-08 Add BassUtils.NetCore package.
+     2021-11-08 Create BassUtils.NetCore package.
     </PackageReleaseNotes>
     <PackageIcon>bass-clef-128.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
