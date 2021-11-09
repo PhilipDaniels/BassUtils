@@ -5,7 +5,6 @@
     <DebugType>embedded</DebugType>
     <EmbedAllSources>true</EmbedAllSources>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>4.1.5-alpha</Version>
     <Authors>Philip Daniels</Authors>
     <Company>Philip Daniels</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -37,10 +36,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\README.md" Link="README.md">
+    <None Include="README.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
