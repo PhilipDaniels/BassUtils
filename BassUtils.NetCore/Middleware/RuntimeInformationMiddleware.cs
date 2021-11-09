@@ -105,6 +105,7 @@ namespace BassUtils.NetCore.Middleware
                                 }
                                 table th, table td {
                                     padding: 3px;
+                                    border: thin;
                                 }
                                 table tbody tr:nth-of-type(even) {
                                     background-color: lightgrey;
@@ -112,6 +113,7 @@ namespace BassUtils.NetCore.Middleware
                                 .left-table td:nth-child(1) {
                                     background-color: black;
                                     color: white;
+                                    text-align: right;
                                 }
                               </style>
                             </head>");
