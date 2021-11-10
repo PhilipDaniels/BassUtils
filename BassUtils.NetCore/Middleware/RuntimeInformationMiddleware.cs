@@ -92,11 +92,11 @@ namespace BassUtils.NetCore.Middleware
                                 }
                                 table {
                                     border-collapse: collapse;
+                                    border: thin solid black;
                                     margin: 25px 0;
                                     font-size: 0.9em;
                                     font-family: sans-serif;
                                     min-width: 400px;
-                                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
                                 }
                                 table thead tr {
                                     background-color: black;
@@ -104,7 +104,7 @@ namespace BassUtils.NetCore.Middleware
                                     text-align: left;
                                 }
                                 table th, table td {
-                                    padding: 3px;
+                                    padding: 4px;
                                     border-left: thin solid black;
                                     border-right: thin solid black;
                                 }

@@ -35,4 +35,11 @@
 		<PackageReference Include="Dawn.Guard" Version="1.12.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="3.0.1" />
 	</ItemGroup>
+
+  <Target Name="CopyPackage" AfterTargets="Pack" Condition="'$(LocalNuGetDir)' != ''">
+    <Message Importance="high" Text="Copying $(OutputPath)..\$(PackageId).$(PackageVersion).nupkg to $(LocalNuGetDir)" />
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"
+          DestinationFolder="$(LocalNuGetDir)"
+           OverwriteReadOnlyFiles="true"/>
+  </Target>
 </Project>
