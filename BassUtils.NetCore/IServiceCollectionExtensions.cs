@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Dawn;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -27,14 +28,45 @@ namespace BassUtils.NetCore
         public static IServiceCollection AddConfigurationModel<T>(this IServiceCollection services, IConfiguration configuration, string sectionName = null)
             where T : class, new()
         {
+            Guard.Argument(services, nameof(services)).NotNull();
+            Guard.Argument(configuration, nameof(configuration)).NotNull();
+
             sectionName = sectionName ?? typeof(T).Name;
             var section = configuration.GetSection(sectionName);
+
             var model = new T();
 
             new ConfigureFromConfigurationOptions<T>(section)
                 .Configure(model);
 
             Validate(model, sectionName);
+
+            services.AddSingleton(model);
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds an instance of a strongly-typed configuration model to the <paramref name="services"/> as
+        /// a singleton. If the model has data annotations they will be checked an an exception thrown
+        /// if the model is invalid.
+        /// </summary>
+        /// <typeparam name="T">Type of the configuration model.</typeparam>
+        /// <param name="services">The service collection to add a model instance to.</param>
+        /// <param name="section">Configuration section object.</param>
+        /// <returns>Service collection, for further configuration.</returns>
+        public static IServiceCollection AddConfigurationModel<T>(this IServiceCollection services, IConfigurationSection section)
+            where T : class, new()
+        {
+            Guard.Argument(services, nameof(services)).NotNull();
+            Guard.Argument(section, nameof(section)).NotNull();
+
+            var model = new T();
+
+            new ConfigureFromConfigurationOptions<T>(section)
+                .Configure(model);
+
+            Validate(model, typeof(T).Name);
 
             services.AddSingleton(model);
 

@@ -16,12 +16,6 @@ namespace BassUtils.NetCore.Middleware
     /// </summary>
     public class RuntimeInformationMiddleware
     {
-        /// <summary>
-        /// URL to check against. This must be set before you register the middleware!
-        /// In other words, it is a one-time initialisation.
-        /// </summary>
-        //public static string Url { get; set; }
-
         readonly RequestDelegate nextRequestDelegate;
         readonly PathString path;
 
