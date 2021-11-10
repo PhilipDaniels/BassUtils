@@ -105,7 +105,8 @@ namespace BassUtils.NetCore.Middleware
                                 }
                                 table th, table td {
                                     padding: 3px;
-                                    border: thin;
+                                    border-left: thin solid black;
+                                    border-right: thin solid black;
                                 }
                                 table tbody tr:nth-of-type(even) {
                                     background-color: lightgrey;
