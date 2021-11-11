@@ -1,22 +1,20 @@
 # BassUtils
 Low-level utility functions for use in any .Net Standard 2.0 project.
+Available on [NuGet](https://www.nuget.org/packages/BassUtils/)
 
 # BassUtils.NetCore
 Low-level utility functions for use in any .Net Core 3.1 and later project.
+Available on [NuGet](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # Change History
 
 
 #### [4.1.0]
 
-###### Added (BassUtils)
-- Added IDataReader.ReadOne() method.
+###### Added
+- Added `IDataReader.ReadOne`, `HydrateOne` and `TryHydrateOne` methods.
 - Added RuntimeInformation classes.
-
-###### Added (BassUtils.NetCore)
-- Added BassUtils.NetCore downstream library.
-
-
+- Added BassUtils.NetCore downstream library
 
 #### [4.0.0]
 

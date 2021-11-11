@@ -14,7 +14,7 @@
 	  <Copyright>Philip Daniels</Copyright>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReleaseNotes>
-      2021-11-08 Add BassUtils.NetCore package.
+2021-11-08 Add BassUtils.NetCore package.
 2021-11-04 Convert to .Net Standard 2.0. See README.md.</PackageReleaseNotes>
 	  <PackageIcon>bass-clef-128.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
