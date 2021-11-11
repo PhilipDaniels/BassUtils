@@ -14,16 +14,77 @@ namespace BassUtils.Data
     public static class IDataReaderExtensions
     {
         /// <summary>
-        /// Calls <c>Read</c> on the <paramref name="rdr"/> and throws
+        /// Calls <c>Read</c> on the <paramref name="reader"/> and throws
         /// an exception if it returns false - so this method will either
         /// throw or position you on the first record.
         /// </summary>
-        public static void ReadOne(this IDataReader rdr)
+        public static void ReadOne(this IDataReader reader)
         {
-            if (!rdr.Read())
+            if (!reader.Read())
             {
                 throw new Exception("No rows returned in " + nameof(ReadOne) + "()");
             }
+        }
+
+        /// <summary>
+        /// Hydrates a single object from the <paramref name="reader"/>. If 0 or more than
+        /// 1 rows are returned by the reader then an exception is thrown.
+        /// </summary>
+        /// <typeparam name="T">The type of object to create.</typeparam>
+        /// <param name="reader">The data reader to iterate.</param>
+        /// <param name="hydrationFunction">A delegate that can construct objects of type T.</param>
+        /// <returns>A single object of the specified type.</returns>
+        public static T HydrateOne<T>(this IDataReader reader, Func<IDataRecord, T> hydrationFunction)
+        {
+            Guard.Argument(reader, nameof(reader)).NotNull();
+            Guard.Argument(hydrationFunction, nameof(hydrationFunction)).NotNull();
+
+            if (!reader.Read())
+            {
+                throw new Exception("No rows returned in " + nameof(HydrateOne) + "()");
+            }
+
+            var value = hydrationFunction(reader);
+
+            if (reader.Read())
+            {
+                throw new Exception("More than 1 row returned in " + nameof(HydrateOne) + "()");
+            }
+
+            return value;
+        }
+
+        /// <summary>
+        /// Hydrates a single object from the <paramref name="reader"/>. If 0 rows are returned
+        /// by the reader then false is returned and the out parameter is unspecified.
+        /// If more than 1 rows are returned by the reader then an exception is thrown.
+        /// </summary>
+        /// <typeparam name="T">The type of object to create.</typeparam>
+        /// <param name="reader">The data reader to iterate.</param>
+        /// <param name="hydrationFunction">A delegate that can construct objects of type T.</param>
+        /// <param name="value">An object of the specified type.</param>
+        /// <returns>True if exactly one object could be hydrated, false otherwise.</returns>
+        public static bool TryHydrateOne<T>(this IDataReader reader, Func<IDataRecord, T> hydrationFunction, out T value)
+        {
+            Guard.Argument(reader, nameof(reader)).NotNull();
+            Guard.Argument(hydrationFunction, nameof(hydrationFunction)).NotNull();
+
+            value = default;
+
+            if (!reader.Read())
+            {
+                return false;
+            }
+
+            var temp_value = hydrationFunction(reader);
+
+            if (reader.Read())
+            {
+                throw new Exception("More than 1 row returned in " + nameof(TryHydrateOne) + "()");
+            }
+
+            value = temp_value;
+            return true;
         }
 
         /// <summary>
