@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -24,11 +26,12 @@ namespace BassUtils.Data
     /// i.e. use a LINQ query. This is also the way to flatten object graphs.
     /// </summary>
     /// <typeparam name="T">The type of things we are creating a reader over</typeparam>
-    public sealed class ObjectDataReader<T> : IDataReader
+    public sealed class ObjectDataReader<T> : DbDataReader
     {
         static List<Attribute> scalarAttributes;
 
         readonly NullConversion NullConversion;
+        readonly IEnumerable<T> Collection;
         readonly IEnumerator<T> Enumerator;
         readonly List<Attribute> Attributes;
         T current;
@@ -161,6 +164,7 @@ namespace BassUtils.Data
             Guard.Argument(collection, nameof(collection)).NotNull();
 
             this.NullConversion = nullConversion;
+            this.Collection = collection;
             this.Enumerator = collection.GetEnumerator();
 
             // Done without a lock, so we risk running twice.
@@ -273,7 +277,7 @@ namespace BassUtils.Data
         /// System.Data.IDataReader.
         /// </summary>
         /// <returns>A System.Data.DataTable that describes the column metadata.</returns>
-        public DataTable GetSchemaTable()
+        public override DataTable GetSchemaTable()
         {
             using (DataSet ds = new DataSet())
             {
@@ -309,7 +313,7 @@ namespace BassUtils.Data
         /// <summary>
         /// Closes the data reader.
         /// </summary>
-        public void Close()
+        public override void Close()
         {
             closed = true;
         }
@@ -317,7 +321,7 @@ namespace BassUtils.Data
         /// <summary>
         /// Always returns 1.
         /// </summary>
-        public int Depth
+        public override int Depth
         {
             get { return 1; }
         }
@@ -325,7 +329,7 @@ namespace BassUtils.Data
         /// <summary>
         /// Returns true if the reader is closed.
         /// </summary>
-        public bool IsClosed
+        public override bool IsClosed
         {
             get { return closed; }
         }
@@ -334,7 +338,7 @@ namespace BassUtils.Data
         /// Always returns false, the ObjectDataReader only supports one recordset at a time.
         /// </summary>
         /// <returns>False.</returns>
-        public bool NextResult()
+        public override bool NextResult()
         {
             return false;
         }
@@ -343,7 +347,7 @@ namespace BassUtils.Data
         /// Advances the data reader to the next record.
         /// </summary>
         /// <returns>True if there are more rows; false otherwise.</returns>
-        public bool Read()
+        public override bool Read()
         {
             if (IsClosed)
                 throw new InvalidOperationException("You cannot called Read() on a data reader that is closed.");
@@ -367,23 +371,25 @@ namespace BassUtils.Data
         /// <summary>
         /// Always returns -1.
         /// </summary>
-        public int RecordsAffected
+        public override int RecordsAffected
         {
             get { return -1; }
         }
 
+        /*
         /// <summary>
         /// Disposes the data reader.
         /// </summary>
         public void Dispose()
         {
         }
+        */
 
         /// <summary>
         /// Gets the number of columns in the current row.
         /// </summary>
         /// <returns>Number of columns.</returns>
-        public int FieldCount
+        public override int FieldCount
         {
             get
             {
@@ -405,11 +411,31 @@ namespace BassUtils.Data
         }
 
         /// <summary>
+        /// Returns true if the reader has rows.
+        /// </summary>
+        public override bool HasRows
+        {
+            get
+            {
+                return Collection.Any();
+            }
+        }
+
+        /// <summary>
+        /// Returns the enumerator  for the reader.
+        /// </summary>
+        /// <returns>The enumerator.</returns>
+        public override IEnumerator GetEnumerator()
+        {
+            return Enumerator;
+        }
+
+        /// <summary>
         /// Gets the boolean at column ordinal i.
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Boolean value.</returns>
-        public bool GetBoolean(int i)
+        public override bool GetBoolean(int i)
         {
             return GetValue<bool>(i);
         }
@@ -419,7 +445,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Byte value.</returns>
-        public byte GetByte(int i)
+        public override byte GetByte(int i)
         {
             return GetValue<byte>(i);
         }
@@ -434,7 +460,7 @@ namespace BassUtils.Data
         /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
         /// <param name="length">The number of bytes to read.</param>
         /// <returns>The actual number of bytes read.</returns>
-        public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
+        public override long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
         {
             var buf = GetValue<byte[]>(i);
             int bytes = Math.Min(length, buf.Length - (int)fieldOffset);
@@ -447,7 +473,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Char value.</returns>
-        public char GetChar(int i)
+        public override char GetChar(int i)
         {
             return GetValue<char>(i);
         }
@@ -462,7 +488,7 @@ namespace BassUtils.Data
         /// <param name="bufferoffset">The index for buffer to start the read operation.</param>
         /// <param name="length">The number of bytes to read.</param>
         /// <returns>The actual number of characters read.</returns>
-        public long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
+        public override long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
         {
             string s = GetValue<string>(i);
             int chars = Math.Min(length, s.Length - (int)fieldoffset);
@@ -476,7 +502,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Never, always throws.</returns>
-        public IDataReader GetData(int i)
+        public new IDataReader GetData(int i)
         {
             throw new NotImplementedException();
         }
@@ -486,7 +512,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>The data type information for the specified field.</returns>
-        public string GetDataTypeName(int i)
+        public override string GetDataTypeName(int i)
         {
             return Attributes[i].Type.Name;
         }
@@ -496,7 +522,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>DateTime value.</returns>
-        public DateTime GetDateTime(int i)
+        public override DateTime GetDateTime(int i)
         {
             return GetValue<DateTime>(i);
         }
@@ -506,7 +532,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Decimal value.</returns>
-        public decimal GetDecimal(int i)
+        public override decimal GetDecimal(int i)
         {
             return GetValue<decimal>(i);
         }
@@ -516,7 +542,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Double value.</returns>
-        public double GetDouble(int i)
+        public override double GetDouble(int i)
         {
             return GetValue<double>(i);
         }
@@ -529,7 +555,7 @@ namespace BassUtils.Data
         /// <returns>The System.Type information corresponding to the type of System.Object that
         /// would be returned from System.Data.IDataRecord.GetValue(System.Int32).
         /// </returns>
-        public Type GetFieldType(int i)
+        public override Type GetFieldType(int i)
         {
             Type t = Attributes[i].Type;
 
@@ -546,7 +572,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Float value.</returns>
-        public float GetFloat(int i)
+        public override float GetFloat(int i)
         {
             return GetValue<float>(i);
         }
@@ -556,7 +582,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Guid value.</returns>
-        public Guid GetGuid(int i)
+        public override Guid GetGuid(int i)
         {
             return GetValue<Guid>(i);
         }
@@ -566,7 +592,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Int16 (short) value.</returns>
-        public short GetInt16(int i)
+        public override short GetInt16(int i)
         {
             return GetValue<short>(i);
         }
@@ -576,7 +602,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Int32 value.</returns>
-        public int GetInt32(int i)
+        public override int GetInt32(int i)
         {
             return GetValue<int>(i);
         }
@@ -586,7 +612,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Int64 value.</returns>
-        public long GetInt64(int i)
+        public override long GetInt64(int i)
         {
             return GetValue<long>(i);
         }
@@ -596,7 +622,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Name of the field.</returns>
-        public string GetName(int i)
+        public override string GetName(int i)
         {
             Attribute a = Attributes[i];
             return a.Name;
@@ -607,7 +633,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="name">Name of the column.</param>
         /// <returns>Corresponding column ordinal.</returns>
-        public int GetOrdinal(string name)
+        public override int GetOrdinal(string name)
         {
             for (int i = 0; i < Attributes.Count; i++)
             {
@@ -624,7 +650,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>String value.</returns>
-        public string GetString(int i)
+        public override string GetString(int i)
         {
             return GetValue<string>(i);
         }
@@ -634,7 +660,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Value from column i.</returns>
-        public object GetValue(int i)
+        public override object GetValue(int i)
         {
             object o = GetValue<object>(i);
             if (NullConversion == NullConversion.ToDBNull && o == null)
@@ -648,7 +674,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="values">An array of System.Object to copy the attribute fields into.</param>
         /// <returns>The number of instances of System.Object in the array.</returns>
-        public int GetValues(object[] values)
+        public override int GetValues(object[] values)
         {
             Guard.Argument(values, nameof(values)).NotNull();
 
@@ -675,7 +701,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>True if the field is DbNull, false otherwise.</returns>
-        public bool IsDBNull(int i)
+        public override bool IsDBNull(int i)
         {
             object o = GetValue<object>(i);
             return (o == null);
@@ -686,7 +712,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="name">Name of the field.</param>
         /// <returns>Value from the column.</returns>
-        public object this[string name]
+        public override object this[string name]
         {
             get
             {
@@ -700,7 +726,7 @@ namespace BassUtils.Data
         /// </summary>
         /// <param name="i">The zero-based column ordinal.</param>
         /// <returns>Value from column i.</returns>
-        public object this[int i]
+        public override object this[int i]
         {
             get { return GetValue(i); }
         }
