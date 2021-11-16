@@ -691,6 +691,9 @@ namespace BassUtils.Data
 
         /// <summary>
         /// Gets the value of the specified column as a <see cref="String"/>.
+        /// Like the standard <c>GetString(int)</c> method, this method will throw an exception
+        /// if the column is DBNull. If the column can be null, either use the overload which
+        /// allows you to specify a default, or use <seealso cref="GetNullableString(IDataRecord, string)"/>
         /// </summary>
         /// <param name="record">The data record.</param>
         /// <param name="name">The name of the column.</param>
