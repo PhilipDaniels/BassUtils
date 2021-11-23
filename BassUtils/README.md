@@ -13,8 +13,14 @@ Available on [NuGet](https://www.nuget.org/packages/BassUtils.NetCore)
 
 ###### Added
 - Added `IDataReader.ReadOne`, `HydrateOne` and `TryHydrateOne` methods.
+- Added `SqlDataRecord` extensions for use with MS-SQL TVPs.
 - Added RuntimeInformation classes.
 - Added BassUtils.NetCore downstream library
+
+###### Changed
+- `ObjectDataReader` now inherits from `DbDataReader`. Previously it just implemented
+  the interface `IDataReader`, which caused type conversion problems in some advanced
+  scenarios.
 
 #### [4.0.0]
 
