@@ -9,7 +9,7 @@ Available on [NuGet](https://www.nuget.org/packages/BassUtils.NetCore)
 # Change History
 
 
-#### [4.1.0]
+#### [4.1.12]
 
 ###### Added
 - Added `IDataReader.ReadOne`, `HydrateOne` and `TryHydrateOne` methods.

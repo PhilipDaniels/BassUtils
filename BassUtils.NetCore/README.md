@@ -8,7 +8,7 @@ Available on [NuGet](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # Change History
 
-#### [4.1.0]
+#### [4.1.12]
 
 ###### Added BassUtils.NetCore
 - Added BassUtils.NetCore library.
