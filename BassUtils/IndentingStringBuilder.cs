@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using Dawn;
 
@@ -11,7 +13,7 @@ namespace BassUtils
     /// that automatically adds indentation when you add a new line. The amount
     /// of indentation is setup upon construction.
     /// </summary>
-    public class IndentingStringBuilder
+    public class IndentingStringBuilder : IDisposable
     {
         const string DefaultIndentation = "    ";
         StringBuilder sb;
@@ -160,10 +162,50 @@ namespace BassUtils
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         int _IndentationLevel;
 
+        int _codeBlockLevel;
+
+        
+
+        /// <summary>
+        /// Begins a code block by writing a "{" and increases the indentation level.
+        /// The code block will be automatically closed when the instance is disposed.
+        /// </summary>
+        /// <returns>Builder for further use. Normally you want to call <c>Dispose</c> on this to
+        /// get automatic outdenting.</returns>
+        public IndentingStringBuilder BeginCodeBlock()
+        {
+            AppendLine("{");
+            _codeBlockLevel += 1;
+            _IndentationLevel += 1;
+            return this;
+        }
+
+        /// <summary>
+        /// Reduce the current indentation level.
+        /// If the builder was writing a code block, writes a terminating "}" after decreasing
+        /// the indentation level.
+        /// </summary>
+        public void Dispose()
+        {
+            bool currentlyInCodeBlock = _codeBlockLevel > 0;
+            if (_IndentationLevel > 0)
+                _IndentationLevel--;
+            if (_codeBlockLevel > 0)
+                _codeBlockLevel--;
+
+            if (currentlyInCodeBlock)
+            {
+                AppendLine("}");
+            }
+        }
+
         /// <summary>
         /// Increases the indentation level by 1.
+        /// Note that <seealso cref="BeginCodeBlock"/> will manage this automatically in
+        /// most circumstances. However, this is useful if you want to manage the indentation
+        /// within a block or other type of formatted text.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The builder, for further use.</returns>
         public IndentingStringBuilder Indent()
         {
             IndentationLevel++;
@@ -172,8 +214,11 @@ namespace BassUtils
 
         /// <summary>
         /// Decreases the indentation level by 1.
+        /// Note that <seealso cref="BeginCodeBlock"/> will manage this automatically in
+        /// most circumstances. However, this is useful if you want to manage the indentation
+        /// within a block or other type of formatted text.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The builder, for further use.</returns>
         public IndentingStringBuilder OutDent()
         {
             IndentationLevel--;
@@ -487,6 +532,43 @@ namespace BassUtils
             AppendIndentationIfNecessary();
             sb.AppendLine(value);
             CurrentLineIsEmpty = true;
+            return this;
+        }
+
+        /// <summary>
+        /// Appends multiple lines, each with the required indentation.
+        /// </summary>
+        /// <param name="values">List of lines to append.</param>
+        /// <returns>A reference to this instance after the append operation has completed.</returns>
+        public IndentingStringBuilder AppendLines(params string[] values)
+        {
+            if (values != null)
+            {
+                AppendLines(values.AsEnumerable());
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Appends multiple lines, each with the required indentation.
+        /// </summary>
+        /// <param name="values">List of lines to append.</param>
+        /// <returns>A reference to this instance after the append operation has completed.</returns>
+        public IndentingStringBuilder AppendLines(IEnumerable<string> values)
+        {
+            if (values != null)
+            {
+                foreach (var value in values)
+                {
+                    AppendIndentationIfNecessary();
+                    sb.AppendLine(value);
+                    CurrentLineIsEmpty = true;
+                }
+
+                CurrentLineIsEmpty = true;
+            }
+
             return this;
         }
 

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
 		<DebugType>embedded</DebugType>
 	  <EmbedAllSources>true</EmbedAllSources>
@@ -38,8 +39,6 @@
 
   <Target Name="CopyPackage" AfterTargets="Pack" Condition="'$(LocalNuGetDir)' != ''">
     <Message Importance="high" Text="Copying $(OutputPath)..\$(PackageId).$(PackageVersion).nupkg to $(LocalNuGetDir)" />
-    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"
-          DestinationFolder="$(LocalNuGetDir)"
-           OverwriteReadOnlyFiles="true"/>
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(LocalNuGetDir)" OverwriteReadOnlyFiles="true" />
   </Target>
 </Project>

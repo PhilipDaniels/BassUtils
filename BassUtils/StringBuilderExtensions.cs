@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Dawn;
 
@@ -170,6 +172,42 @@ namespace BassUtils
             using (var sw = new StringWriter(builder))
             {
                 sw.AppendCsv(options, args);
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends multiple lines, each with the required indentation.
+        /// </summary>
+        /// <param name="builder">The builder to append to.</param>
+        /// <param name="values">List of lines to append.</param>
+        /// <returns>A reference to this instance after the append operation has completed.</returns>
+        public static StringBuilder AppendLines(this StringBuilder builder, params string[] values)
+        {
+            if (values != null)
+            {
+                AppendLines(builder, values.AsEnumerable());
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Appends multiple lines, each with the required indentation.
+        /// </summary>
+        /// <param name="builder">The builder to append to.</param>
+        /// <param name="values">List of lines to append.</param>
+        /// <returns>A reference to this instance after the append operation has completed.</returns>
+        public static StringBuilder AppendLines(this StringBuilder builder, IEnumerable<string> values)
+        {
+            if (values != null)
+            {
+                foreach (var value in values)
+                {
+                    builder.AppendLine(value);
+                }
+
             }
 
             return builder;

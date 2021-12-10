@@ -8,6 +8,11 @@ Available on [NuGet](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # Change History
 
+#### [4.2.0]
+- Added `AppendLines` methods to the StringBuilder extensions and the `IndentingStringBuilder`.
+- Added `BeginCodeBlock` and dispose functionality to `IndentingStringBuilder`.
+- Added Async versions of `ReadOne`, `Hydrate` and `HydrateAll`. These are extensions on
+    `DbDataReader` though, not `IDataReader`, which doesn't provide async methods.
 
 #### [4.1.12]
 
