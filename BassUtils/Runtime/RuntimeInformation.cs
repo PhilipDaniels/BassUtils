@@ -6,25 +6,20 @@ using System.Reflection;
 namespace BassUtils.Runtime
 {
     /// <summary>
-    /// Contains information about the assemblies loaded at runtime into
-    /// the app.
+    /// Contains information about the assemblies loaded into
+    /// the app and other interesting runtime information.
     /// </summary>
     public class RuntimeInformation
     {
         /// <summary>
-        /// Server name.
+        /// Information about the server and environment.
         /// </summary>
-        public string ServerName { get; set; }
+        public ServerRuntimeInformation ServerInfo { get; private set; }
 
         /// <summary>
-        /// Current UTC server time.
+        /// Information about the running process.
         /// </summary>
-        public DateTime CurrentServerTimeUtc { get; private set; }
-
-        /// <summary>
-        /// Current server local time.
-        /// </summary>
-        public DateTime CurrentServerTimeLocal { get; private set; }
+        public ProcessRuntimeInformation ProcessInfo { get; private set; }
 
         /// <summary>
         /// Current domain info.
@@ -47,9 +42,8 @@ namespace BassUtils.Runtime
         /// </summary>
         public RuntimeInformation()
         {
-            ServerName = Environment.MachineName;
-            CurrentServerTimeUtc = DateTime.UtcNow;
-            CurrentServerTimeLocal = DateTime.Now;
+            ServerInfo = new ServerRuntimeInformation();
+            ProcessInfo = new ProcessRuntimeInformation();
             CurrentDomainInfo = new AppDomainRuntimeInformation();
 
             var entryAsm = Assembly.GetEntryAssembly();

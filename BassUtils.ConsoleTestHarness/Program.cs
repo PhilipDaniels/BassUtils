@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using BassUtils.Runtime;
 
 namespace BassUtils.ConsoleTestHarness
 {
@@ -9,6 +10,8 @@ namespace BassUtils.ConsoleTestHarness
     {
         static void Main(string[] args)
         {
+            var ri = new RuntimeInformation();
+
             var options = new DirectoryWatcherOptions()
             {
                 Directory = @"C:\temp",
