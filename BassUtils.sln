@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{AAB1E2F3
 		..\.gitignore = ..\.gitignore
 		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
+		nuke_package.ps1 = nuke_package.ps1
 		README.md = README.md
 		version.json = version.json
 	EndProjectSection
@@ -21,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils.UnitTests", "Bass
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils.NetCore", "BassUtils.NetCore\BassUtils.NetCore.csproj", "{9247692B-7BBC-44AF-87D6-B0F1E6E1229A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils.Oracle", "BassUtils.Oracle\BassUtils.Oracle.csproj", "{CB9F43FA-019A-4C0C-AFD9-1BEE5C6EB351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils.Oracle", "BassUtils.Oracle\BassUtils.Oracle.csproj", "{CB9F43FA-019A-4C0C-AFD9-1BEE5C6EB351}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

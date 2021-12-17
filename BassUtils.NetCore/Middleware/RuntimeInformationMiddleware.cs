@@ -200,7 +200,7 @@ namespace BassUtils.NetCore.Middleware
             sb.AppendLine("</table>");
 
             sb.AppendLine("<div>");
-            sb.AppendLine("See <a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process?view=net-6.0\">System.Diagnostics.Process</a>for the meaning of these fields");
+            sb.AppendLine("See <a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process?view=net-6.0\" target=\"_blank\">System.Diagnostics.Process</a> for the meaning of these fields");
             sb.AppendLine("</div>");
         }
 
