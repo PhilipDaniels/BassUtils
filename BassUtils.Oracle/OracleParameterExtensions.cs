@@ -4,6 +4,9 @@ using Oracle.ManagedDataAccess.Types;
 
 namespace BassUtils.Oracle
 {
+    /// <summary>
+    /// Extensions for the <c>OracleParameter</c> class.
+    /// </summary>
     public static class OracleParameterExtensions
     {
         /// <summary>
@@ -16,6 +19,7 @@ namespace BassUtils.Oracle
         public static OracleDataReader GetDataReader(this OracleParameter prm)
         {
             Guard.Argument(prm, nameof(prm)).NotNull();
+
             return ((OracleRefCursor)prm.Value).GetDataReader();
         }
     }
