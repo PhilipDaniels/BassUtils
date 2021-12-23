@@ -7,10 +7,9 @@ namespace BassUtils.Oracle;
 
 /*
  * TODO
- * - AddUdtObjectParameter (how do we pass a null object?)
- * - AddUdtArrayParameter (passing a null array makes no sense, but how do we pass an array that contains a null object?)
+ * - AddUdtObject (how do we pass a null object?)
+ * - AddUdtArray (passing a null array makes no sense, but how do we pass an array that contains a null object?)
  */
-
 
 /// <summary>
 /// Extensions for the <c>OracleParameterCollection</c> class.
@@ -45,7 +44,7 @@ public static partial class OracleParameterCollectionExtensions
     /// <param name="value">The value of the parameter. Must be a special <c>IOracleCustomType</c> implementation.</param>
     /// <param name="parameterDirection">The direction of the parameter.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddUdtObjectParameter<T>
+    public static OracleParameter AddUdtObject<T>
         (
         this OracleParameterCollection parameterCollection,
         string parameterName,
@@ -82,7 +81,7 @@ public static partial class OracleParameterCollectionExtensions
     /// that is a collection type.</param>
     /// <param name="parameterDirection">The direction of the parameter.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddUdtArrayParameter<T>(
+    public static OracleParameter AddUdtArray<T>(
         this OracleParameterCollection parameterCollection,
         string parameterName,
         string udtTypeName,
@@ -104,4 +103,22 @@ public static partial class OracleParameterCollectionExtensions
         parameterCollection.Add(prm);
         return prm;
     }
+
+    public static OracleParameter AddRefCursor(
+        this OracleParameterCollection parameterCollection,
+        string parameterName,
+        ParameterDirection parameterDirection = ParameterDirection.Output
+        )
+    {
+        Guard.Argument(parameterCollection, nameof(parameterCollection)).NotNull();
+        Guard.Argument(parameterName, nameof(parameterName)).NotNull().NotWhiteSpace();
+
+        var prm = new OracleParameter();
+        prm.ParameterName = parameterName;
+        prm.Direction = parameterDirection;
+        prm.OracleDbType = OracleDbType.RefCursor;
+        parameterCollection.Add(prm);
+        return prm;
+    }
+
 }

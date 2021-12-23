@@ -25,7 +25,7 @@ public static partial class OracleParameterCollectionExtensions
     /// <param name="parameterDirection">The direction of the parameter.</param>
     /// <param name="values">The values in the array.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddArrayParameter<T>
+    public static OracleParameter AddArray<T>
         (
         this OracleParameterCollection parameterCollection,
         string parameterName,
@@ -42,7 +42,7 @@ public static partial class OracleParameterCollectionExtensions
         prm.ParameterName = parameterName;
         prm.Direction = parameterDirection;
         prm.OracleDbType = oracleDbType;
-        prm.Value = values;
+        prm.Value = values.ToArray();
         parameterCollection.Add(prm);
         return prm;
     }
@@ -65,7 +65,7 @@ public static partial class OracleParameterCollectionExtensions
     /// <param name="parameterDirection">The direction of the parameter.</param>
     /// <param name="values">The values in the array.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddArrayParameter
+    public static OracleParameter AddArray
         (
         this OracleParameterCollection parameterCollection,
         string parameterName,
@@ -81,7 +81,7 @@ public static partial class OracleParameterCollectionExtensions
         prm.ParameterName = parameterName;
         prm.Direction = parameterDirection;
         prm.OracleDbType = OracleDbType.Varchar2;
-        prm.Value = values;
+        prm.Value = values.ToArray();
         // ArrayBindSize is the length of each string.
         prm.ArrayBindSize = GetStringLengths(values);
         parameterCollection.Add(prm);

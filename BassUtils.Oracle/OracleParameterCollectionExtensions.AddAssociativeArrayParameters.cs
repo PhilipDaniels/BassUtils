@@ -23,7 +23,7 @@ public static partial class OracleParameterCollectionExtensions
     /// <param name="parameterDirection">The direction of the parameter.</param>
     /// <param name="values">The values to set as the parameter value.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddAssociativeArrayParameter<T>
+    public static OracleParameter AddAssociativeArray<T>
         (
         this OracleParameterCollection parameterCollection,
         string parameterName,
@@ -35,7 +35,7 @@ public static partial class OracleParameterCollectionExtensions
         Guard.Argument(parameterName, nameof(parameterName)).NotNull().NotWhiteSpace();
         Guard.Argument(values, nameof(values)).NotNull();
 
-        return AddAssociativeArrayParameter
+        return AddAssociativeArray
             (
             parameterCollection,
             parameterName,
@@ -59,7 +59,7 @@ public static partial class OracleParameterCollectionExtensions
     /// <param name="values">The values to set as the parameter value.</param>
     /// <param name="size">The size of the array.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddAssociativeArrayParameter<T>
+    public static OracleParameter AddAssociativeArray<T>
         (
         this OracleParameterCollection parameterCollection,
         string parameterName,
@@ -96,7 +96,7 @@ public static partial class OracleParameterCollectionExtensions
     /// <param name="parameterDirection">The direction of the parameter.</param>
     /// <param name="values">The values to set as the parameter value.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddAssociativeArrayParameter
+    public static OracleParameter AddAssociativeArray
         (
         this OracleParameterCollection parameterCollection,
         string parameterName,
@@ -108,7 +108,7 @@ public static partial class OracleParameterCollectionExtensions
         Guard.Argument(parameterName, nameof(parameterName)).NotNull().NotWhiteSpace();
         Guard.Argument(values, nameof(values)).NotNull();
 
-        return AddAssociativeArrayParameter
+        return AddAssociativeArray
             (
             parameterCollection,
             parameterName,
@@ -134,7 +134,7 @@ public static partial class OracleParameterCollectionExtensions
     /// <param name="arrayBindSize">The size of each string within the array. If you pass a null
     /// array, set this to the sizes of the expected results, e.g. 20 for a VARCHAR2(20) column.</param>
     /// <returns>The parameter that was added.</returns>
-    public static OracleParameter AddAssociativeArrayParameter
+    public static OracleParameter AddAssociativeArray
         (
         this OracleParameterCollection parameterCollection,
         string parameterName,

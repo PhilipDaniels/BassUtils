@@ -18,7 +18,7 @@ namespace BassUtils.Oracle
         /// <param name="parameterCollection">The collection to add the parameter to.</param>
         /// <param name="oracleDbType">The type of the return parameter.</param>
         /// <returns>The parameter that was added. Use this to get the value later.</returns>
-        public static OracleParameter AddReturnParameter(this OracleParameterCollection parameterCollection, OracleDbType oracleDbType)
+        public static OracleParameter AddReturn(this OracleParameterCollection parameterCollection, OracleDbType oracleDbType)
         {
             Guard.Argument(parameterCollection, nameof(parameterCollection)).NotNull();
 
@@ -44,7 +44,7 @@ namespace BassUtils.Oracle
         /// <param name="udtTypeName">The name of the UDT type. This will be a two-part name of the
         /// form "SCHEMA.OBJECTTYPENAME".</param>
         /// <returns>The parameter that was added. Use this to get the value later.</returns>
-        public static OracleParameter AddUdtObjectReturnParameter(this OracleParameterCollection parameterCollection, string udtTypeName)
+        public static OracleParameter AddUdtObjectReturn(this OracleParameterCollection parameterCollection, string udtTypeName)
         {
             Guard.Argument(parameterCollection, nameof(parameterCollection)).NotNull();
             Guard.Argument(udtTypeName, nameof(udtTypeName)).NotNull().NotWhiteSpace();
@@ -72,7 +72,7 @@ namespace BassUtils.Oracle
         /// <param name="udtTypeName">The name of the UDT type. This will be a two-part name of the
         /// form "SCHEMA.TABLETYPENAME".</param>
         /// <returns>The parameter that was added. Use this to get the value later.</returns>
-        public static OracleParameter AddUdtArrayReturnParameter(this OracleParameterCollection parameterCollection, string udtTypeName)
+        public static OracleParameter AddUdtArrayReturn(this OracleParameterCollection parameterCollection, string udtTypeName)
         {
             Guard.Argument(parameterCollection, nameof(parameterCollection)).NotNull();
             Guard.Argument(udtTypeName, nameof(udtTypeName)).NotNull().NotWhiteSpace();
