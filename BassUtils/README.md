@@ -7,17 +7,25 @@ Low-level utility functions for use in any .Net Core 3.1 and later project.
 Available on [NuGet](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # BassUtils.Oracle
-Low-level utility functions for `Oracle.ManagedDataAccess.Core`.
+Low-level utility functions to simplify working with Oracle via
+Oracle.ManagedDataAccess.Core.
 Available on [NuGet](https://www.nuget.org/packages/BassUtils.Oracle)
+
 
 
 # Change History
 
+#### [4.3.0]
+###### Added
+- Better RuntimeInfo.
+- Add TVP helpers for MS SQL server.
+
 #### [4.2.0]
-- Added `AppendLines` methods to the StringBuilder extensions and the `IndentingStringBuilder`.
-- Added `BeginCodeBlock` and dispose functionality to `IndentingStringBuilder`.
-- Added Async versions of `ReadOne`, `Hydrate` and `HydrateAll`. These are extensions on
-    `DbDataReader` though, not `IDataReader`, which doesn't provide async methods.
+###### Added
+- `AppendLines` methods to the StringBuilder extensions and the `IndentingStringBuilder`.
+- `BeginCodeBlock` and dispose functionality to `IndentingStringBuilder`.
+- Async versions of `ReadOne`, `Hydrate` and `HydrateAll`. These are extensions on
+  `DbDataReader` though, not `IDataReader`, which doesn't provide async methods.
 
 #### [4.1.12]
 
