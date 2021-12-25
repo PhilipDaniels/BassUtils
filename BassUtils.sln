@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{AAB1E2F3
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		..\.gitignore = ..\.gitignore
+		clear_package_cache.ps1 = clear_package_cache.ps1
 		Directory.Build.props = Directory.Build.props
 		LICENSE = LICENSE
-		nuke_package.ps1 = nuke_package.ps1
 		README.md = README.md
 		version.json = version.json
 	EndProjectSection

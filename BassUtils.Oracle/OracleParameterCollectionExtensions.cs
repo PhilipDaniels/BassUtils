@@ -5,11 +5,6 @@ using Oracle.ManagedDataAccess.Types;
 
 namespace BassUtils.Oracle;
 
-/*
- * TODO
- * - AddUdtObject (how do we pass a null object?)
- * - AddUdtArray (passing a null array makes no sense, but how do we pass an array that contains a null object?)
- */
 
 /// <summary>
 /// Extensions for the <c>OracleParameterCollection</c> class.
