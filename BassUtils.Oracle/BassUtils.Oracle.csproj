@@ -17,7 +17,7 @@
     <Copyright>Philip Daniels</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>
-      2021-12-15 Initial version.
+      2021-12-28 Initial version.
     </PackageReleaseNotes>
     <PackageIcon>bass-clef-128.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -37,7 +37,7 @@
   <ItemGroup>
     <PackageReference Include="Dawn.Guard" Version="1.12.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.4" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.41" />
   </ItemGroup>
 
   <Target Name="CopyPackage" AfterTargets="Pack" Condition="'$(LocalNuGetDir)' != ''">
