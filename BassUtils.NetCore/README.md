@@ -20,7 +20,7 @@ if need be - see the SQL script for instructions.
 
 # Change History
 
-#### [4.3.0]
+#### [4.4.0]
 ###### Changed
 - Bumped dependencies. No functional changes.
 

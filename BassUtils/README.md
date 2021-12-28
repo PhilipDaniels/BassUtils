@@ -21,7 +21,7 @@ if need be - see the SQL script for instructions.
 
 # Change History
 
-#### [4.3.0]
+#### [4.4.0]
 ###### Added
 - Better RuntimeInfo.
 - Add TVP helpers for MS SQL server.

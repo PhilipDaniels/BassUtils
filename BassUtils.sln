@@ -3,17 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{AAB1E2F3-0F23-4F96-BDD4-3D28C7086BEB}"
-	ProjectSection(SolutionItems) = preProject
-		.gitattributes = .gitattributes
-		..\.gitignore = ..\.gitignore
-		clear_package_cache.ps1 = clear_package_cache.ps1
-		Directory.Build.props = Directory.Build.props
-		LICENSE = LICENSE
-		README.md = README.md
-		version.json = version.json
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils", "BassUtils\BassUtils.csproj", "{1DF57039-9A4C-4854-8BEB-4E6B7DBCF245}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils.ConsoleTestHarness", "BassUtils.ConsoleTestHarness\BassUtils.ConsoleTestHarness.csproj", "{F51AE113-302B-4862-ABCF-ED2144948599}"
@@ -24,7 +13,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils.NetCore", "BassUt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils.Oracle", "BassUtils.Oracle\BassUtils.Oracle.csproj", "{CB9F43FA-019A-4C0C-AFD9-1BEE5C6EB351}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BassUtils.OracleExamples", "BassUtils.OracleExamples\BassUtils.OracleExamples.csproj", "{0C67EC3C-0FA3-418E-8C62-175DFA9B6899}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BassUtils.OracleExamples", "BassUtils.OracleExamples\BassUtils.OracleExamples.csproj", "{0C67EC3C-0FA3-418E-8C62-175DFA9B6899}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44AF849C-08C4-4A6E-B74A-588A26D33A3C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		..\.gitignore = ..\.gitignore
+		clear_package_cache.ps1 = clear_package_cache.ps1
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+		version.json = version.json
+		VERSIONING.md = VERSIONING.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
