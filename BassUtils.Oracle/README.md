@@ -1,12 +1,7 @@
-﻿# BassUtils
-Low-level utility functions for use in any .Net Standard 2.0 project.
-Available on [NuGet](https://www.nuget.org/packages/BassUtils/)
+﻿# BassUtils.Oracle
 
-# BassUtils.NetCore
-Low-level utility functions for use in any .Net Core 3.1 and later project.
-Available on [NuGet](https://www.nuget.org/packages/BassUtils.NetCore)
+[![NuGet Badge](https://buildstats.info/nuget/bassutils.oracle)](https://www.nuget.org/packages/BassUtils.Oracle/)
 
-# BassUtils.Oracle
 Low-level utility functions to simplify working with Oracle via
 Oracle.ManagedDataAccess.Core.
 Available on [NuGet](https://www.nuget.org/packages/BassUtils.Oracle)
@@ -19,6 +14,9 @@ the `OracleParameterCollectionExtensions`. You can install Oracle via Docker
 if need be - see the SQL script for instructions.
 
 [Oracle's official documentation for ODP.Net](https://docs.oracle.com/en/database/oracle/oracle-data-access-components/19.3.2/odpnt/features.html#GUID-FF58E75D-B5D1-4327-B65E-CE263E3A5C6C)
+
+Also available: [BassUtils](https://www.nuget.org/packages/BassUtils)
+and [BassUtils.NetCore](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # Features
 
@@ -37,6 +35,11 @@ if need be - see the SQL script for instructions.
 
 
 # Change History
+
+#### [4.4.2]
+###### Fixed
+- Trimmed the READMEs for the 3 BassUtils packages to be just relevant to them.
+- Added NuGet badges.
 
 #### [4.4.0]
 - Library created.
