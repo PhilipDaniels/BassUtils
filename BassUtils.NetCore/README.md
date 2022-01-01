@@ -1,5 +1,4 @@
 # BassUtils.NetCore
-
 [![NuGet Badge](https://buildstats.info/nuget/bassutils.netcore)](https://www.nuget.org/packages/BassUtils.NetCore/)
 
 Low-level utility functions for use in any .Net Core 3.1 and later project.

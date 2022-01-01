@@ -1,11 +1,10 @@
 # BassUtils
-
 [![NuGet Badge](https://buildstats.info/nuget/bassutils)](https://www.nuget.org/packages/BassUtils/)
 
 Low-level utility functions for use in any .Net Standard 2.0 project.
 Available on [NuGet](https://www.nuget.org/packages/BassUtils/)
 
-Also available: [BassUtils.NetCore] (https://www.nuget.org/packages/BassUtils.NetCore)
+Also available: [BassUtils.NetCore](https://www.nuget.org/packages/BassUtils.NetCore)
 and [BassUtils.Oracle](https://www.nuget.org/packages/BassUtils.Oracle)
 
 

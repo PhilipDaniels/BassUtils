@@ -1,5 +1,4 @@
 ﻿# BassUtils.Oracle
-
 [![NuGet Badge](https://buildstats.info/nuget/bassutils.oracle)](https://www.nuget.org/packages/BassUtils.Oracle/)
 
 Low-level utility functions to simplify working with Oracle via
