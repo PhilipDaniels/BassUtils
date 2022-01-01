@@ -10,3 +10,5 @@ If version 4.1 is published on nuget.org, then to start the next version:
 - When done, change version.json to "4.2" and build
 - Upload packages to NuGet.
 
+To make point releases without relying on git height feature of
+Nerdbank, you can set the version to "4.4.3" etc.
