@@ -23,6 +23,8 @@ and [BassUtils.NetCore](https://www.nuget.org/packages/BassUtils.NetCore)
   when performing database transactions.
 * `OracleConnectionExtensions`: Easier to use overloads of the `OracleUdt.GetValue`
   and `OracleUdt.SetValue` methods.
+* `WrappedTransaction`: bundles a transaction and its connection together to
+  make them easier to dispose correctly.
 * `OracleParameterExtensions`: extension methods to get the `Value` property as
   an `OracleDataReader` or as a list of strings or numbers.
 * `OracleParameterCollectionExtensions`: many extension methods to help with creating
@@ -34,6 +36,14 @@ and [BassUtils.NetCore](https://www.nuget.org/packages/BassUtils.NetCore)
 
 
 # Change History
+
+#### [4.6.0]
+###### Added
+- Added the `WrappedTransaction` class, which bundles an `OracleTransaction` together
+  with its corresponding `OracleConnection` and ensures they are properly disposed together.
+###### Fixed
+- Fixed the logging in `DbTransactionExtensions` so that it works properly with
+  non-MS loggers (tested with Serilog).
 
 #### [4.4.2]
 ###### Fixed

@@ -29,11 +29,11 @@ public static class DbTransactionExtensions
         try
         {
             transaction.Commit();
-            logger.LogInformation("Successfully committed {}", msg);
+            logger.LogInformation("Successfully committed {0}", msg);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Exception while committing {}", msg);
+            logger.LogError(ex, "Exception while committing {0}", msg);
             throw;
         }
     }
@@ -57,11 +57,11 @@ public static class DbTransactionExtensions
         try
         {
             await transaction.CommitAsync(cancellationToken);
-            logger.LogInformation("Successfully committed {}", msg);
+            logger.LogInformation("Successfully committed {0}", msg);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Exception while committing {}", msg);
+            logger.LogError(ex, "Exception while committing {0}", msg);
             throw;
         }
     }
@@ -83,11 +83,11 @@ public static class DbTransactionExtensions
         try
         {
             transaction.Rollback();
-            logger.LogInformation("Successfully rolled back {}", msg);
+            logger.LogInformation("Successfully rolled back {0}", msg);
         }
         catch (Exception ex)
         {
-            logger.LogWarning(ex, "Exception while rolling back {}", msg);
+            logger.LogWarning(ex, "Exception while rolling back {0}", msg);
             throw;
         }
     }
@@ -111,11 +111,11 @@ public static class DbTransactionExtensions
         try
         {
             await transaction.RollbackAsync(cancellationToken);
-            logger.LogInformation("Successfully rolled back {}", msg);
+            logger.LogInformation("Successfully rolled back {0}", msg);
         }
         catch (Exception ex)
         {
-            logger.LogWarning(ex, "Exception while rolling back {}", msg);
+            logger.LogWarning(ex, "Exception while rolling back {0}", msg);
             throw;
         }
     }
