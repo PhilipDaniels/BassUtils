@@ -17,7 +17,8 @@
     <Copyright>Philip Daniels</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>
-      2021-12-28 Initial version.
+2022-01-28 Added WrappedTransaction.
+2021-12-28 Initial version.
     </PackageReleaseNotes>
     <PackageIcon>bass-clef-128.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>

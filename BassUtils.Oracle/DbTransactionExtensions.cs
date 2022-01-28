@@ -56,7 +56,7 @@ public static class DbTransactionExtensions
 
         try
         {
-            await transaction.CommitAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
             logger.LogInformation("Successfully committed {0}", msg);
         }
         catch (Exception ex)
@@ -110,7 +110,7 @@ public static class DbTransactionExtensions
 
         try
         {
-            await transaction.RollbackAsync(cancellationToken);
+            await transaction.RollbackAsync(cancellationToken).ConfigureAwait(false); ;
             logger.LogInformation("Successfully rolled back {0}", msg);
         }
         catch (Exception ex)

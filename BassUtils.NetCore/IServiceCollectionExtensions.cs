@@ -134,7 +134,7 @@ namespace BassUtils.NetCore
         /// If this happens at runtime, your application will probably stop.
         /// To have your application actually pick up the changes, you should have your classes take
         /// an <c>IOptionsMonitor></c> or <c>IOptionsSnapshot</c> by dependency injection.
-        /// Use IOptions&lt;T&gt; or <seealso cref="AddConfigurationModelAsSingleton"/> when you are not expecting your
+        /// Use IOptions&lt;T&gt; or AddConfigurationModelAsSingleton when you are not expecting your
         /// config values to change. Use IOptionsSnaphot&lt;T&gt; when you are expecting your values to change but want it
         /// to be consistent for the entirety of a request. Use IOptionsMonitor&lt;T&gt; when you need real time values (or
         /// you have a long running service which is only constructed once but you still want to respond to configuration

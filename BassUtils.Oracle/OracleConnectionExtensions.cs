@@ -1,4 +1,5 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using System.Data;
+using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 
 namespace BassUtils.Oracle
@@ -8,6 +9,35 @@ namespace BassUtils.Oracle
     /// </summary>
     public static class OracleConnectionExtensions
     {
+        /// <summary>
+        /// Begins a new transaction on the <paramref name="connection"/> at the default isolation level and
+        /// bundles it into a <seealso cref="WrappedTransaction"/> for easier disposal.
+        /// </summary>
+        /// <param name="connection">The Oracle connection.</param>
+        /// <param name="cancellationToken">Optional cancellation token.</param>
+        /// <returns>A wrapped transaction object.</returns>
+        public static async Task<WrappedTransaction> BeginWrappedTransactionAsync(this OracleConnection connection, CancellationToken cancellationToken = default)
+        {
+            var txn = await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+            var oracleTxn = txn as OracleTransaction;
+            return new WrappedTransaction(connection, oracleTxn);
+        }
+
+        /// <summary>
+        /// Begins a new transaction on the <paramref name="connection"/> at the specified <paramref name="isolationLevel"/> and
+        /// bundles it into a <seealso cref="WrappedTransaction"/> for easier disposal.
+        /// </summary>
+        /// <param name="connection">The Oracle connection.</param>
+        /// <param name="isolationLevel">Transaction isolation level.</param>
+        /// <param name="cancellationToken">Optional cancellation token.</param>
+        /// <returns>A wrapped transaction object.</returns>
+        public static async Task<WrappedTransaction> BeginWrappedTransactionAsync(this OracleConnection connection, IsolationLevel isolationLevel, CancellationToken cancellationToken = default)
+        {
+            var txn = await connection.BeginTransactionAsync(isolationLevel, cancellationToken).ConfigureAwait(false);
+            var oracleTxn = txn as OracleTransaction;
+            return new WrappedTransaction(connection, oracleTxn);
+        }
+
         /// <summary>
         /// Sets a UDT value. If the value is null then <c>DBNull.Value</c> will be set.
         /// </summary>
