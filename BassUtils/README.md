@@ -10,6 +10,10 @@ and [BassUtils.Oracle](https://www.nuget.org/packages/BassUtils.Oracle)
 
 # Change History
 
+#### [4.6.0]
+###### Added
+- Calculate the process up-time when `RuntimeInformation` is captured.
+
 #### [4.4.2]
 ###### Fixed
 - Trimmed the READMEs for the 3 BassUtils packages to be just relevant to them.
