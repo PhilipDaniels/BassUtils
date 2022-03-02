@@ -9,6 +9,11 @@ namespace BassUtils.Runtime
     public class ProcessRuntimeInformation
     {
         /// <summary>
+        /// How long the process has been alive.
+        /// </summary>
+        public TimeSpan UpTime { get; private set; }
+
+        /// <summary>
         /// Gets the base priority of the associated process.
         /// </summary>
         public int BasePriority { get; private set; }
@@ -153,6 +158,7 @@ namespace BassUtils.Runtime
             try
             {
                 StartTime = p.StartTime;
+                UpTime = DateTime.Now - StartTime;
             }
             catch { }
 

@@ -16,6 +16,11 @@ and [BassUtils.Oracle](https://www.nuget.org/packages/BassUtils.Oracle)
 
 # Change History
 
+#### [4.6.0]
+###### Added
+- Display the process up-time on the `runtimeinfo` middleware endpoint, plus the
+  value of the two critical ASP.Net Core [environment variables](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-6.0).
+
 #### [4.5.0]
 ###### Added
 - Added new extension method `AddConfigurationModelWithMonitoring` to allow the

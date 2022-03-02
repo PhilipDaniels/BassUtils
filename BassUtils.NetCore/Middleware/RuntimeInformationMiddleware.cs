@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -115,6 +116,7 @@ namespace BassUtils.NetCore.Middleware
 
             sb.AppendLine("<body>");
             AppendServerInfo(sb, info.ServerInfo);
+            AppendEnvironmentInfo(sb);
             AppendProcessInfo(sb, info.ProcessInfo);
             AppendCurrentDomain(sb, info.CurrentDomainInfo);
             AppendEntryAssembly(sb, info.EntryAssemblyInfo);
@@ -130,7 +132,7 @@ namespace BassUtils.NetCore.Middleware
                 return;
 
             sb.AppendLine("<div class=\"ri-server\">");
-            sb.AppendFormat("<h1>Server</h1>\n");
+            sb.AppendLine("<h1>Server</h1>\n");
             sb.AppendLine("</div>");
 
             sb.AppendLine("<table class=\"normal-table\">");
@@ -164,6 +166,30 @@ namespace BassUtils.NetCore.Middleware
             sb.AppendLine("</table>");
         }
 
+        void AppendEnvironmentInfo(StringBuilder sb)
+        {
+
+            sb.AppendLine("<div class=\"ri-environment\">");
+            sb.AppendLine("<h1>Environment</h1>\n");
+            sb.AppendLine("</div>");
+
+            sb.AppendLine("<table class=\"normal-table\">");
+            sb.AppendLine("<thead>");
+            sb.AppendLine("  <tr>");
+            sb.AppendLine("    <th>ASPNETCORE_ENVIRONMENT (Pri 1)</th>");
+            sb.AppendLine("    <th>DOTNET_ENVIRONMENT (Pri 2)</th>");
+            sb.AppendLine("  </tr>");
+            sb.AppendLine("</thead>");
+
+            sb.AppendLine("<tbody>");
+            sb.AppendLine("  <tr>");
+            sb.AppendFormat("    <td>{0}</td>\n", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+            sb.AppendFormat("    <td>{0}</td>\n", Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT"));
+            sb.AppendLine("  </tr>");
+            sb.AppendLine("</tbody>");
+            sb.AppendLine("</table>");
+        }
+
         void AppendProcessInfo(StringBuilder sb, ProcessRuntimeInformation info)
         {
             if (info == null)
@@ -176,6 +202,7 @@ namespace BassUtils.NetCore.Middleware
             sb.AppendLine("<table class=\"left-table\">");
             sb.AppendLine("<tbody>");
             sb.AppendFormat("  <tr><td>Start Time</td><td>{0:O}</td></tr>\n", info.StartTime);
+            sb.AppendFormat("  <tr><td>Up Time</td><td>{0}</td></tr>\n", info.UpTime);
             sb.AppendFormat("  <tr><td>Priority Class</td><td>{0}</td></tr>\n", info.PriorityClass);
             sb.AppendFormat("  <tr><td>Base Priority</td><td>{0}</td></tr>\n", info.BasePriority);
             sb.AppendFormat("  <tr><td>Processor Time</td><td>User = {0}</br>System = {1}</br>Total = {2}</td></tr>\n",
