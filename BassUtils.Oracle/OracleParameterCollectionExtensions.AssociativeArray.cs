@@ -363,7 +363,7 @@ public static partial class OracleParameterCollectionExtensions
         prm.ParameterName = parameterName;
         prm.Direction = parameterDirection;
         prm.CollectionType = OracleCollectionType.PLSQLAssociativeArray;
-        prm.Value = values;
+        prm.Value = values.ToArray();
         prm.Size = values.Count();
         if (oracleDbType != null)
             prm.OracleDbType = oracleDbType.Value;

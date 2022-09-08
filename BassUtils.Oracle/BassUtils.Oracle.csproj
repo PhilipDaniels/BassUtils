@@ -17,6 +17,7 @@
     <Copyright>Philip Daniels</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>
+2022-09-08 Bug fix to AssociativeArray fns.
 2022-01-28 Added WrappedTransaction.
 2021-12-28 Initial version.
     </PackageReleaseNotes>

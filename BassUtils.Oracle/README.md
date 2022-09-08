@@ -37,6 +37,12 @@ and [BassUtils.NetCore](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # Change History
 
+#### [4.6.1]
+###### Fixed
+- The `AddAssociativeArray` family of functions must actually call `ToArray`
+  on their values or ODP.Net will give an error (e.g. if you pass it a LINQ
+  enumerable).
+
 #### [4.6.0]
 ###### Added
 - Added the `WrappedTransaction` class, which bundles an `OracleTransaction` together
