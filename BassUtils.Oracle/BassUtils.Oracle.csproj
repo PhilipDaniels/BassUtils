@@ -11,7 +11,7 @@
     <Authors>Philip Daniels</Authors>
     <Company>Philip Daniels</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>Useful extension methods for .Net Standard 2.0 and above.</Description>
+    <Description>Useful extension methods Oracle ODP.Net, e.g. to pass arrays and objects to Oracle from C#</Description>
     <RepositoryUrl>https://github.com/PhilipDaniels/BassUtils</RepositoryUrl>
     <PackageProjectUrl>https://github.com/PhilipDaniels/BassUtils</PackageProjectUrl>
     <Copyright>Philip Daniels</Copyright>
