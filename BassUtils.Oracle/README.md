@@ -37,6 +37,14 @@ and [BassUtils.NetCore](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # Change History
 
+#### [4.6.3]
+###### Fixed
+- In `GetStringLengths`, handle null strings by returning 0.
+
+#### [4.6.2]
+###### Changed
+- Improved the description of the NuGet package.
+
 #### [4.6.1]
 ###### Fixed
 - The `AddAssociativeArray` family of functions must actually call `ToArray`

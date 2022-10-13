@@ -13,7 +13,7 @@ public static partial class OracleParameterCollectionExtensions
     /// </summary>
     private static int[] GetStringLengths(string[] values)
     {
-        return values.Select(d => d.Length).ToArray();
+        return values.Select(d => d == null ? 0 : d.Length).ToArray();
     }
 
     /// <summary>
@@ -21,7 +21,7 @@ public static partial class OracleParameterCollectionExtensions
     /// </summary>
     private static int[] GetStringLengths(IEnumerable<string> values)
     {
-        return values.Select(d => d.Length).ToArray();
+        return values.Select(d => d == null ? 0 : d.Length).ToArray();
     }
 
     private static OracleParameter MakeReturnParameter(OracleDbType oracleDbType)
