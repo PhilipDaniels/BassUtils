@@ -37,6 +37,10 @@ and [BassUtils.NetCore](https://www.nuget.org/packages/BassUtils.NetCore)
 
 # Change History
 
+#### [4.7.0]
+###### Added
+- OracleDb simple abstract base class.
+
 #### [4.6.3]
 ###### Fixed
 - In `GetStringLengths`, handle null strings by returning 0.

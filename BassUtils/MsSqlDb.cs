@@ -7,7 +7,7 @@ namespace BassUtils
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    public class MsSqlDb : IMsSqlDb
+    public abstract class MsSqlDb : IMsSqlDb
     {
         /// <summary>
         /// <inheritdoc/>

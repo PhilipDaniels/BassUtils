@@ -10,6 +10,10 @@ and [BassUtils.Oracle](https://www.nuget.org/packages/BassUtils.Oracle)
 
 # Change History
 
+#### [4.7.0]
+###### Added
+- MsSqlDb simple abstract base class.
+
 #### [4.6.0]
 ###### Added
 - Calculate the process up-time when `RuntimeInformation` is captured.
