@@ -14,8 +14,9 @@
     <Copyright>Philip Daniels</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>
-      2022-01-11 Add AddConfigurationModelWithMonitoring method. Deprecate AddConfigurationModel in favour of AddConfigurationModelAsSingletion.
-      2021-11-08 Create BassUtils.NetCore package.
+2023-01-19 New version 4.7.0. Bumped for newer dependency on BassUtils.
+2022-01-11 Add AddConfigurationModelWithMonitoring method. Deprecate AddConfigurationModel in favour of AddConfigurationModelAsSingletion.
+2021-11-08 Create BassUtils.NetCore package.
     </PackageReleaseNotes>
     <PackageIcon>bass-clef-128.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
